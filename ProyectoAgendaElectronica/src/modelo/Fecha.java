@@ -49,7 +49,7 @@ public class Fecha {
         return new Fecha();
     }
     
-    public int comparar(Fecha otra) {
+    public int compareTo(Fecha otra) {
     	int res = 0;
     	
     	if(año == otra.getAño()) {
