@@ -1,9 +1,12 @@
 package modelo;
 
 import noLineales.*;
+
+import java.io.Serializable;
+
 import lineales.*;
 
-public class Agenda {
+public class Agenda implements Serializable {
 	private ArbolBB<Cita> listaCita;
 
 	public Agenda() {

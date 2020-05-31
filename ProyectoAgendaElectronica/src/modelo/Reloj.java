@@ -1,8 +1,9 @@
 package modelo;
 
+import java.io.Serializable;
 import java.time.LocalDateTime; 
 
-public class Reloj {
+public class Reloj implements Serializable{
 	
 	private int hora;
 	private int minutos;

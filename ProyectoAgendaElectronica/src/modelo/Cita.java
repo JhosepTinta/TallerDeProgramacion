@@ -1,6 +1,8 @@
 package modelo;
 
-public class Cita implements Comparable<Cita>{
+import java.io.Serializable;
+
+public class Cita implements Comparable<Cita>, Serializable{
 	
 	private String asunto;
 	private String descripcion;
