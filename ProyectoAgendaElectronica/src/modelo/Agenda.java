@@ -18,7 +18,7 @@ public class Agenda implements Serializable {
 	}
 
 	public String mostrar() {
-		return listaCita.toString();
+		return toString();
 	}
 
 	public ArbolBB<Cita> getLista() {
@@ -102,5 +102,9 @@ public class Agenda implements Serializable {
 			i++;
 		}
 		return encontrado;
+	}
+	
+	public String toString() {
+		return listaCita.inOrden().toString();
 	}
 }
