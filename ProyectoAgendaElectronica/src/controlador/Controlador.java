@@ -41,7 +41,11 @@ public class Controlador implements ActionListener {
 		//Botones de la Ventana Crear Contacto
 		if(e.getSource()==window.btnGuardar) {
 			Archivo a=new Archivo();
-			String Vno=window.txtNombre.getText();
+			
+			if(a.existeC(window.txtNombre.getText(), window.txtApellido.getText())) {
+				JOptionPane.showMessageDialog(window, "El contacto ya existe");
+			}
+			else{String Vno=window.txtNombre.getText();
 			String Vap=window.txtApellido.getText();
 			String Vnu=window.txtNumero.getText();
 			try {
@@ -55,13 +59,13 @@ public class Controlador implements ActionListener {
 				Vap=".";
 			}
 			if(Vnu.equals("")) {
-				Vnu="Sin N˙mero actualmente";
+				Vnu="Sin N√∫mero actualmente";
 			}
 			if(Vco.equals("")) {
-				Vco="Sin Correo aÒadido actualmente";
+				Vco="Sin Correo a√±adido actualmente";
 			}
 			if(Vdi.equals("")) {
-				Vdi="Sin DirecciÛn aÒadida actualmente";
+				Vdi="Sin Direcci√≥n a√±adida actualmente";
 			}
 			a.escribirPersona(new Contacto(Vno,Vap,Vnu,Vco,Vdi));
 			JOptionPane.showMessageDialog(window, "Contacto "+window.txtNombre.getText()+" "+window.txtApellido.getText()+" "+"Guardado Correctamente");
@@ -72,9 +76,9 @@ public class Controlador implements ActionListener {
 			window.txtDireccion.setText(null);}
 				
 			}catch(NumberFormatException nfe){
-				JOptionPane.showMessageDialog(window, "Asegurese de que el n˙mero sea correcto");
+				JOptionPane.showMessageDialog(window, "Asegurese de que el n√∫mero sea correcto");
 			}
-		}
+		}}
 		
 		if(e.getSource()==window.btnVolver) {
 			windowP.setVisible(true);    //posibles lineas de codigo extras
@@ -91,7 +95,7 @@ public class Controlador implements ActionListener {
 			windowP.dispose();
 		}
 		if(e.getSource()==windowP.btnSalir) {
-			System.exit(0);            // DEBER¡ MODIFICARSE AL ADJUNTAR LOS DEMAS PROGRAMAS
+			System.exit(0);            // DEBER√Å MODIFICARSE AL ADJUNTAR LOS DEMAS PROGRAMAS
 		}
 		if((e.getSource()==windowP.btnBuscar)) {
 			Archivo a=new Archivo();
@@ -100,9 +104,14 @@ public class Controlador implements ActionListener {
 			ap=".";
 			else
 				ap=windowP.txtAB.getText();
+			
+			if(a.existeC(windowP.txtNB.getText(), ap)) {
 			windowP.txtMosN.setText(a.buscarN(windowP.txtNB.getText(), ap));
 			windowP.txtMosC.setText(a.buscarC(windowP.txtNB.getText(), ap));
-			windowP.txtMosD.setText(a.buscarD(windowP.txtNB.getText(), ap));
+			windowP.txtMosD.setText(a.buscarD(windowP.txtNB.getText(), ap));}
+			else {
+				JOptionPane.showMessageDialog(windowP, "No existe el contacto que busca");
+			}
 	    }
 		if(e.getSource()==windowP.btnEliminarC) {
 			Archivo a=new Archivo();
@@ -135,7 +144,12 @@ public class Controlador implements ActionListener {
 			windowP.dispose();
 		}
 	    if(e.getSource()==window2.btnVolver2) {
-	    	windowP.setVisible(true);
+			windowP.setVisible(true);
+			windowP.txtMosN.setText(window2.txtNuE.getText());
+			windowP.txtMosC.setText(window2.txtCE.getText());
+			windowP.txtMosD.setText(window2.txtDE.getText());
+			windowP.txtNB.setText(window2.txtNE.getText());
+			windowP.txtAB.setText(window2.txtAE.getText());
 	    	window2.dispose();
 	    }
 	    if(e.getSource()==window2.btnEditar) {
@@ -152,13 +166,13 @@ public class Controlador implements ActionListener {
 				Vap=".";
 			}
 			if(Vnu.equals("")) {
-				Vnu="Sin N˙mero actualmente";
+				Vnu="Sin N√∫mero actualmente";
 			}
 			if(Vco.equals("")) {
-				Vco="Sin Correo aÒadido actualmente";
+				Vco="Sin Correo a√±adido actualmente";
 			}
 			if(Vdi.equals("")) {
-				Vdi="Sin DirecciÛn aÒadida actualmente";
+				Vdi="Sin Direcci√≥n a√±adida actualmente";
 			}
 			a.eliminarC(window2.txtNP.getText(), window2.txtAP.getText());
 	    	a.escribirPersona(new Contacto(Vno,Vap,Vnu,Vco,Vdi));
@@ -166,7 +180,7 @@ public class Controlador implements ActionListener {
 	    	window2.dispose();
 	    	windowP.setVisible(true);
 	    	
-			}
+			}	
 	    }
 	}
 }
