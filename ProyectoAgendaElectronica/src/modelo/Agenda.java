@@ -24,10 +24,14 @@ public class Agenda implements Serializable {
 	public ArbolBB<Cita> getLista() {
 		return listaCita;
 	}
+	
+	public int cantidadCitas() {
+		return listaCita.inOrden().longitud();
+	}
 
 	public boolean eliminatCita(Cita otra) {
 		Cita aux = listaCita.eliminar(otra);
-		return aux != null ? false : true;
+		return aux != null ? true : false;
 	}
 
 	public ListaSE<Cita> buscarHora(Reloj hora) {
@@ -35,7 +39,7 @@ public class Agenda implements Serializable {
 		ListaSE<Cita> listaRespuesta = new ListaSE<Cita>();
 		for (int i = 0; i < citasCompletas.longitud(); i++) {
 			Cita aux = citasCompletas.acceder(i);
-			if (aux.getHoraInicio().compareTo(hora) == 0) {
+			if (aux.getHoraInicio().getHora()==hora.getHora()) {
 				listaRespuesta.insertar(aux);
 			}
 		}

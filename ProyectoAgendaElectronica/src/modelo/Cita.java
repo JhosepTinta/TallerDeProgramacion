@@ -98,6 +98,6 @@ public class Cita implements Comparable<Cita>, Serializable{
 	}
 	
 	public String toString() {
-		return asunto +"\n"+descripcion+"\n"+horaInicio+"  "+horaFin+"  "+fecha+"\n"+lugar;
+		return asunto +" "+descripcion+" "+horaInicio+" "+horaFin+" "+fecha+" "+lugar;
 	}
 }
