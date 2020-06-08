@@ -6,8 +6,6 @@ import java.util.GregorianCalendar;
 
 import javax.swing.JOptionPane;
 
-import controlador.AlertaAlarma;
-
 public class AlertaAlarma {
 	
 	
@@ -66,7 +64,7 @@ public class AlertaAlarma {
 				
 	   }else
 	   {
-		   JOptionPane.showMessageDialog(null, "error , formato 0;0;0  "+   "!!!corregir¡¡¡");
+		   JOptionPane.showMessageDialog(null, "error , formato 0;0;0  "+   "!!!corregirÂ¡Â¡Â¡");
 	   }
 				
 		
