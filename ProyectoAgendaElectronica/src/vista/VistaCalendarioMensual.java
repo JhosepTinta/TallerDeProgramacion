@@ -6,147 +6,109 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import modelo.*;
+import paquete1.*;
+
+
 
 public class VistaCalendarioMensual extends JPanel {
     CalendarioMensual aux;
-	
+	JButton back;
+	JButton next;
 	public VistaCalendarioMensual(CalendarioMensual aux) {
     this.aux = aux;		
+    back = new JButton("<");
+    next = new JButton(">");
 	setLayout(new BorderLayout());	
        LaminaMes mes= new LaminaMes(aux);
+       int month = aux.getMes();
+       int anio = aux.getAnio();
+       CabeceraMes cabecera= new CabeceraMes(month,anio);
+       add(cabecera,BorderLayout.NORTH);
        add(mes,BorderLayout.CENTER);
        
+     //  add(next,BorderLayout.EAST);
+       //add(back,BorderLayout.WEST);
+      
 
 	}
 
 	private class LaminaMes extends JPanel{
 		Agenda agenda ;
 		Integer[] arrayMes;
-		LaminaObjeto[] objetos;
+	
 		CalendarioMensual calendario;
 		int contador;
-		int contadoraux;
+	
 	    LaminaObjeto a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,a1,a2,a3,a4,a5,a6,a7,a8,a9,a0,b1,b2,b3,b4,b5,b6;
 		
 		public LaminaMes(CalendarioMensual calendario) {
 			
 			this.calendario = calendario;
-			setLayout(new GridLayout(6,7,10,10));
+			setLayout(new GridLayout(6,7,5,5));
 			contador = 0;
 			
 			pedirArrayMes();
-			
-			LaminaObjeto a = new LaminaObjeto(arrayMes[0]);
-			LaminaObjeto b = new LaminaObjeto(arrayMes[1]);
-			LaminaObjeto c = new LaminaObjeto(arrayMes[2]);
-			LaminaObjeto d = new LaminaObjeto(arrayMes[3]);
-			LaminaObjeto e = new LaminaObjeto(arrayMes[4]);
-			LaminaObjeto f = new LaminaObjeto(arrayMes[5]);
-			LaminaObjeto g = new LaminaObjeto(arrayMes[6]);
-			LaminaObjeto h = new LaminaObjeto(arrayMes[7]);
-			LaminaObjeto i = new LaminaObjeto(arrayMes[8]);
-			LaminaObjeto j = new LaminaObjeto(arrayMes[9]);
-			LaminaObjeto k = new LaminaObjeto(arrayMes[10]);
-			LaminaObjeto l = new LaminaObjeto(arrayMes[11]);
-			LaminaObjeto m = new LaminaObjeto(arrayMes[12]);
-			LaminaObjeto n = new LaminaObjeto(arrayMes[13]);
-			LaminaObjeto o = new LaminaObjeto(arrayMes[14]);
-			LaminaObjeto p = new LaminaObjeto(arrayMes[15]);
-			LaminaObjeto q = new LaminaObjeto(arrayMes[16]);
-			LaminaObjeto r = new LaminaObjeto(arrayMes[17]);
-			LaminaObjeto s = new LaminaObjeto(arrayMes[18]);
-			LaminaObjeto t = new LaminaObjeto(arrayMes[19]);
-			LaminaObjeto u = new LaminaObjeto(arrayMes[20]);
-			LaminaObjeto v = new LaminaObjeto(arrayMes[21]);
-			LaminaObjeto w = new LaminaObjeto(arrayMes[22]);
-			LaminaObjeto x = new LaminaObjeto(arrayMes[23]);
-			LaminaObjeto y = new LaminaObjeto(arrayMes[24]);
-			LaminaObjeto z = new LaminaObjeto(arrayMes[25]);
-			LaminaObjeto a1 = new LaminaObjeto(arrayMes[26]);
-			LaminaObjeto a2 = new LaminaObjeto(arrayMes[27]);
-			LaminaObjeto a3 = new LaminaObjeto(arrayMes[28]);
-			LaminaObjeto a4 = new LaminaObjeto(arrayMes[29]);
-			LaminaObjeto a5 = new LaminaObjeto(arrayMes[30]);
-			LaminaObjeto a6 = new LaminaObjeto(arrayMes[31]);
-			LaminaObjeto a7 = new LaminaObjeto(arrayMes[32]);
-			LaminaObjeto a8 = new LaminaObjeto(arrayMes[33]);
-			LaminaObjeto a9 = new LaminaObjeto(arrayMes[34]);
-			LaminaObjeto a0= new LaminaObjeto(arrayMes[35]);
-			LaminaObjeto b1 = new LaminaObjeto(arrayMes[36]);
-			LaminaObjeto b2= new LaminaObjeto(arrayMes[37]);
-			LaminaObjeto b3= new LaminaObjeto(arrayMes[38]);
-			LaminaObjeto b4 = new LaminaObjeto(arrayMes[39]);
-			LaminaObjeto b5= new LaminaObjeto(arrayMes[40]);
-			//LaminaObjeto b6 = new LaminaObjeto(arrayMes[41]);
-		
+			inicializarDia(a);
+			inicializarDia(b);
+			inicializarDia(c);
+			inicializarDia(d);
+			inicializarDia(e);
+			inicializarDia(f);
+			inicializarDia(g);
+			inicializarDia(h);
+			inicializarDia(i);
+			inicializarDia(j);
+			inicializarDia(k);
+			inicializarDia(l);
+			inicializarDia(m);
+			inicializarDia(n);
+			inicializarDia(o);
+			inicializarDia(p);
+			inicializarDia(q);
+			inicializarDia(r);
+			inicializarDia(s);
+			inicializarDia(t);
+			inicializarDia(u);
+			inicializarDia(v);
+			inicializarDia(w);
+			inicializarDia(x);
+			inicializarDia(y);
+			inicializarDia(z);
+			inicializarDia(a1);
+			inicializarDia(a2);
+			inicializarDia(a3);
+			inicializarDia(a4);
+			inicializarDia(a5);
+			inicializarDia(a6);
+			inicializarDia(a7);
+			inicializarDia(a8);
+			inicializarDia(a9);
+			inicializarDia(a0);
+			inicializarDia(b1);
+			inicializarDia(b2);
+			inicializarDia(b3);
+			inicializarDia(b4);
+			inicializarDia(b5);
 			
 			
-		
-			inicializarLaminaObjeto (a);
-			inicializarLaminaObjeto (b);
-			inicializarLaminaObjeto (c);
-			inicializarLaminaObjeto (d);
-			inicializarLaminaObjeto (e);
-			inicializarLaminaObjeto (f);
-			inicializarLaminaObjeto (g);
-			inicializarLaminaObjeto (h);
-			inicializarLaminaObjeto (i);
-			inicializarLaminaObjeto (j);
 			
-			inicializarLaminaObjeto (k);
-			inicializarLaminaObjeto (l);
-			inicializarLaminaObjeto (m);
-			inicializarLaminaObjeto (n);
-			inicializarLaminaObjeto (o);
-			inicializarLaminaObjeto (p);
-			inicializarLaminaObjeto (q);
-			inicializarLaminaObjeto (r);
-			inicializarLaminaObjeto (s);
-			inicializarLaminaObjeto (t);
-			
-			inicializarLaminaObjeto (u);
-			inicializarLaminaObjeto (w);
-			inicializarLaminaObjeto (v);
-			inicializarLaminaObjeto (x);
-			inicializarLaminaObjeto (y);
-			inicializarLaminaObjeto (z);
-			inicializarLaminaObjeto (a1);
-			inicializarLaminaObjeto (a2);
-			inicializarLaminaObjeto (a3);
-			inicializarLaminaObjeto (a4);
-			
-			inicializarLaminaObjeto (a5);
-			inicializarLaminaObjeto (a6);
-			inicializarLaminaObjeto (a7);
-			inicializarLaminaObjeto (a8);
-			inicializarLaminaObjeto (a9);
-			inicializarLaminaObjeto (a0);
-			inicializarLaminaObjeto (b1);
-			inicializarLaminaObjeto (b2);
-			inicializarLaminaObjeto (b3);
-			inicializarLaminaObjeto (b4);
-			
-			inicializarLaminaObjeto (b5);
-			inicializarLaminaObjeto (b6);
 			
 			
 		}
-		public void llenarArray(LaminaObjeto objeto) {
-			if(contador != objetos.length ) 
-			{objetos[contador]= objeto;
+		
+       public void inicializarDia(LaminaObjeto objeto) {
+			if(arrayMes[contador]== 0) {
+				String numeroVacio = " ";
+				objeto = new LaminaObjeto(numeroVacio);
+				contador++;
+			}else {
+			objeto = new LaminaObjeto(""+ arrayMes[contador]);
 			contador++;
-			}
-		}
-		public void inicializar() {
-			for(int i = 0; i<= arrayMes.length;i++) {
-				
-				LaminaObjeto aux= objetos[i];
-				aux.setNumeroDia(arrayMes[i]);
-                add(objetos[i]);
-			}
 			
+			}
+			add(objeto);
 		}
+		
 		public void inicializarLaminaObjeto(LaminaObjeto objeto) {
 			
 				add(objeto);
@@ -162,11 +124,11 @@ public class VistaCalendarioMensual extends JPanel {
 	private class LaminaObjeto extends JPanel{
 		
 		ObjetoDiaCitas objeto;
-		int numeroDia;
+		String numeroDia;
 		
 		JButton numero,cita1,cita2;
 		
-		public LaminaObjeto(int numeroDia) {
+		public LaminaObjeto(String numeroDia) {
 			
 			this.numeroDia = numeroDia;
 			numero = new JButton("   "+numeroDia+"   ");
@@ -182,16 +144,17 @@ public class VistaCalendarioMensual extends JPanel {
 			add(box);
 			
 		}
+		
 
 		public ObjetoDiaCitas getObjeto() {
 			return objeto;
 		}
 
-		public int getNumeroDia() {
+		public String getNumeroDia() {
 			return numeroDia;
 		}
 
-		public void setNumeroDia(int numeroDia) {
+		public void setNumeroDia(String numeroDia) {
 			this.numeroDia = numeroDia;
 		}
 
@@ -228,4 +191,87 @@ public class VistaCalendarioMensual extends JPanel {
 
 	
 	
+}
+//esta clase crea la parte de los dias en el calendario y pone el nombre del mes al calendario
+class CabeceraMes extends JPanel{
+	 String mes;
+	public CabeceraMes(int month, int year) {
+		JPanel encabezado = new JPanel(new GridLayout(1,7,5,5));
+		JButton a1 = new JButton("   LU    ");
+		JButton a2 = new JButton("   MA    ");
+		JButton a3 = new JButton("   MI    ");
+		JButton a4 = new JButton("   JU    ");
+		JButton a5 = new JButton("   VI    ");
+		JButton a6 = new JButton("   SA    ");
+		JButton a7 = new JButton("   DO    ");
+		JPanel todo = new JPanel();
+		BoxLayout nuevo = new BoxLayout(todo, BoxLayout.Y_AXIS);
+		todo.setLayout(nuevo);
+	    mes = nombrarMes(month);
+	    JLabel tituloMes = new JLabel(mes);
+	    JLabel tituloanio= new JLabel("     " + year+"    ");
+	   
+		encabezado.add(a1);
+		encabezado.add(a2);
+		encabezado.add(a3);
+		encabezado.add(a4);
+		encabezado.add(a5);
+		encabezado.add(a6);
+		encabezado.add(a7);
+		 todo.add(tituloanio);
+		   todo.add(tituloMes);
+		    todo.add(encabezado);
+		add(todo);
+		
+		
+	}
+	//  este metodo de devuelve el nombre del mes depende al int que ingreses
+	 public String nombrarMes (int month) {
+			String res = "";
+			
+		    switch (month) {
+			case 0:
+				res = "ENERO";
+				break;
+			case 1:
+				res = "FEBRERO";
+				break;
+			case 2:
+				res = "MARZO";
+				break;
+			case 3:
+				res = "ABRIL";
+				break;
+			case 4:
+				res = "MAYO";
+				break;
+			case 5:
+				res = "JUNIO";
+				break;
+			case 6:
+				res = "JULIO";
+				break;
+			case 7:
+				res = "AGOSTO";
+				break;
+			case 8:
+				res = "SEPTIEMBRE";
+				break;
+			case 9:
+				res = "OCTUBRE";
+				break;
+			case 10:
+				res = "NOVIEMBRE";
+				break;
+			case 11:
+				res = "DICIEMBRE";
+				break;
+			
+			default:
+				break;
+			}
+			
+			return res;
+			
+		}
 }
