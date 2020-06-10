@@ -9,9 +9,14 @@ public class Memo {
 	private String texto;
 	private Fecha fechaCreacion;
 	private Reloj horaCreacion;
-	private Fecha fechamodificion;
+	private Fecha fechaModificion;
  
 	public Memo() {
+		
+		
+	}
+	
+	public String getTitulo() {
 		
 		
 	}
