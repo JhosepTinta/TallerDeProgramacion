@@ -6,9 +6,12 @@ import java.util.GregorianCalendar;
 public class CalendarioMensual {
     Calendar calendar;
     int contador;
+    int mes;
+    int anio;
 	
     public CalendarioMensual(int mes , int anio) {
-	
+	    this.mes = mes ;
+	    this.anio = anio;
 		calendar= new GregorianCalendar(anio,mes,1);
 	}
     public static void main(String args[]) {
@@ -50,4 +53,17 @@ public class CalendarioMensual {
     	return a;
     	
     }
+	public int getMes() {
+		return mes;
+	}
+	public void setMes(int mes) {
+		this.mes = mes;
+	}
+	public int getAnio() {
+		return anio;
+	}
+	public void setAnio(int anio) {
+		this.anio = anio;
+	}
+	
 }

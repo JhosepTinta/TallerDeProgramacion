@@ -1,12 +1,15 @@
-package vista;
+package modelo;
 
+import lineales.ListaSE;
 import modelo.*;
-
+import noLineales.*;
 public class ObjetoDiaCitas {
     int dia;
     Cita cita1;
     Cita cita2;
+    ListaSE<Cita> lista;
 	public ObjetoDiaCitas(int dia, Cita cita1, Cita cita2) {
+		lista = new ListaSE<Cita>();
 		this.dia = dia;
 		this.cita1 = cita1;
 		this.cita2 = cita2;
@@ -15,11 +18,14 @@ public class ObjetoDiaCitas {
     	
     	
     }
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	
 
+	public ListaSE<Cita> getLista() {
+		return lista;
 	}
-
+	public void setLista(ListaSE<Cita> lista) {
+		this.lista = lista;
+	}
 	public int getDia() {
 		return dia;
 	}
