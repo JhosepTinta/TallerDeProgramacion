@@ -31,13 +31,13 @@ public class VPrin extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 547, 393);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.LIGHT_GRAY);
+		contentPane.setBackground(SystemColor.menu);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.BLACK);
+		panel.setBackground(SystemColor.menu);
 		panel.setBounds(0, 0, 531, 88);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -60,12 +60,12 @@ public class VPrin extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Buscar");
 		lblNewLabel.setFont(new Font("Agency FB", Font.PLAIN, 18));
-		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setForeground(SystemColor.desktop);
 		lblNewLabel.setBounds(32, 11, 65, 22);
 		panel.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Contacto");
-		lblNewLabel_1.setForeground(Color.WHITE);
+		lblNewLabel_1.setForeground(SystemColor.desktop);
 		lblNewLabel_1.setFont(new Font("Agency FB", Font.PLAIN, 18));
 		lblNewLabel_1.setBounds(31, 35, 71, 22);
 		panel.add(lblNewLabel_1);
@@ -106,7 +106,7 @@ public class VPrin extends JFrame {
 		contentPane.add(lblNewLabel_5);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.BLACK);
+		panel_1.setBackground(SystemColor.menu);
 		panel_1.setBounds(387, 266, 144, 88);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
@@ -124,7 +124,7 @@ public class VPrin extends JFrame {
 		contentPane.add(btnIrEditar);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.BLACK);
+		panel_2.setBackground(SystemColor.menu);
 		panel_2.setBounds(0, 266, 144, 88);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
