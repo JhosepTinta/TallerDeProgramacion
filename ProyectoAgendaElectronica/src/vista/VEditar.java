@@ -33,7 +33,7 @@ public class VEditar extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 547, 393);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.LIGHT_GRAY);
+		contentPane.setBackground(SystemColor.menu);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -76,13 +76,13 @@ public class VEditar extends JFrame {
 		contentPane.add(btnVolver2);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.BLACK);
+		panel.setBackground(SystemColor.menu);
 		panel.setBounds(0, 0, 531, 54);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Editar Contacto");
-		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setForeground(SystemColor.desktop);
 		lblNewLabel.setFont(new Font("Agency FB", Font.BOLD, 26));
 		lblNewLabel.setBounds(44, 11, 203, 32);
 		panel.add(lblNewLabel);
@@ -136,3 +136,4 @@ public class VEditar extends JFrame {
 	  
 	}
 }
+
