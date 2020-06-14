@@ -2,7 +2,6 @@ package vista;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -26,12 +25,11 @@ public class Ventana extends JFrame {
 	public JButton btnGuardar;
 	public JButton btnVolver;
 
-	
 	public Ventana() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 547, 393);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.LIGHT_GRAY);
+		contentPane.setBackground(SystemColor.menu);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -74,13 +72,13 @@ public class Ventana extends JFrame {
 		contentPane.add(btnVolver);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.BLACK);
+		panel.setBackground(SystemColor.menu);
 		panel.setBounds(0, 0, 531, 54);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("A\u00F1adir nuevo contacto");
-		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setForeground(SystemColor.desktop);
 		lblNewLabel.setFont(new Font("Agency FB", Font.BOLD, 26));
 		lblNewLabel.setBounds(161, 11, 245, 32);
 		panel.add(lblNewLabel);
@@ -120,7 +118,5 @@ public class Ventana extends JFrame {
 		lblNewLabel_7.setForeground(Color.DARK_GRAY);
 		lblNewLabel_7.setBounds(72, 82, 306, 29);
 		contentPane.add(lblNewLabel_7);
-		
-	  
 	}
 }
