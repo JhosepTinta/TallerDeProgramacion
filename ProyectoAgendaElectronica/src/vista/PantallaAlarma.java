@@ -25,6 +25,13 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.ButtonGroup;
 import javax.swing.JTextPane;
+import javax.swing.JList;
+import javax.swing.JFormattedTextField;
+import javax.swing.JProgressBar;
+import javax.swing.JMenuItem;
+import javax.swing.JTable;
+import javax.swing.JSpinner;
+import javax.swing.JComboBox;
 
 
 public class PantallaAlarma extends JFrame {
@@ -48,7 +55,7 @@ public class PantallaAlarma extends JFrame {
 		getContentPane().add(textField, BorderLayout.CENTER);
 		textField.setColumns(10);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 423, 154);
+		setBounds(100, 100, 423, 261);
 		contentPane = new JPanel();
 		contentPane.setToolTipText("ALARMA");
 		contentPane.setBackground(new Color(153, 153, 204));
@@ -147,6 +154,10 @@ public class PantallaAlarma extends JFrame {
 		});
 		PM.setBounds(267, 58, 62, 23);
 		contentPane.add(PM);
+		
+		JList list = new JList();
+		list.setBounds(98, 93, 1, 1);
+		contentPane.add(list);
 
 		
 	}
