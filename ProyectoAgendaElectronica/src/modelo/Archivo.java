@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 public class Archivo {
 
 	public void escribirPersona(Contacto nuevo) {
+
+	
 		try {
 			File file= new File("agenda.txt");
 			FileWriter fw;
@@ -33,29 +35,7 @@ public class Archivo {
 			System.out.println(e);
 		}
 	}
-	
-	/*public void leer() {
-		try {
-			File file=new File("agenda.txt");
-			if (file.exists()) {
-				FileReader fr = new FileReader(file);
-				BufferedReader br=new BufferedReader(fr);
-				String linea;
-				while((linea=br.readLine( ))!=null) {
-					String [] contacto = linea.split("%");
-					Contacto c =new Contacto(contacto[0],contacto[1],contacto[2],contacto[3],contacto[4]);
-					c.desplegar();
-					System.out.println("********************************************");
-				}
-			}else {
-				System.out.println("Agenda no existente");
-			}
-		}catch(Exception e){
-			System.out.println(e);
-			
-		}
-	} */
-	
+
 	public String buscarN(String nombre,String apellido) {
 		try {
 			File file=new File("agenda.txt");
@@ -80,6 +60,8 @@ public class Archivo {
 		}
 		return ("No existe el Contacto");
 	  }
+	
+	
 	public String buscarC(String nombre,String apellido) {
 		try {
 			File file=new File("agenda.txt");
@@ -104,6 +86,8 @@ public class Archivo {
 		}
 		return ("No existe el Contacto");
 	  }
+	
+	
 	public String buscarD(String nombre,String apellido) {
 		try {
 			File file=new File("agenda.txt");
@@ -128,6 +112,8 @@ public class Archivo {
 		}
 		return ("No existe el Contacto");
 	  }
+	
+	
 	public void eliminarC(String nombreE,String apellidoE) {
 		try {
 		File file=new File("agenda.txt");
@@ -183,4 +169,28 @@ public class Archivo {
 	    	System.out.println(e);
 		}
 	}
-}
+	
+	public boolean existeC(String nombre,String apellido) {
+		try {
+			File file=new File("agenda.txt");
+			if(file.exists()) {
+				FileReader fr=new FileReader(file);
+				BufferedReader br = new BufferedReader(fr);
+				String linea;
+				while((linea=br.readLine())!=null) {
+					String contacto[]=linea.split("%");
+					if((contacto[0].equals(nombre))&&(contacto[1].equals(apellido))) {
+				     return true;
+				}
+			  }
+			}
+			else {
+				System.out.println("No hay nada por buscar");
+				return false;
+				}
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return false;
+	  }
+	}
