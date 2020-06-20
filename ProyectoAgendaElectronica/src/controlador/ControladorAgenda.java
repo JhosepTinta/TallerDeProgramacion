@@ -19,7 +19,7 @@ public class ControladorAgenda {
 		try {
 			System.out.println("Guardando lista en el fichero objetos.dat");
 			ObjectOutputStream escribiendo = new ObjectOutputStream(
-					new FileOutputStream("C:\\Users\\IBM LENOVO\\Desktop\\datos generados\\datosAgenda.dat"));
+					new FileOutputStream("C:\\Users\\KarenCh\\Desktop\\agenda\\datosAgenda.dat"));
 			escribiendo.writeObject(agendaControlada);
 			escribiendo.close();
 		} catch (Exception e) {
@@ -33,7 +33,7 @@ public class ControladorAgenda {
 
 			System.out.println("Leyendo lista en el fichero datosAgenda.dat");
 			ObjectInputStream leendo = new ObjectInputStream(
-					new FileInputStream("C:\\Users\\IBM LENOVO\\Desktop\\datos generados\\datosAgenda.dat"));
+					new FileInputStream("C:\\Users\\KarenCh\\Desktop\\agenda\\datosAgenda.dat"));
 			datosRecogidos = (Agenda) leendo.readObject();
 			leendo.close();
 			System.out.println("Se a leido los datos guardados");

@@ -159,13 +159,17 @@ public class VistaCalendarioMensual extends JPanel {
 				objeto = new LaminaObjeto(numeroVacio);
 				contador++;
 			}else {
-			     objeto = new LaminaObjeto("        "+ arrayMes[contador]+"      ");
+			     objeto = new LaminaObjeto( arrayMes[contador]+"                        ");
 			     Fecha fecha = new Fecha(arrayMes[contador], month, anio);
 			 
 			     ListaSE<Cita> lista = agenda.buscarFecha(fecha);
-			     if(lista.vacia()==false) {
-			     objeto.setTextoCita1(lista.acceder(0).getAsunto());
-			     objeto.setTextoCita2(lista.acceder(1).getAsunto());
+			     int tamanio = lista.longitud();
+			     if(lista.vacia()==false && tamanio >=2) {
+			         objeto.setTextoCita1(lista.acceder(0).getAsunto());
+			         objeto.setTextoCita2(lista.acceder(1).getAsunto());
+			     }
+			     if(lista.vacia()==false && tamanio ==1) {
+			    	 objeto.setTextoCita1(lista.acceder(0).getAsunto());
 			     }
 			     contador++;
 			}
