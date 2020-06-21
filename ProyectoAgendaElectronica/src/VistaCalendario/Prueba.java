@@ -1,4 +1,7 @@
-package vista;
+package VistaCalendario;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.JFrame;
 
@@ -15,7 +18,7 @@ public class Prueba extends JFrame {
 
 	
 	public Prueba () {
-		CalendarioMensual aux = new  CalendarioMensual(5,2020);
+		CalendarioMensual aux = new  CalendarioMensual(1,2020);
 		Agenda a = new Agenda();
 		Cita cita1 = new Cita("dormir","a",new Reloj(11,0,0),new Reloj(14,50,0),new Fecha(16,5,2020),"asunto");
 		Cita cita2 = new Cita("asunto","b",new Reloj(15,0,0),new Reloj(16,30,0),new Fecha(16,5,2020),"asunto2");
@@ -40,9 +43,11 @@ public class Prueba extends JFrame {
 		System.out.println(prueba.getAgendaControlada().mostrar());
 		
 		VistaCalendarioCompleto ac = new VistaCalendarioCompleto(aux,a);
+		Navegacion na = new Navegacion(a, aux);
 		setVisible(true);
-		
-		  add(ac);
+		int mes =aux.getMes();
+		aux.setMes(mes++);
+		  add(na);
 		setSize(1200,700);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

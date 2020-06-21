@@ -1,4 +1,4 @@
-package vista;
+package VistaCalendario;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,11 +20,12 @@ public class VistaCalendarioMensual extends JPanel {
 	String mesElegido;
 	 
 	public VistaCalendarioMensual(CalendarioMensual aux,Agenda agenda) {
+		
 	   int month = aux.getMes();
 	   int anio = aux.getAnio();
 	   this.aux = aux;		
        setLayout(new BorderLayout());	
-       LaminaMes mes= new LaminaMes(aux,agenda);
+       LaminaMes mes= new LaminaMes(this.aux,agenda);
       
       //Encabezado para el mes
        mesElegido = nombrarMes(month);
@@ -119,6 +120,7 @@ public class VistaCalendarioMensual extends JPanel {
 	    LaminaObjeto a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,a1,a2,a3,a4,a5,a6,a7,a8,a9,a0,b1,b2,b3,b4,b5,b6;
 		
 		public LaminaMes(CalendarioMensual calendario,Agenda agenda) {
+	
 			this.agenda = agenda;
 			agenda = new Agenda();
 			fecha = new Fecha(1, calendario.getMes(), calendario.getAnio());

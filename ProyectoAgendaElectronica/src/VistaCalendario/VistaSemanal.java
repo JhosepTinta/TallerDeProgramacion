@@ -1,4 +1,4 @@
-package vista;
+package VistaCalendario;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
