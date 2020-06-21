@@ -45,10 +45,10 @@ public class VistaAgendaPrueba extends JPanel{
 	}
 	
 	private void agregarElementos() {
-		buscar.setBounds(5, 10, 250, 20);
-		agregar.setBounds(260, 10, 95, 20);
-		mas_opciones.setBounds(360, 10, 70, 20);
-		listaCitas.setBounds(5, 35, 425, 320);
+		buscar.setBounds(5, 10, 450, 20);
+		agregar.setBounds(585, 10, 95, 20);
+		mas_opciones.setBounds(688, 10, 90, 20);
+		listaCitas.setBounds(5, 35, 780, 520);
 		add(buscar);
 		add(agregar);
 		add(mas_opciones);
