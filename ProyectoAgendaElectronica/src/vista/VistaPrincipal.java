@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import VistaCalendario.VistaCalendarioMensual;
 import modelo.Agenda;
 import modelo.CalendarioMensual;
 import vistaAgenda.VistaAgendaPrueba;
@@ -23,6 +24,8 @@ public class VistaPrincipal extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(laminaprincipal);
+		
+		
 	}
 
 	private class LaminaPrincipal extends JPanel {
@@ -30,9 +33,11 @@ public class VistaPrincipal extends JFrame {
 		JScrollPane contenedorDePaneles;
 		VistaCalendarioMensual calendario;
 		Agenda agenda;
-		
+		PantallaAlarma alar;
+	   
 		public LaminaPrincipal() {
 			contenedorDePaneles = new JScrollPane();
+			alar = new PantallaAlarma();
 			CalendarioMensual calendarioMensual = new CalendarioMensual(5, 2020);
 			agenda = new Agenda();
 			setLayout(new BorderLayout());
@@ -44,6 +49,7 @@ public class VistaPrincipal extends JFrame {
 			add(contenedorDePaneles, BorderLayout.CENTER);
 			//add(a, BorderLayout.CENTER);
 			//a.setVisible(false);
+			
 		}
 		
 		public void agregarEnPrincipal(JPanel aux) {
@@ -86,6 +92,7 @@ public class VistaPrincipal extends JFrame {
 				agenda.addActionListener(new AccionDeBoton());
 				inicio.addActionListener(new AccionDeBoton());
 				memo.addActionListener(new AccionDeBoton());
+				alarma.addActionListener(new AccionDeBoton());
 			}
 			private class AccionDeBoton implements ActionListener{
 
@@ -97,7 +104,11 @@ public class VistaPrincipal extends JFrame {
 					}else if(e.getSource().equals(memo)) {
 
 						definirPanel(b);
+					}else if(e.getSource().equals(alarma)) {
+						definirPanel(alar);
 					}
+					}
+					
 
 				}
 				
@@ -106,4 +117,4 @@ public class VistaPrincipal extends JFrame {
 		
 	}
 
-}
+
