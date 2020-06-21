@@ -6,17 +6,18 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import VistaCalendario.Navegacion;
 import VistaCalendario.VistaCalendarioMensual;
 import modelo.Agenda;
 import modelo.CalendarioMensual;
 import vistaAgenda.VistaAgendaPrueba;
 
 public class VistaPrincipal extends JFrame {
-
+	LaminaPrincipal laminaprincipal;
 	VistaAgendaPrueba a = new VistaAgendaPrueba();
 	VistaMemo b = new VistaMemo();
-	LaminaPrincipal laminaprincipal;
-
+    PantallaAlarma alar;
+	Navegacion calendario;
 	public VistaPrincipal() {
 		laminaprincipal = new LaminaPrincipal();
 		
@@ -31,9 +32,9 @@ public class VistaPrincipal extends JFrame {
 	private class LaminaPrincipal extends JPanel {
 		LaminaDeBotones laminaBotones;
 		JScrollPane contenedorDePaneles;
-		VistaCalendarioMensual calendario;
+		
 		Agenda agenda;
-		PantallaAlarma alar;
+		
 	   
 		public LaminaPrincipal() {
 			contenedorDePaneles = new JScrollPane();
@@ -42,7 +43,7 @@ public class VistaPrincipal extends JFrame {
 			agenda = new Agenda();
 			setLayout(new BorderLayout());
 			laminaBotones = new LaminaDeBotones();
-			calendario = new VistaCalendarioMensual(calendarioMensual, agenda);
+			calendario = new Navegacion( agenda,calendarioMensual);
 			add(laminaBotones, BorderLayout.WEST);
 			//add(calendario, BorderLayout.CENTER);
 			definirPanel(calendario);
