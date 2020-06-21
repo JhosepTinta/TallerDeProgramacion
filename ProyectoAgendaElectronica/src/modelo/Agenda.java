@@ -54,6 +54,18 @@ public class Agenda implements Serializable {
 		Fecha fechaHoy = new Fecha();
 		return darCitasPorEstado(0,fechaHoy);
 	}
+	
+	public ListaSE<Cita> buscarHorayFecha(Reloj hora,Fecha fecha) {
+		ListaSE<Cita> citasCompletas = (ListaSE) listaCita.inOrden();
+		ListaSE<Cita> listaRespuesta = new ListaSE<Cita>();
+		for (int i = 0; i < citasCompletas.longitud(); i++) {
+			Cita aux = citasCompletas.acceder(i);
+			if (aux.getHoraInicio().compareTo(hora) == 0 && aux.getFecha().compareTo(fecha) == 0) {
+				listaRespuesta.insertar(aux);
+			}
+		}
+		return listaRespuesta;
+	}
 
 	public ListaSE<Cita> buscarLugarAsunto(String lugar, String asunto) {
 		ListaSE<Cita> citasCompletas = (ListaSE) listaCita.inOrden();
