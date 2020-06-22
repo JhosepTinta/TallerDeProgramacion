@@ -8,19 +8,26 @@ import javax.swing.*;
 
 import VistaCalendario.Navegacion;
 import VistaCalendario.VistaCalendarioMensual;
+import controlador.Controlador;
 import modelo.Agenda;
+import modelo.Archivo;
 import modelo.CalendarioMensual;
 import vistaAgenda.VistaAgendaPrueba;
 
 public class VistaPrincipal extends JFrame {
+	
 	LaminaPrincipal laminaprincipal;
 	VistaAgendaPrueba a = new VistaAgendaPrueba();
 	VistaMemo b = new VistaMemo();
     PantallaAlarma alar;
 	Navegacion calendario;
+	Panel1 miPanel1=new Panel1();
+	Panel2 miPanel2=new Panel2();
+	Panel3 miPanel3=new Panel3();
+	
 	public VistaPrincipal() {
-		laminaprincipal = new LaminaPrincipal();
 		
+		laminaprincipal = new LaminaPrincipal();
 		setSize(950, 600);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,10 +36,10 @@ public class VistaPrincipal extends JFrame {
 		
 	}
 
-	private class LaminaPrincipal extends JPanel {
+	public class LaminaPrincipal extends JPanel {
+		
 		LaminaDeBotones laminaBotones;
 		JScrollPane contenedorDePaneles;
-		
 		Agenda agenda;
 		
 	   
@@ -94,6 +101,7 @@ public class VistaPrincipal extends JFrame {
 				inicio.addActionListener(new AccionDeBoton());
 				memo.addActionListener(new AccionDeBoton());
 				alarma.addActionListener(new AccionDeBoton());
+				contactos.addActionListener(new AccionDeBoton());
 			}
 			private class AccionDeBoton implements ActionListener{
 
@@ -108,7 +116,12 @@ public class VistaPrincipal extends JFrame {
 					}else if(e.getSource().equals(alarma)) {
 						definirPanel(alar);
 					}
+					else if(e.getSource().equals(contactos)) {
+						Archivo arch=new Archivo();
+						Controlador ctrl = new Controlador(miPanel1,miPanel2,miPanel3,arch);
+						definirPanel(miPanel1);
 					}
+				  }
 					
 
 				}
