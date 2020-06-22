@@ -2,56 +2,55 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JOptionPane;
-
 import modelo.Archivo;
 import modelo.Contacto;
-import vista.VEditar;
-import vista.VPrin;
-import vista.Ventana;
+import vista.Panel1;
+import vista.Panel2;
+import vista.Panel3;
 
 public class Controlador implements ActionListener {
 
-	private Ventana window;
-	private Archivo a;
-	private VEditar window2;
-	private VPrin windowP;
+	private Panel1 miPanel1;
+	private Panel2 miPanel2;
+	private Panel3 miPanel3;
+	private Archivo arch;	
 	
-	
-	public Controlador (Ventana window,Archivo a,VEditar window2,VPrin windowP) {
-		this.window=window;
-		this.a=a;
-		window.btnGuardar.addActionListener(this);
-		window.btnVolver.addActionListener(this);
+	public Controlador (Panel1 miPanel1,Panel2 miPanel2,Panel3 miPanel3,Archivo arch) {
+		this.miPanel1=miPanel1;
+		this.miPanel2=miPanel2;
+		this.miPanel3=miPanel3;
+		this.arch=arch;
 		
-		this.window2=window2;
-		window2.btnEditar.addActionListener(this);
-		window2.btnVolver2.addActionListener(this);
-		
-		this.windowP=windowP;
-		windowP.btnBuscar.addActionListener(this);
-		windowP.btnCrear.addActionListener(this);
-		windowP.btnEliminarC.addActionListener(this);
-		windowP.btnIrEditar.addActionListener(this);
+		miPanel1.btnIrEditar.addActionListener(this);
+		miPanel1.btnBuscar.addActionListener(this);
+		miPanel1.btnCrear.addActionListener(this);
+		miPanel1.btnEliminarC.addActionListener(this);
+        miPanel3.btnGuardar.addActionListener(this);
+		miPanel3.btnVolver.addActionListener(this);
+
+		miPanel2.btnEditar.addActionListener(this);
+		miPanel2.btnVolver2.addActionListener(this);
 		
 	}
 	public void actionPerformed (ActionEvent e) {
-		
 		//Botones de la Ventana Crear Contacto
-		if(e.getSource()==window.btnGuardar) {
+	/*	if(e.getSource()==miPanel1.btnIrEditar) {
+			VistaPrincipal.definirPanel(miPanel2);
+	        }
+		if(e.getSource()==window.miPanel3.btnGuardar) {
 			Archivo a=new Archivo();
 			
-			if(a.existeC(window.txtNombre.getText(), window.txtApellido.getText())) {
+			if(a.existeC(window.miPanel3.txtNombre.getText(), window.miPanel3.txtApellido.getText())) {
 				JOptionPane.showMessageDialog(window, "El contacto ya existe");
 			}
-			else{String Vno=window.txtNombre.getText();
-			String Vap=window.txtApellido.getText();
-			String Vnu=window.txtNumero.getText();
+			else{String Vno=window.miPanel3.txtNombre.getText();
+			String Vap=window.miPanel3.txtApellido.getText();
+			String Vnu=window.miPanel3.txtNumero.getText();
 			try {
 				Integer.parseInt(Vnu);
-				String Vco=window.txtCorreo.getText();
-			String Vdi=window.txtDireccion.getText();
+				String Vco=window.miPanel3.txtCorreo.getText();
+			String Vdi=window.miPanel3.txtDireccion.getText();
 			if(Vno.equals("")) {
 				JOptionPane.showMessageDialog(window, "Ingresar un nombre es obligatorio");
 			}else {
@@ -68,97 +67,94 @@ public class Controlador implements ActionListener {
 				Vdi="Sin Dirección añadida actualmente";
 			}
 			a.escribirPersona(new Contacto(Vno,Vap,Vnu,Vco,Vdi));
-			JOptionPane.showMessageDialog(window, "Contacto "+window.txtNombre.getText()+" "+window.txtApellido.getText()+" "+"Guardado Correctamente");
-			window.txtNombre.setText(null);
-			window.txtApellido.setText(null);
-			window.txtNumero.setText(null);
-			window.txtCorreo.setText(null);
-			window.txtDireccion.setText(null);}
+			JOptionPane.showMessageDialog(window, "Contacto "+window.miPanel3.txtNombre.getText()+" "+window.miPanel3.txtApellido.getText()+" "+"Guardado Correctamente");
+			window.miPanel3.txtNombre.setText(null);
+			window.miPanel3.txtApellido.setText(null);
+			window.miPanel3.txtNumero.setText(null);
+			window.miPanel3.txtCorreo.setText(null);
+			window.miPanel3.txtDireccion.setText(null);}
 				
 			}catch(NumberFormatException nfe){
 				JOptionPane.showMessageDialog(window, "Asegurese de que el número sea correcto");
 			}
 		}}
 		
-		if(e.getSource()==window.btnVolver) {
-			windowP.setVisible(true);    //posibles lineas de codigo extras
-			window.dispose();
+		if(e.getSource()==window.miPanel3.btnVolver) {
+			window.definirPanel(window.miPanel1);
 		}
 		
 		//Botones de la Ventana Principal
-		if(e.getSource()==windowP.btnCrear) {
+		if(e.getSource()==window.miPanel1.btnCrear) {
 			Archivo a=new Archivo();
-			windowP.txtMosN.setText(null);
-			windowP.txtMosC.setText(null);
-			windowP.txtMosD.setText(null);
-			window.setVisible(true);   
-			windowP.dispose();
+			window.miPanel1.txtMosN.setText(null);
+			window.miPanel1.txtMosC.setText(null);
+			window.miPanel1.txtMosD.setText(null);
+			window.definirPanel(window.miPanel3);
 		}
-		if(e.getSource()==windowP.btnSalir) {
+		if(e.getSource()==window.miPanel1.btnSalir) {
 			System.exit(0);            // DEBERÁ MODIFICARSE AL ADJUNTAR LOS DEMAS PROGRAMAS
 		}
-		if((e.getSource()==windowP.btnBuscar)) {
+		if((e.getSource()==window.miPanel1.btnBuscar)) {
 			Archivo a=new Archivo();
-			String ap= windowP.txtAB.getText();
-			if(windowP.txtAB.getText().equals(""))
+			String ap= window.miPanel1.txtAB.getText();
+			if(window.miPanel1.txtAB.getText().equals(""))
 			ap=".";
 			else
-				ap=windowP.txtAB.getText();
+				ap=window.miPanel1.txtAB.getText();
 			
-			if(a.existeC(windowP.txtNB.getText(), ap)) {
-			windowP.txtMosN.setText(a.buscarN(windowP.txtNB.getText(), ap));
-			windowP.txtMosC.setText(a.buscarC(windowP.txtNB.getText(), ap));
-			windowP.txtMosD.setText(a.buscarD(windowP.txtNB.getText(), ap));}
+			if(a.existeC(window.miPanel1.txtNB.getText(), ap)) {
+			window.miPanel1.txtMosN.setText(a.buscarN(window.miPanel1.txtNB.getText(), ap));
+			window.miPanel1.txtMosC.setText(a.buscarC(window.miPanel1.txtNB.getText(), ap));
+			window.miPanel1.txtMosD.setText(a.buscarD(window.miPanel1.txtNB.getText(), ap));}
 			else {
-				JOptionPane.showMessageDialog(windowP, "No existe el contacto que busca");
+				JOptionPane.showMessageDialog(window, "No existe el contacto que busca");
 			}
 	    }
-		if(e.getSource()==windowP.btnEliminarC) {
+		if(e.getSource()==window.miPanel1.btnEliminarC) {
 			Archivo a=new Archivo();
-			a.eliminarC(windowP.txtNB.getText(), windowP.txtAB.getText());
-			JOptionPane.showMessageDialog(windowP, "Contacto Eliminado");
-			windowP.txtMosN.setText(null);
-			windowP.txtMosC.setText(null);
-			windowP.txtMosD.setText(null);
-			windowP.txtNB.setText(null);
-			windowP.txtAB.setText(null);
+			a.eliminarC(window.miPanel1.txtNB.getText(), window.miPanel1.txtAB.getText());
+			JOptionPane.showMessageDialog(window.miPanel1, "Contacto Eliminado");
+			window.miPanel1.txtMosN.setText(null);
+			window.miPanel1.txtMosC.setText(null);
+			window.miPanel1.txtMosD.setText(null);
+			window.miPanel1.txtNB.setText(null);
+			window.miPanel1.txtAB.setText(null);
 			
 			
 		}
-		if(e.getSource()==windowP.btnIrEditar) {
-			window2.txtNP.setText(windowP.txtNB.getText());
-			window2.txtAP.setText(windowP.txtAB.getText());
+		if(e.getSource()==window.miPanel1.btnIrEditar) {
+			window.miPanel2.txtNP.setText(window.miPanel1.txtNB.getText());
+			window.miPanel2.txtAP.setText(window.miPanel1.txtAB.getText());
 			
-			window2.txtNE.setText(windowP.txtNB.getText());
-			window2.txtAE.setText(windowP.txtAB.getText());
-			window2.txtNuE.setText(windowP.txtMosN.getText());
-			window2.txtCE.setText(windowP.txtMosC.getText());
-			window2.txtDE.setText(windowP.txtMosD.getText());
+			window.miPanel2.txtNE.setText(window.miPanel1.txtNB.getText());
+			window.miPanel2.txtAE.setText(window.miPanel1.txtAB.getText());
+			window.miPanel2.txtNuE.setText(window.miPanel1.txtMosN.getText());
+			window.miPanel2.txtCE.setText(window.miPanel1.txtMosC.getText());
+			window.miPanel2.txtDE.setText(window.miPanel1.txtMosD.getText());
 			
-			windowP.txtMosN.setText(null);
-			windowP.txtMosC.setText(null);
-			windowP.txtMosD.setText(null);
-			windowP.txtNB.setText(null);
-			windowP.txtAB.setText(null);
-			window2.setVisible(true);
-			windowP.dispose();
+			window.miPanel1.txtMosN.setText(null);
+			window.miPanel1.txtMosC.setText(null);
+			window.miPanel1.txtMosD.setText(null);
+			window.miPanel1.txtNB.setText(null);
+			window.miPanel1.txtAB.setText(null);
+			window.definirPanel(window.miPanel2);
 		}
-	    if(e.getSource()==window2.btnVolver2) {
-			windowP.setVisible(true);
-			windowP.txtMosN.setText(window2.txtNuE.getText());
-			windowP.txtMosC.setText(window2.txtCE.getText());
-			windowP.txtMosD.setText(window2.txtDE.getText());
-			windowP.txtNB.setText(window2.txtNE.getText());
-			windowP.txtAB.setText(window2.txtAE.getText());
-	    	window2.dispose();
+	    if(e.getSource()==window.miPanel2.btnVolver2) {
+	    	window.definirPanel(window.miPanel1);                        //Podría ir abajo
+			window.miPanel1.txtMosN.setText(window.miPanel2.txtNuE.getText());
+			window.miPanel1.txtMosC.setText(window.miPanel2.txtCE.getText());
+			window.miPanel1.txtMosD.setText(window.miPanel2.txtDE.getText());
+			window.miPanel1.txtNB.setText(window.miPanel2.txtNE.getText());
+			window.miPanel1.txtAB.setText(window.miPanel2.txtAE.getText());
+	    	
 	    }
-	    if(e.getSource()==window2.btnEditar) {
+	    if(e.getSource()==window.miPanel2.btnEditar) {
 	    	Archivo a = new Archivo();
-	    	String Vno=window2.txtNE.getText();
-			String Vap=window2.txtAE.getText();
-			String Vnu=window2.txtNuE.getText();
-			String Vco=window2.txtCE.getText();
-			String Vdi=window2.txtDE.getText();
+	    	String Vno=window.miPanel2.txtNE.getText();
+			String Vap=window.miPanel2.txtAE.getText();
+			String Vnu=window.miPanel2.txtNuE.getText();
+			String Vco=window.miPanel2.txtCE.getText();
+			String Vdi=window.miPanel2.txtDE.getText();
 			if(Vno.equals("")) {
 				JOptionPane.showMessageDialog(window, "Ingresar un nombre es obligatorio");
 			}else {
@@ -174,14 +170,13 @@ public class Controlador implements ActionListener {
 			if(Vdi.equals("")) {
 				Vdi="Sin Dirección añadida actualmente";
 			}
-			a.eliminarC(window2.txtNP.getText(), window2.txtAP.getText());
+			a.eliminarC(window.miPanel2.txtNP.getText(), window.miPanel2.txtAP.getText());
 	    	a.escribirPersona(new Contacto(Vno,Vap,Vnu,Vco,Vdi));
-	    	JOptionPane.showMessageDialog(window2, "Contacto Actualizado Correctamente");
-	    	window2.dispose();
-	    	windowP.setVisible(true);
+	    	JOptionPane.showMessageDialog(window.miPanel2, "Contacto Actualizado Correctamente");
+	    	window.definirPanel(window.miPanel1);
 	    	
 			}	
 	    }
+       */
+      }
 	}
-}
-
