@@ -17,13 +17,13 @@ import vistaAgenda.VistaAgendaPrueba;
 public class VistaPrincipal extends JFrame {
 	
 	LaminaPrincipal laminaprincipal;
-	VistaAgendaPrueba a = new VistaAgendaPrueba();
-	VistaMemo b = new VistaMemo();
-    PantallaAlarma alar;
-	Navegacion calendario;
-	Panel1 miPanel1=new Panel1();
-	Panel2 miPanel2=new Panel2();
-	Panel3 miPanel3=new Panel3();
+	static VistaAgendaPrueba a = new VistaAgendaPrueba();
+	static VistaMemo b = new VistaMemo();
+    static PantallaAlarma alar;
+	static Navegacion calendario;
+	static Panel1 miPanel1=new Panel1();
+	static Panel2 miPanel2=new Panel2();
+	static Panel3 miPanel3=new Panel3();
 	
 	public VistaPrincipal() {
 		
@@ -36,10 +36,10 @@ public class VistaPrincipal extends JFrame {
 		
 	}
 
-	public class LaminaPrincipal extends JPanel {
+	public static class LaminaPrincipal extends JPanel {
 		
 		LaminaDeBotones laminaBotones;
-		JScrollPane contenedorDePaneles;
+		static JScrollPane contenedorDePaneles;
 		Agenda agenda;
 		
 	   
@@ -64,7 +64,7 @@ public class VistaPrincipal extends JFrame {
 			add(aux,BorderLayout.CENTER);
 		}
 		
-		public void definirPanel(JPanel panel) {
+		public static void definirPanel(JPanel panel) {
 			contenedorDePaneles.setViewportView(panel);
 		}
 
