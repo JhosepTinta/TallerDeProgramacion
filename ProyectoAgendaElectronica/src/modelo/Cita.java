@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Cita implements Comparable<Cita>, Serializable{
 	
@@ -10,6 +11,9 @@ public class Cita implements Comparable<Cita>, Serializable{
 	private Reloj  horaFin;
 	private Fecha  fecha;
 	private String lugar;
+	private AlertaAlarma alarmaCita;
+	private ArrayList<Contacto> contactosEnCita;
+	private ArrayList<Memo> listaRecordatorios;
 	
 	public Cita(String asunto, String descripcion, Reloj horaInicio, Reloj horaFin, Fecha fecha, String lugar) {
 		this.asunto = asunto;
@@ -18,6 +22,8 @@ public class Cita implements Comparable<Cita>, Serializable{
 		this.horaFin = horaFin;
 		this.fecha = fecha;
 		this.lugar = lugar;
+		contactosEnCita = new ArrayList<Contacto>();
+		listaRecordatorios = new ArrayList<Memo>();
 	}
 
 	public String getAsunto() {
@@ -97,7 +103,23 @@ public class Cita implements Comparable<Cita>, Serializable{
 		return res;
 	}
 	
+	public AlertaAlarma getAlarmaCita() {
+		return alarmaCita;
+	}
+
+	public void setAlarmaCita(AlertaAlarma alarmaCita) {
+		this.alarmaCita = alarmaCita;
+	}
+
+	public ArrayList<Contacto> getContactosEnCita() {
+		return contactosEnCita;
+	}
+
+	public void setContactosEnCita(ArrayList<Contacto> contactosEnCita) {
+		this.contactosEnCita = contactosEnCita;
+	}
+
 	public String toString() {
-		return asunto +" "+descripcion+" "+horaInicio+" "+horaFin+" "+fecha+" "+lugar;
+		return asunto +"\n"+descripcion+"\n"+horaInicio+"  "+horaFin+"  "+fecha+"\n"+lugar;
 	}
 }

@@ -1,23 +1,39 @@
 package vistaAgenda;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
-
+import javax.swing.*;
+import javax.swing.border.*;
 import controlador.ControladorAgenda;
 import lineales.ListaSE;
-import modelo.Agenda;
-import modelo.Cita;
+import modelo.*;
 
-public class VistaAgendaPrueba extends JPanel{
+public class VistaAgendaPasada extends JFrame {
+	/*PanelAgenda panel = new PanelAgenda();
+	public VistaAgendaPasada() {
+		
+		/*ControladorAgenda agendaControl= new ControladorAgenda(new Agenda());
+		agendaControl.getAgendaControlada().agregarCita(new Cita("asunto a","a",new Reloj(11,0,0),new Reloj(12,0,0),new Fecha(12,5,2020),"a"));
+		agendaControl.getAgendaControlada().agregarCita(new Cita("asunto b","a",new Reloj(13,0,0),new Reloj(14,0,0),new Fecha(12,5,2020),"a"));
+		agendaControl.getAgendaControlada().agregarCita(new Cita("asunto c","a",new Reloj(15,0,0),new Reloj(16,50,0),new Fecha(12,5,2020),"a"));
+		System.out.println(agendaControl.getAgendaControlada().getLista().inOrden().longitud());
+		
+		setBounds(450,150,450,400);
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		add(panel);
+		
+	}
+	
+	public PanelAgenda getPanel() {
+		return panel;
+	}
+}
+
+class PanelAgenda extends JPanel{
 	ControladorAgenda controlAgenda;
 	//JPanel panelCitas = new JPanel();
 	JPanel panelCitas;
@@ -27,7 +43,7 @@ public class VistaAgendaPrueba extends JPanel{
 	JButton agregar = new JButton("añadir");
 	JButton mas_opciones = new JButton("mas...");
 	
-	public VistaAgendaPrueba() {
+	public PanelAgenda() {
 		setLayout(null);
 		panelCitas = new JPanel();
 		listaCitas = new JScrollPane(panelCitas);
@@ -45,10 +61,10 @@ public class VistaAgendaPrueba extends JPanel{
 	}
 	
 	private void agregarElementos() {
-		buscar.setBounds(5, 10, 450, 20);
-		agregar.setBounds(585, 10, 95, 20);
-		mas_opciones.setBounds(688, 10, 90, 20);
-		listaCitas.setBounds(5, 35, 780, 520);
+		buscar.setBounds(5, 10, 250, 20);
+		agregar.setBounds(260, 10, 95, 20);
+		mas_opciones.setBounds(360, 10, 70, 20);
+		listaCitas.setBounds(5, 35, 425, 320);
 		add(buscar);
 		add(agregar);
 		add(mas_opciones);
@@ -60,19 +76,24 @@ public class VistaAgendaPrueba extends JPanel{
 		ListaSE<Cita> listaCitas = (ListaSE<Cita>) controlAgenda.getAgendaControlada().getLista().inOrden();
 		for(int i=0;i<listaCitas.longitud();i++) {
 			Cita aux = listaCitas.acceder(i);
-			panelCitas.add(new ElementoCita2(aux.getAsunto(),aux.getDescripcion(),
+			panelCitas.add(new ElementoCita(aux.getAsunto(),aux.getDescripcion(),
 					aux.getHoraInicio().toString(),aux.getHoraFin().toString(),aux.getFecha().toString()));
 		}
 	}
 	
+	/*public void setControlador(ControladorAgenda control) {
+		agregar.addActionListener(control);
+	}
+
 }
-class ElementoCita2 extends JButton {
+
+class ElementoCita extends JButton {
 	private JLabel asuntoCita;
 	private JLabel descripcionCita;
 	private JLabel horaInicioCita;
 	private JLabel horaFinCita;
 	private JLabel fechaCita;
-	public ElementoCita2(String asunto,String descripcion,String horaInicio,String horaFin,String fecha) {
+	public ElementoCita(String asunto,String descripcion,String horaInicio,String horaFin,String fecha) {
 		Border bordePanel = new TitledBorder(new EtchedBorder());
         setBorder(bordePanel);
         setBackground(Color.white);
@@ -100,5 +121,5 @@ class ElementoCita2 extends JButton {
 		add(horaInicioCita);
 		add(horaFinCita);
 		add(fechaCita);
-	}
+	}*/
 }

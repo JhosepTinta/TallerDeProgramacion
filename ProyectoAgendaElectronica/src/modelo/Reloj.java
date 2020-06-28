@@ -1,7 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
-import java.time.LocalDateTime; 
+import java.time.LocalDateTime; ////hace falta implementar la busca de horas de otros paises
 
 public class Reloj implements Serializable{
 	
@@ -20,6 +20,40 @@ public class Reloj implements Serializable{
     	hora = tiempo.getHour();
     	minutos = tiempo.getMinute();
     	segundos = tiempo.getSecond();
+	}
+	
+	public Reloj(String tiempo) {
+		int h = 0;
+		int m = 0;
+		int s = 0;
+		boolean bandera1 = false;
+		boolean bandera2 = false;
+		String numero = "";
+		
+		for(int i=0; i<tiempo.length(); i++) {
+			char aux = tiempo.charAt(i);
+			if(aux != ':') {
+				numero +=aux;
+				
+			}else {
+				if(!bandera1) {
+					h = Integer.parseInt(numero);
+					bandera1 = true;
+				}
+				else if(!bandera2) {
+					m = Integer.parseInt(numero);
+					bandera2 = true;
+				}
+				numero = "";
+			}
+			if(i == tiempo.length()-1) {
+				s = Integer.parseInt(numero);
+			}
+		}
+		
+		hora = h;
+		minutos = m;
+		segundos = s;
 	}
 
 	public int getHora() {
@@ -80,11 +114,11 @@ public class Reloj implements Serializable{
 		String minutosM = ""+minutos;
 		String segundosM = ""+segundos;
 		
-		if(horaM.length() == 0) { horaM = "0"+hora;}
-		if(minutosM.length() == 0) { horaM = "0"+minutos;}
-		if(segundosM.length() == 0) { horaM = "0"+segundos;}
+		if(horaM.length() == 1) { horaM = "0"+hora;}else if(horaM.length() > 2) {horaM = "00";}
+		if(minutosM.length() == 1) { minutosM = "0"+minutos;}else if(minutosM.length() > 2) {minutosM = "00";}
+		if(segundosM.length() == 1) { segundosM = "0"+segundos;}else if(segundosM.length() > 2) {segundosM = "00";}
 		
-		return horaM + ":" + minutosM + ":" + segundosM;
+		return horaM + "  :  " + minutosM + "  :  " + segundosM;
 	}
 	
 	

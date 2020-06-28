@@ -15,6 +15,40 @@ public class Fecha implements Serializable{
         this.mes = mes;
         this.dia = dia;
     }
+    
+    public Fecha(String fecha) {
+    	int d = 0;
+		int m = 0;
+		int a= 0;
+		boolean bandera1 = false;
+		boolean bandera2 = false;
+		String numero = "";
+		
+		for(int i=0; i<fecha.length(); i++) {
+			char aux = fecha.charAt(i);
+			if(aux != '/') {
+				numero +=aux;
+				
+			}else {
+				if(!bandera1) {
+					d = Integer.parseInt(numero);
+					bandera1 = true;
+				}
+				else if(!bandera2) {
+					m = Integer.parseInt(numero);
+					bandera2 = true;
+				}
+				numero = "";
+			}
+			if(i == fecha.length()-1) {
+				a = Integer.parseInt(numero);
+			}
+		}
+		
+		dia = d;
+		mes = m;
+		año = a;
+    }
 
     public Fecha(){
         dia = fechaActual.get(Calendar.DAY_OF_MONTH);
@@ -77,6 +111,13 @@ public class Fecha implements Serializable{
     }
 
     public String toString(){
-        return dia+"/"+mes+"/"+año;
+    	String diaM = ""+dia;
+		String mesM = ""+mes;
+		String añoM = ""+año;
+		
+		if(diaM.length() == 1) { diaM = "0"+dia;}else if(diaM.length() > 2) {diaM = "00";}
+		if(mesM.length() == 1) { mesM = "0"+mes;}else if(mesM.length() > 2) {mesM = "00";}
+		if(añoM.length() !=  4) { añoM = ""+fechaActual.get(Calendar.YEAR);}
+        return diaM+"  /  "+mesM+"  /  "+añoM;
     }
 }
