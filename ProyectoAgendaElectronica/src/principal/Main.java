@@ -1,16 +1,15 @@
 package principal;
 
 
+import controlador.ControladorG;
 import vista.VistaPrincipal;
 
 public class Main {
 
-	public Main() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public static void main(String[] args) {
-	VistaPrincipal prueba = new VistaPrincipal();
+	VistaPrincipal window = new VistaPrincipal();
+	ControladorG ctrlg=new ControladorG(window);
+	window.setVisible(true);
     
 	}
 
