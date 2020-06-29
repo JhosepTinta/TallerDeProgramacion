@@ -13,6 +13,7 @@ import modelo.CalendarioMensual;
 import vistaAgenda.VistaAgenda;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class VistaPrincipal extends JFrame {
 
