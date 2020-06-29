@@ -20,7 +20,6 @@ import controlador.ControladorAgenda;
 			window.btnA.addActionListener(this);
 			window.btnCa.addActionListener(this);
 			window.btnAg.addActionListener(this);
-			window.btnM.addActionListener(this);
 			window.btnP.addActionListener(this);
 	
 		}
@@ -39,9 +38,6 @@ import controlador.ControladorAgenda;
 			if(e.getSource()==window.btnAg) {
 
 				window.definirPanel(window.vistaAgenda);
-			}
-			if(e.getSource()==window.btnM) {
-				JOptionPane.showMessageDialog(null, "No implementado Memo");	
 			}
 			if(e.getSource()==window.btnP) {
 				JOptionPane.showMessageDialog(null, "No implementado TareasPendientes");	
