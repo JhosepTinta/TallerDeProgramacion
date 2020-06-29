@@ -24,7 +24,7 @@ public class Panel1 extends JPanel {
     
 	public Panel1() {
 		setLayout(null);
-		setBackground(Color.GREEN);
+		setBackground(Color.WHITE);
 		iniciarComponentes();
 	}
 	

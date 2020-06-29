@@ -1,8 +1,9 @@
-/vista/
-/controlador/
-/principal/
-/modelo/
-/vistaModelo/
-/vistaMemo/
-/vistaAgenda/
 /VistaCalendario/
+/controlador/
+/modelo/
+/principal/
+/pruebas_JUnit/
+/vista/
+/vistaAgenda/
+/vistaMemo/
+/imagenes/

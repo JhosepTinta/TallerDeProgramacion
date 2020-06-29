@@ -33,7 +33,7 @@ public class VistaPrincipal extends JFrame {
 	public VistaPrincipal() {
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(970,650);
+		setSize(1050,650);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
 		iniciarComponentes();
@@ -54,7 +54,7 @@ public class VistaPrincipal extends JFrame {
 		calendario=new Navegacion(agenda,calendarioMensual);
 		
 		scrollPaneles=new JScrollPane();
-		scrollPaneles.setBounds(175, 0, 775, 600);
+		scrollPaneles.setBounds(175, 0, 855, 600);
 		
 		btnCa = new JButton("New button");
 		btnCa.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/imagenes/Calendario.png")));

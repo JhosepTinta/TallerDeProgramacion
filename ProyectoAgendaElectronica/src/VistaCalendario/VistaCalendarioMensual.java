@@ -18,11 +18,12 @@ public class VistaCalendarioMensual extends JPanel {
 	JButton back;
 	JButton next;
 	String mesElegido;
-	 
+	int month;
+	int anio;
 	public VistaCalendarioMensual(CalendarioMensual aux,Agenda agenda) {
-		
-	   int month = aux.getMes();
-	   int anio = aux.getAnio();
+	   
+	   month = aux.getMes();
+	   anio = aux.getAnio();
 	   this.aux = aux;		
        setLayout(new BorderLayout());	
        LaminaMes mes= new LaminaMes(this.aux,agenda);
@@ -30,6 +31,8 @@ public class VistaCalendarioMensual extends JPanel {
       //Encabezado para el mes
        mesElegido = nombrarMes(month);
 	   JLabel tituloMes = new JLabel(mesElegido);
+
+
        JPanel encabezado = new JPanel(new GridLayout(1,7,5,5));
 		JLabel a1 = new JLabel("        LU  ");
 		JLabel a2 = new JLabel("        MA  ");
@@ -58,7 +61,24 @@ public class VistaCalendarioMensual extends JPanel {
      
 
 	}
-//  este metodo de devuelve el nombre del mes depende al int que ingreses
+	
+     public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+
+	public int getAnio() {
+		return anio;
+	}
+
+	public void setAnio(int anio) {
+		this.anio = anio;
+	}
+
+	//  este metodo de devuelve el nombre del mes depende al int que ingreses
 	 public String nombrarMes (int month) {
 			String res = "";
 			

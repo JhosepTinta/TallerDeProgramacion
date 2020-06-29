@@ -21,7 +21,7 @@ public class Panel2 extends JPanel {
 		public JTextField txtAP;
 	public Panel2() {
 		setLayout(null);
-		setBackground(Color.GREEN);
+		setBackground(Color.WHITE);
 		iniciarComponentes();
 	}
 

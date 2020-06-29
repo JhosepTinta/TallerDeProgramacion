@@ -18,9 +18,9 @@ public class Prueba extends JFrame {
 
 	
 	public Prueba () {
-		CalendarioMensual aux = new  CalendarioMensual(1,2020);
+		//CalendarioMensual aux = new  CalendarioMensual(1,2020);
 		Agenda a = new Agenda();
-		Cita cita1 = new Cita("dormir","a",new Reloj(11,0,0),new Reloj(14,50,0),new Fecha(16,5,2020),"asunto");
+		/*Cita cita1 = new Cita("dormir","a",new Reloj(11,0,0),new Reloj(14,50,0),new Fecha(16,5,2020),"asunto");
 		Cita cita2 = new Cita("asunto","b",new Reloj(15,0,0),new Reloj(16,30,0),new Fecha(16,5,2020),"asunto2");
 		Cita cita3 = new Cita("asunto","c",new Reloj(17,0,0),new Reloj(20,0,0),new Fecha(1,5,2020),"clases");
 		Cita cita4 = new Cita("cenar","d",new Reloj(9,10,0),new Reloj(10,59,0),new Fecha(12,5,2020),"cenar");
@@ -47,9 +47,13 @@ public class Prueba extends JFrame {
 		setVisible(true);
 		int mes =aux.getMes();
 		aux.setMes(mes++);
-		  add(na);
+		  add(na);*/
+		VistaDiaria ab = new VistaDiaria(a);
 		setSize(1200,700);
+		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		add(ab);
+		
 	}
 	
 	

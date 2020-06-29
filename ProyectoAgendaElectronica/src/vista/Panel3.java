@@ -20,7 +20,7 @@ public class Panel3 extends JPanel{
 	public JButton btnVolver;
 	public Panel3() {
 		setLayout(null);
-		setBackground(Color.GREEN);
+		setBackground(Color.WHITE);
 		iniciarComponentes();
 	}
 	private void iniciarComponentes() {

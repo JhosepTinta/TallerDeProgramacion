@@ -1,10 +1,12 @@
 package VistaCalendario;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -20,32 +22,29 @@ public class Navegacion extends JPanel {
        VistaDiaria diaria;
        JScrollPane contenedorDePaneles;
        JButton botonmensual;
-       JMenuItem semanal;
-       JMenuItem dia;
-       JButton botonsemanal;
+       JButton botondiario;
+    
 	public Navegacion(Agenda agenda, CalendarioMensual calen) {
+		
+		  
 		setLayout(new BorderLayout());
 		completo = new VistaCalendarioCompleto(calen,agenda);
-		 contenedorDePaneles= new JScrollPane();
-		vistasemanal = new VistaSemanal(2020,5,2);
-		diaria = new VistaDiaria();
-		JMenuBar modo = new JMenuBar();
-		JMenu nombre = new JMenu("VISTA");
-	    botonmensual = new JButton("Mensual");
-	//JMenuItem semanal = new JMenuItem("Semanal");
-		JMenuItem dia = new JMenuItem("Diaria");
-		botonsemanal = new JButton("semanal");
-		botonmensual.addActionListener(new AccionBoton());
-		botonsemanal.addActionListener(new AccionBoton());
-		dia.addActionListener(new AccionBoton());
 		
-		//nombre.add(semanal);
-		nombre.add(dia);
-		modo.add(nombre);
+		contenedorDePaneles= new JScrollPane();
+		contenedorDePaneles.setCursor(null);
+		vistasemanal = new VistaSemanal(2020,5,2);
+		diaria = new VistaDiaria(agenda);
+		Box box = Box.createHorizontalBox();
+	    botonmensual = new JButton("Mensual");
+	    botondiario = new JButton("Diaria");
+		botonmensual.addActionListener(new AccionBoton());
+		botondiario.addActionListener(new AccionBoton());
+		box.add(botonmensual);
+		box.add(botondiario);
 		
 		definirPanel(completo);
-		add(botonsemanal, BorderLayout.NORTH);
-		add(botonmensual,BorderLayout.SOUTH);
+		add(box, BorderLayout.NORTH);
+		
 		add(contenedorDePaneles, BorderLayout.CENTER);
 		
 	
@@ -62,8 +61,8 @@ public class Navegacion extends JPanel {
 				definirPanel(completo);
 				System.out.println("se apreto mensual");
 			}else {
-				if(e.getSource().equals(botonsemanal)) {
-				   definirPanel(vistasemanal);	
+				if(e.getSource().equals(botondiario)) {
+				   definirPanel(diaria);	
 				   System.out.println("se apreto semanal");
 				}
 				
