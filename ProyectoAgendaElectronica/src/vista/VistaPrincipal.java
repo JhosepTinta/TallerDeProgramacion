@@ -7,9 +7,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import VistaCalendario.Navegacion;
+import controlador.ControladorAgenda;
 import modelo.Agenda;
 import modelo.CalendarioMensual;
-import vistaAgenda.VistaAgendaPrueba;
+import vistaAgenda.VistaAgenda;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 
@@ -18,11 +19,13 @@ public class VistaPrincipal extends JFrame {
 	public Panel1 miPanel1;
 	public Panel2 miPanel2;
 	public Panel3 miPanel3;
-	public VistaAgendaPrueba a;
-	public VistaMemo b;
+	public VistaAgenda vistaAgenda;
+//public VistaMemo b;
     public PantallaAlarma alar;
 	public Navegacion calendario;
 	public Agenda agenda;
+	public Agenda modeloAgenda; 
+	public ControladorAgenda controlador;
 	
 	public JButton btnC,btnA,btnCa,btnAg,btnM,btnP;
 	JScrollPane scrollPaneles;
@@ -41,10 +44,12 @@ public class VistaPrincipal extends JFrame {
 		miPanel1=new Panel1();
 		miPanel2=new Panel2();
 		miPanel3=new Panel3();
-		a = new VistaAgendaPrueba();
-		b = new VistaMemo();
+	    vistaAgenda = new VistaAgenda();
+		//b = new VistaMemo();
 	    alar= new PantallaAlarma();
 	    agenda = new Agenda();
+	    modeloAgenda= new Agenda();
+	    controlador = new ControladorAgenda(modeloAgenda, vistaAgenda);
 	    CalendarioMensual calendarioMensual = new CalendarioMensual(5, 2020);
 		calendario=new Navegacion(agenda,calendarioMensual);
 		
