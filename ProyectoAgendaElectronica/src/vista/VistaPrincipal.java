@@ -21,14 +21,13 @@ public class VistaPrincipal extends JFrame {
 	public Panel2 miPanel2;
 	public Panel3 miPanel3;
 	public VistaAgenda vistaAgenda;
-//public VistaMemo b;
     public PantallaAlarma alar;
 	public Navegacion calendario;
 	public Agenda agenda;
 	public Agenda modeloAgenda; 
 	public ControladorAgenda controlador;
 	
-	public JButton btnC,btnA,btnCa,btnAg,btnM,btnP;
+	public JButton btnC,btnA,btnCa,btnAg,btnP;
 	JScrollPane scrollPaneles;
 
 	public VistaPrincipal() {
