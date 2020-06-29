@@ -3,8 +3,12 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+
+import modelo.Agenda;
 import modelo.Archivo;
 import vista.VistaPrincipal;
+import vistaAgenda.VistaAgenda;
+import controlador.ControladorAgenda;
 
 	public class ControladorG implements ActionListener {
 
@@ -33,10 +37,11 @@ import vista.VistaPrincipal;
 				window.definirPanel(window.calendario);
 			}
 			if(e.getSource()==window.btnAg) {
-				window.definirPanel(window.a);	
+
+				window.definirPanel(window.vistaAgenda);
 			}
 			if(e.getSource()==window.btnM) {
-				window.definirPanel(window.b);	
+				JOptionPane.showMessageDialog(null, "No implementado Memo");	
 			}
 			if(e.getSource()==window.btnP) {
 				JOptionPane.showMessageDialog(null, "No implementado TareasPendientes");	
