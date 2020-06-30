@@ -24,6 +24,8 @@ public class Controlador implements ActionListener {
 		window.miPanel3.btnVolver.addActionListener(this);
 		window.miPanel2.btnEditar.addActionListener(this);
 		window.miPanel2.btnVolver2.addActionListener(this);
+		window.miPanelC.btnG.addActionListener(this);
+		window.miPanel1.btnSalir.addActionListener(this);
 		
 	}
 	public void actionPerformed (ActionEvent e) {
@@ -51,13 +53,13 @@ public class Controlador implements ActionListener {
 				Vap=".";
 			}
 			if(Vnu.equals("")) {
-				Vnu="Sin Número actualmente";
+				Vnu="Sin numero";
 			}
 			if(Vco.equals("")) {
-				Vco="Sin Correo añadido actualmente";
+				Vco="Sin Correo";
 			}
 			if(Vdi.equals("")) {
-				Vdi="Sin Dirección añadida actualmente";
+				Vdi="Sin Direccion";
 			}
 			a.escribirPersona(new Contacto(Vno,Vap,Vnu,Vco,Vdi));
 			JOptionPane.showMessageDialog(window, "Contacto "+window.miPanel3.txtNombre.getText()+" "+window.miPanel3.txtApellido.getText()+" "+"Guardado Correctamente");
@@ -68,7 +70,7 @@ public class Controlador implements ActionListener {
 			window.miPanel3.txtDireccion.setText(null);}
 				
 			}catch(NumberFormatException nfe){
-				JOptionPane.showMessageDialog(window, "Asegurese de que el número sea correcto");
+				JOptionPane.showMessageDialog(window, "Asegurese de que el nÃºmero sea correcto");
 			}
 		}}
 		
@@ -84,8 +86,12 @@ public class Controlador implements ActionListener {
 			window.miPanel1.txtMosD.setText(null);
 			window.definirPanel(window.miPanel3);
 		}
-		if(e.getSource()==window.miPanel1.btnSalir) {
-			System.exit(0);            // DEBERÁ MODIFICARSE AL ADJUNTAR LOS DEMAS PROGRAMAS
+		if(e.getSource()==window.miPanel1.btnSalir) {			
+			window.definirPanel(window.miPanelC);
+			
+		}
+		if(e.getSource()==window.miPanelC.btnG) {
+			window.definirPanel(window.miPanel1);         
 		}
 		if((e.getSource()==window.miPanel1.btnBuscar)) {
 			Archivo a=new Archivo();
@@ -133,7 +139,7 @@ public class Controlador implements ActionListener {
 			window.definirPanel(window.miPanel2);
 		}
 	    if(e.getSource()==window.miPanel2.btnVolver2) {
-	    	window.definirPanel(window.miPanel1);                        //Podría ir abajo
+	    	window.definirPanel(window.miPanel1);                        //PodrÃ­a ir abajo
 			window.miPanel1.txtMosN.setText(window.miPanel2.txtNuE.getText());
 			window.miPanel1.txtMosC.setText(window.miPanel2.txtCE.getText());
 			window.miPanel1.txtMosD.setText(window.miPanel2.txtDE.getText());
@@ -155,13 +161,13 @@ public class Controlador implements ActionListener {
 				Vap=".";
 			}
 			if(Vnu.equals("")) {
-				Vnu="Sin Número actualmente";
+				Vnu="Sin Numero";
 			}
 			if(Vco.equals("")) {
-				Vco="Sin Correo añadido actualmente";
+				Vco="Sin Correo";
 			}
 			if(Vdi.equals("")) {
-				Vdi="Sin Dirección añadida actualmente";
+				Vdi="Sin Direccion";
 			}
 			a.eliminarC(window.miPanel2.txtNP.getText(), window.miPanel2.txtAP.getText());
 	    	a.escribirPersona(new Contacto(Vno,Vap,Vnu,Vco,Vdi));
@@ -172,3 +178,4 @@ public class Controlador implements ActionListener {
 	    }
 }
 }
+
