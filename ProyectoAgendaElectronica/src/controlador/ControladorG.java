@@ -27,7 +27,7 @@ import controlador.ControladorAgenda;
 			if(e.getSource()==window.btnC) {
                 Archivo a =new Archivo();
 				Controlador ctrl=new Controlador(window,a);
-				window.definirPanel(window.miPanel1);
+				window.definirPanel(window.miPanelC);
 			}
 			if(e.getSource()==window.btnA) {
 				window.definirPanel(window.alar);	
