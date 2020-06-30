@@ -22,6 +22,7 @@ public class VistaPrincipal extends JFrame {
 	public Panel1 miPanel1;
 	public Panel2 miPanel2;
 	public Panel3 miPanel3;
+	public PanelC miPanelC;
 	public VistaAgenda vistaAgenda;
     public PantallaAlarma alar;
 	public Navegacion calendario;
@@ -47,6 +48,7 @@ public class VistaPrincipal extends JFrame {
 		miPanel1=new Panel1();
 		miPanel2=new Panel2();
 		miPanel3=new Panel3();
+		miPanelC=new PanelC();
 	    vistaAgenda = new VistaAgenda();
 		//b = new VistaMemo();
 	    alar= new PantallaAlarma();
@@ -164,6 +166,9 @@ public class VistaPrincipal extends JFrame {
 			scrollPaneles.setViewportView(miPanel);
 		}
 		public void definirPanel(Panel3 miPanel) {
+			scrollPaneles.setViewportView(miPanel);
+		}
+		public void definirPanel(PanelC miPanel) {
 			scrollPaneles.setViewportView(miPanel);
 		}
 		public void definirPanel(JPanel miPanel) {
