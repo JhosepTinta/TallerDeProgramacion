@@ -92,7 +92,7 @@ public class Panel1 extends JPanel {
 		lblNewLabel_5.setBounds(69, 190, 114, 14);
 		add(lblNewLabel_5);
 		
-		btnSalir = new JButton("Salir");
+		btnSalir = new JButton("Lista");
 		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnSalir.setBounds(382, 290, 100, 30);
 		add(btnSalir);
