@@ -32,15 +32,18 @@ public class VistaCalendarioCompleto extends JPanel implements ActionListener{
     	mes= calendario.getMes();
     	anio= calendario.getAnio();
 		setLayout(new BorderLayout());
-	   
+		
+		
 	    JPanel botones =new JPanel();
 	    JPanel cabecera = new JPanel();
 	    cabecera.setLayout(new BorderLayout());
 	    cabecera.add(botones, BorderLayout.EAST);
+	   
 		next = new JButton(">");
 		back = new JButton("<") ;
 		next.addActionListener(this);
 		back.addActionListener(this);
+		
 		botones.add(back);
 		
 		botones.add(next);
@@ -52,7 +55,7 @@ public class VistaCalendarioCompleto extends JPanel implements ActionListener{
 		
 	}
     public void addMesSiguiente() {
-		if(mes == 12) {
+		if(mes == 11) {
 			anio = anio+1;
 			mes = 0;
 			
@@ -76,7 +79,7 @@ public class VistaCalendarioCompleto extends JPanel implements ActionListener{
 		
 	}
     public void addMesAnterior() {
-		if(mes == -1) {
+		if(mes == 0) {
 			anio--;
 			mes = 11;
 			CalendarioMensual nuevo = new CalendarioMensual(mes--,anio);

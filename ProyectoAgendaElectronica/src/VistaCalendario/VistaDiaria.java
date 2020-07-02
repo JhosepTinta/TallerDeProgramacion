@@ -17,16 +17,17 @@ import modelo.Fecha;
 import modelo.Reloj;
 
 public class VistaDiaria extends JPanel {
-      Agenda agenda;
+      
       ListaSE<Cita> citas;
       JScrollPane ventana;
       Objeto a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x;
-      int contador ;
-      int contador2;
+      int contador,contador2 ;
+     
       Box box;
-	public VistaDiaria(Agenda agenda) {
-		citas = agenda.buscarCitasHoy();
-		this.agenda = agenda;
+      int dia,mes;
+	public VistaDiaria(ListaSE<Cita> lista,int dia, int mes) {
+		this.dia= dia;
+		this.mes = mes;
 		contador =0;
 		contador2=1;
 		setLayout(new GridLayout(24,1,5,5 ));
@@ -68,8 +69,8 @@ public class VistaDiaria extends JPanel {
 			objeto = new Objeto("0"+contador2+":00:00");
 	        contador2++;
 		}else {
-		objeto = new Objeto(contador2+":00:00");
-        contador2++;
+		    objeto = new Objeto(contador2+":00:00");
+            contador2++;
         }
 		add(objeto);
 	}
@@ -90,7 +91,7 @@ public class VistaDiaria extends JPanel {
 			 setLayout(new BorderLayout());
 			 hora = new JButton(horario);
 			 
-			 tituloCita = new JButton("     "+ "           ");
+			 tituloCita = new JButton("     "+ dia+"    "+mes);
 			 tituloCita.setBackground(Color.WHITE);
 			 tituloCita.setBorder(null);
 			 add(tituloCita,BorderLayout.CENTER);
@@ -101,3 +102,4 @@ public class VistaDiaria extends JPanel {
 	 }
 
 }
+

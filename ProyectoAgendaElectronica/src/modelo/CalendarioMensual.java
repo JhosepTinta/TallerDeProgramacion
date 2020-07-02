@@ -14,17 +14,7 @@ public class CalendarioMensual {
 	    this.anio = anio;
 		calendar= new GregorianCalendar(anio,mes,1);
 	}
-    public static void main(String args[]) {
-    	CalendarioMensual prueba= new CalendarioMensual(6,2020);
-    	Integer[] a = prueba.generarMes();
-    	
-    	for(int i= 0;i<a.length;i++) {
-    		 
-    		System.out.println(a[i]);
-    		
-    	}
-    	System.out.println(a[1]);
-    }
+    
    
 	public Integer[] generarMes() {
 		int diaInicio= calendar.get(Calendar.DAY_OF_WEEK)-2;

@@ -30,7 +30,7 @@ public class VistaCalendarioMensual extends JPanel {
       
       //Encabezado para el mes
        mesElegido = nombrarMes(month);
-	   JLabel tituloMes = new JLabel(mesElegido);
+	  
 
 
        JPanel encabezado = new JPanel(new GridLayout(1,7,5,5));
@@ -43,8 +43,16 @@ public class VistaCalendarioMensual extends JPanel {
 		JLabel a7 = new JLabel("        DO  ");
 		JPanel todo = new JPanel();
 		BoxLayout nuevo = new BoxLayout(todo, BoxLayout.Y_AXIS);
-	    JLabel tituloanio= new JLabel("     " + anio+"    ");
+	    JButton tituloMes = new JButton(mesElegido);
+	    JButton tituloanio= new JButton("     " + anio+"    ");
 	    todo.setLayout(nuevo);
+	    JPanel contenedorAM = new JPanel();
+	    contenedorAM.setLayout(new BorderLayout());
+	    JPanel contenedorwest= new JPanel();
+	    contenedorwest.add(tituloanio);
+	    contenedorwest.add(tituloMes);
+	    contenedorAM.add(contenedorwest,BorderLayout.WEST);
+	    
 		encabezado.add(a1);
 		encabezado.add(a2);
 		encabezado.add(a3);
@@ -52,8 +60,9 @@ public class VistaCalendarioMensual extends JPanel {
 		encabezado.add(a5);
 		encabezado.add(a6);
 		encabezado.add(a7);
-		todo.add(tituloanio);
-		todo.add(tituloMes);
+		
+		todo.add(contenedorAM);
+	
 		todo.add(encabezado);
 		
 		add(todo,BorderLayout.NORTH);

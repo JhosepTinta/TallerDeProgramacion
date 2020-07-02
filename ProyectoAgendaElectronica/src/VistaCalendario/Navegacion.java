@@ -14,16 +14,17 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import lineales.ListaSE;
 import modelo.*;
 
 public class Navegacion extends JPanel {
        VistaCalendarioCompleto completo;
        VistaSemanal vistasemanal;
-       VistaDiaria diaria;
+       VistaDiariaCompleto diaria;
        JScrollPane contenedorDePaneles;
        JButton botonmensual;
        JButton botondiario;
-    
+       ListaSE<Cita> citashoy;
 	public Navegacion(Agenda agenda, CalendarioMensual calen) {
 		
 		  
@@ -31,9 +32,8 @@ public class Navegacion extends JPanel {
 		completo = new VistaCalendarioCompleto(calen,agenda);
 		
 		contenedorDePaneles= new JScrollPane();
-		contenedorDePaneles.setCursor(null);
-		vistasemanal = new VistaSemanal(2020,5,2);
-		diaria = new VistaDiaria(agenda);
+		
+		diaria = new VistaDiariaCompleto(agenda,new CalendarioMensual(3,2019));
 		Box box = Box.createHorizontalBox();
 	    botonmensual = new JButton("Mensual");
 	    botondiario = new JButton("Diaria");
