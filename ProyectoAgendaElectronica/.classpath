@@ -7,6 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/asus/git/TallerDeProgramacion/ProyectoAgendaElectronica/libreria estructuras/Estructuras.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KarenCh/git/TallerDeProgramacion/ProyectoAgendaElectronica/libreria estructuras/Estructuras.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
