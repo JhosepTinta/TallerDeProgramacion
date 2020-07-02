@@ -1,4 +1,4 @@
-package vistaMemo;
+ package vistaMemo;
 
 import javax.swing.*;
 
