@@ -2,12 +2,14 @@ package VistaCalendario;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 
 import lineales.ListaSE;
 import modelo.*;
@@ -186,21 +188,27 @@ public class VistaCalendarioMensual extends JPanel {
 		//este metodo coloca cada dia en el lugar que corresponde
        public void inicializarDia(LaminaObjeto objeto) {
 			if(arrayMes[contador]== 0) {
-				String numeroVacio = " ";
+				String numeroVacio = "";
 				objeto = new LaminaObjeto(numeroVacio);
+				
 				contador++;
 			}else {
 			     objeto = new LaminaObjeto( arrayMes[contador]+"                        ");
-			     Fecha fecha = new Fecha(arrayMes[contador], month, anio);
+			     Fecha fecha = new Fecha(arrayMes[contador], month+1, anio);
 			 
 			     ListaSE<Cita> lista = agenda.buscarFecha(fecha);
 			     int tamanio = lista.longitud();
 			     if(lista.vacia()==false && tamanio >=2) {
 			         objeto.setTextoCita1(lista.acceder(0).getAsunto());
+			         objeto.setCita(lista.acceder(0));
+			         
 			         objeto.setTextoCita2(lista.acceder(1).getAsunto());
-			     }
+			         
+			         objeto.cita2Bordenull();
+			      }
 			     if(lista.vacia()==false && tamanio ==1) {
 			    	 objeto.setTextoCita1(lista.acceder(0).getAsunto());
+			    	 objeto.setCita(lista.acceder(0));
 			     }
 			     contador++;
 			}
@@ -223,23 +231,22 @@ public class VistaCalendarioMensual extends JPanel {
 		
 		ObjetoDiaCitas objeto;
 		String numeroDia;
-		
+		Cita cita;
 		JButton numero,cita1,cita2;
 		
 		public LaminaObjeto(String numeroDia) {
 			
 			this.numeroDia = numeroDia;
 			numero = new JButton("   "+numeroDia+"   ");
-			cita1 = new JButton();
-			cita2 = new JButton();
+			cita1 = new JButton("");
+			cita2 = new JButton("");
 			
 		    numero.setBorder(null);
 		    cita1.setBorder(null);
 		    cita2.setBorder(null);
-		    
 		    numero.setBackground(Color.WHITE);
-		    cita1.setBackground(Color.WHITE);
-		    cita2.setBackground(Color.WHITE);
+		   // cita1.setBackground(Color.WHITE);
+		 //   cita2.setBackground(Color.WHITE);
 		    
 		    setBackground(Color.WHITE);
 			Box box = Box.createVerticalBox();
@@ -251,7 +258,26 @@ public class VistaCalendarioMensual extends JPanel {
 			add(box);
 			
 		}
-		
+		public void cita1Bordenull() {
+			
+			if(cita1.getText().equals("")) {
+				Border border = LineBorder.createGrayLineBorder();
+				cita1.setBorder(border);
+				
+			}
+			
+		}
+        public void cita2Bordenull() {
+			
+			if(cita2.getText().equals("")) {
+				Border border = LineBorder.createGrayLineBorder();
+				cita2.setBorder(border);
+			}
+			
+		}
+		public void setCita(Cita cita) {
+			this.cita = cita;
+		}
 
 		public ObjetoDiaCitas getObjeto() {
 			return objeto;
@@ -278,14 +304,18 @@ public class VistaCalendarioMensual extends JPanel {
 		}
 
 		public JButton getCita1() {
+			
 			return cita1;
+			
 		}
 
 		public void setCita1(JButton cita1) {
+			
 			this.cita1 = cita1;
 		}
 
 		public JButton getCita2() {
+			
 			return cita2;
 		}
 
@@ -293,10 +323,20 @@ public class VistaCalendarioMensual extends JPanel {
 			this.cita2 = cita2;
 		}
 		public void setTextoCita1(String text) {
+			cita1.setMinimumSize(new Dimension(30,10));
+			cita1.setMaximumSize(new Dimension(130,50));
+			cita1.setPreferredSize(new Dimension(95,25));
+			Border border = new LineBorder(Color.GRAY);
+			cita1.setBorder(border);
 			cita1.setText(text);
 			
 		}
 		public void setTextoCita2(String text) {
+			cita2.setMinimumSize(new Dimension(30,10));
+			cita2.setMaximumSize(new Dimension(130,50));
+			cita2.setPreferredSize(new Dimension(95,25));
+			Border border = new LineBorder(Color.GRAY);
+			cita2.setBorder(border);
 			cita2.setText(text);
 		}
 		

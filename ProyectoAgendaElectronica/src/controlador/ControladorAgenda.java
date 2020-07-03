@@ -45,7 +45,7 @@ public class ControladorAgenda implements ActionListener {
 	public void guardarDatosAgenda() {
 		try {
 			ObjectOutputStream escribiendo = new ObjectOutputStream(
-					new FileOutputStream("C:\\Users\\IBM LENOVO\\Desktop\\datos generados\\datosAgenda.dat"));
+					new FileOutputStream("C:\\Users\\KarenCh\\Desktop\\agenda\\datosAgenda.dat"));
 			escribiendo.writeObject(agendaControlada);
 			escribiendo.close();
 		} catch (Exception e) {
@@ -60,7 +60,7 @@ public class ControladorAgenda implements ActionListener {
 		Agenda datosRecogidos = null;
 		try {
 			ObjectInputStream leendo = new ObjectInputStream(
-					new FileInputStream("C:\\Users\\IBM LENOVO\\Desktop\\datos generados\\datosAgenda.dat"));
+					new FileInputStream("C:\\Users\\KarenCh\\Desktop\\agenda\\datosAgenda.dat"));
 			datosRecogidos = (Agenda) leendo.readObject();
 			leendo.close();
 		} catch (Exception e) {

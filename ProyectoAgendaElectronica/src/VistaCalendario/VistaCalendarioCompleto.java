@@ -6,8 +6,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import lineales.ListaSE;
 import modelo.Agenda;
 import modelo.CalendarioMensual;
+import modelo.Cita;
 import modelo.Fecha;
 
 
@@ -24,7 +26,7 @@ public class VistaCalendarioCompleto extends JPanel implements ActionListener{
 	JButton back,next;
 	int mes;
 	int anio;
-	
+	ListaSE<Cita> lista;
     public VistaCalendarioCompleto(CalendarioMensual calendario,Agenda agenda) {
        
     	this.agenda = agenda;
