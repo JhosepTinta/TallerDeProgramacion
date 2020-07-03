@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import javax.swing.JFrame;
 
 import controlador.ControladorAgenda;
+import lineales.ListaSE;
 import modelo.Agenda;
 import modelo.CalendarioMensual;
 import modelo.Cita;
@@ -35,6 +36,7 @@ public class Prueba extends JFrame {
 		a.agregarCita(cita5);
 		a.agregarCita(cita6);
 		a.agregarCita(cita7);
+	
 		System.out.println(a.buscarFecha(new Fecha(16,5,2020)).acceder(0).getAsunto());
 		ControladorAgenda prueba = new ControladorAgenda(a,new VistaAgenda());
 		prueba.guardarDatosAgenda();
@@ -44,16 +46,17 @@ public class Prueba extends JFrame {
 		System.out.println(recuperada.mostrar());
 		prueba.setAgendaControlada(prueba.leerDatosGuardadosAgenda());
 		System.out.println(prueba.getAgendaControlada().mostrar());
-		
-		VistaCalendarioCompleto ac = new VistaCalendarioCompleto(new CalendarioMensual(6,2020),a);
-		
+		ListaSE<Cita> cit= a.buscarFecha(new Fecha(16, 5, 2020));
+		System.out.println(cit.longitud());
+		//VistaCalendarioCompleto ac = new VistaCalendarioCompleto(new CalendarioMensual(6,2020),a);
+		VistaDiaria diaria = new VistaDiaria(cit, 16, 5);
 		
 		  
 		//VistaDiaria ab = new VistaDiaria(a);
 		setSize(855,600);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		add(ac);
+		add(diaria);
 		
 	}
 	
