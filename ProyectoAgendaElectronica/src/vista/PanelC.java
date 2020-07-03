@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
-
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -34,11 +36,27 @@ public class PanelC extends JPanel {
 		
 		Archivo a = new Archivo();
 		
-		btnG = new JButton("Gestionar Contactos");
+		btnG = new JButton();
+		btnG.setOpaque(false);
+		btnG.setContentAreaFilled(false);
+		btnG.setBorderPainted(false);
+		btnG.setIcon(new ImageIcon(PanelC.class.getResource("/botones/botonGestionarC.png")));	
+		btnG.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnG.setIcon(new ImageIcon(PanelC.class.getResource("/botones/botonGestionarC-presionado.png")));
+			}
+			public void mouseExited(MouseEvent arg0) {
+				btnG.setIcon(new ImageIcon(PanelC.class.getResource("/botones/botonGestionarC.png")));//
+			}
+			
+		});
 		add(btnG, BorderLayout.SOUTH);
 		
 		table = new JTable();
 		table.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		table.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		table.setRowHeight(28);
 		table.setBackground(new Color(255, 255, 255));
 		int numC = a.numeroC();                                       //Remplazar 3 por numero de Contactos
 		mostrarMatriz(darMatriz(numC),numC);              
@@ -64,8 +82,9 @@ public class PanelC extends JPanel {
 	public String[][] darMatriz(int numC){
 		Archivo a = new Archivo();
 		 String matrix[][]=new String[numC][5];//Remplazar 3 por numero de Contactos
-		  return a.enviarMatriz(matrix);     //Dar· de Archivo
+		  return a.enviarMatriz(matrix);     //Dar√° de Archivo
          
 	}
 
 }
+
