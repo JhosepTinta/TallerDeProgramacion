@@ -3,7 +3,6 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-
 import modelo.Agenda;
 import modelo.Archivo;
 import vista.VistaPrincipal;
@@ -39,6 +38,9 @@ import controlador.ControladorAgenda;
 			}
 			if(e.getSource() == window.btnAg) {
 
+				Agenda modeloAgenda=new Agenda();
+				ControladorAgenda controlador=new ControladorAgenda(modeloAgenda,window.vistaAgenda);
+				window.vistaAgenda.setControlador(controlador);
 				window.definirPanel(window.vistaAgenda);
 			}
 			if(e.getSource() == window.btnP) {
