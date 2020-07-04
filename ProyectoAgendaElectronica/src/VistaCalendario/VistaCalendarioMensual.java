@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -27,8 +29,9 @@ public class VistaCalendarioMensual extends JPanel {
 	   month = aux.getMes();
 	   anio = aux.getAnio();
 	   this.aux = aux;		
-       setLayout(new BorderLayout());	
-       LaminaMes mes= new LaminaMes(this.aux,agenda);
+       setLayout(new BorderLayout());
+       setBackground(Color.WHITE);
+       LaminaMes mes = new LaminaMes(this.aux,agenda);
       
       //Encabezado para el mes
        mesElegido = nombrarMes(month);
@@ -49,8 +52,10 @@ public class VistaCalendarioMensual extends JPanel {
 	    JButton tituloanio= new JButton("     " + anio+"    ");
 	    todo.setLayout(nuevo);
 	    JPanel contenedorAM = new JPanel();
+	    contenedorAM.setBackground(Color.WHITE);
 	    contenedorAM.setLayout(new BorderLayout());
-	    JPanel contenedorwest= new JPanel();
+	    JPanel contenedorwest = new JPanel();
+	    contenedorwest.setBackground(Color.WHITE);
 	    contenedorwest.add(tituloanio);
 	    contenedorwest.add(tituloMes);
 	    contenedorAM.add(contenedorwest,BorderLayout.WEST);
@@ -64,8 +69,7 @@ public class VistaCalendarioMensual extends JPanel {
 		encabezado.add(a7);
 		
 		todo.add(contenedorAM);
-	
-		todo.add(encabezado);
+	    todo.add(encabezado);
 		
 		add(todo,BorderLayout.NORTH);
 	    add(mes,BorderLayout.CENTER);
@@ -144,23 +148,34 @@ public class VistaCalendarioMensual extends JPanel {
 		Integer[] arrayMes;
 	    Fecha fecha;
 		CalendarioMensual calendario;
-		int contador;
-	    int anio;
-	    int month;
-	  
+		Calendar calendar;
+		int contador, contadormaximo;
+	    int anio, month;
+	    int contadorPrimerosDias;
+	    int maximo, diaprimero;
 	    LaminaObjeto a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,a1,a2,a3,a4,a5,a6,a7,a8,a9,a0,b1,b2,b3,b4,b5,b6;
 		
 		public LaminaMes(CalendarioMensual calendario,Agenda agenda) {
 	
 			this.agenda = agenda;
-			agenda = new Agenda();
-			fecha = new Fecha(1, calendario.getMes(), calendario.getAnio());
 			this.calendario = calendario;
-			setLayout(new GridLayout(6,7,5,5));
-			contador = 0;
-			anio=calendario.getAnio();
+			agenda = new Agenda();
+			anio = calendario.getAnio();
 			month = calendario.getMes();
+			fecha = new Fecha(1, month, anio);
+			calendar = new GregorianCalendar(anio,month,1);
+			
+			setBackground(Color.WHITE);
+			setLayout(new GridLayout(6,7,5,5));
+			
+			contador = 0;
+			contadorPrimerosDias = 1;
+			maximo = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+		    diaprimero = calendar.get(Calendar.DAY_OF_WEEK)-2;
+		    contadormaximo = maximo-diaprimero + 1;
+			
 			pedirArrayMes();
+			
 			inicializarDia(a);inicializarDia(b);
 			inicializarDia(c);inicializarDia(d);
 			inicializarDia(e);inicializarDia(f);
@@ -181,32 +196,48 @@ public class VistaCalendarioMensual extends JPanel {
 			inicializarDia(a9);inicializarDia(a0);
 			inicializarDia(b1);inicializarDia(b2);
 			inicializarDia(b3);inicializarDia(b4);
-			inicializarDia(b5);
-			
-			
+			inicializarDia(b5);inicializarDia(b6);
+		
 			}
 		//este metodo coloca cada dia en el lugar que corresponde
        public void inicializarDia(LaminaObjeto objeto) {
-			if(arrayMes[contador]== 0) {
-				String numeroVacio = "";
-				objeto = new LaminaObjeto(numeroVacio);
+			if(arrayMes[contador] == 0) {
+				if(contador < 10) {
+				   
+					if(diaprimero == -1) {
+						diaprimero = 6;
+					}
+					
+					System.out.println(contadormaximo);
+					objeto = new LaminaObjeto(contadormaximo + "");
+					
+					contadormaximo++;
+					contador++;
+					
+				}else {
+					if(contador>20) {
+						String numeroVacio = "";
+						objeto = new LaminaObjeto(contadorPrimerosDias + "");
+						contadorPrimerosDias++;
+						contador++;
+					}
+					
+				}
 				
-				contador++;
 			}else {
 			     objeto = new LaminaObjeto( arrayMes[contador]+"                        ");
-			     Fecha fecha = new Fecha(arrayMes[contador], month+1, anio);
-			 
+			     Fecha fecha = new Fecha(arrayMes[contador], month + 1, anio);
 			     ListaSE<Cita> lista = agenda.buscarFecha(fecha);
 			     int tamanio = lista.longitud();
-			     if(lista.vacia()==false && tamanio >=2) {
+			     
+			     if(lista.vacia() == false && tamanio >= 2) {
 			         objeto.setTextoCita1(lista.acceder(0).getAsunto());
 			         objeto.setCita(lista.acceder(0));
 			         
 			         objeto.setTextoCita2(lista.acceder(1).getAsunto());
-			         
 			         objeto.cita2Bordenull();
 			      }
-			     if(lista.vacia()==false && tamanio ==1) {
+			     if(lista.vacia() == false && tamanio == 1) {
 			    	 objeto.setTextoCita1(lista.acceder(0).getAsunto());
 			    	 objeto.setCita(lista.acceder(0));
 			     }
@@ -216,15 +247,13 @@ public class VistaCalendarioMensual extends JPanel {
 		}
 		
 		public void inicializarLaminaObjeto(LaminaObjeto objeto) {
-			
-				add(objeto);
+			add(objeto);
 		}
 
 		public void pedirArrayMes() {
 			arrayMes = calendario.generarMes();
 		}
-		
-		
+	
 	}
 	
 	private class LaminaObjeto extends JPanel{
@@ -237,7 +266,7 @@ public class VistaCalendarioMensual extends JPanel {
 		public LaminaObjeto(String numeroDia) {
 			
 			this.numeroDia = numeroDia;
-			numero = new JButton("   "+numeroDia+"   ");
+			numero = new JButton("   " + numeroDia + "   ");
 			cita1 = new JButton("");
 			cita2 = new JButton("");
 			
@@ -245,8 +274,7 @@ public class VistaCalendarioMensual extends JPanel {
 		    cita1.setBorder(null);
 		    cita2.setBorder(null);
 		    numero.setBackground(Color.WHITE);
-		   // cita1.setBackground(Color.WHITE);
-		 //   cita2.setBackground(Color.WHITE);
+		   
 		    
 		    setBackground(Color.WHITE);
 			Box box = Box.createVerticalBox();

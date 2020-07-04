@@ -15,7 +15,7 @@ import controlador.ControladorAgenda;
 		private VistaPrincipal window;
 		
 		public ControladorG (VistaPrincipal window) {
-			this.window=window;
+			this.window = window;
 			window.btnC.addActionListener(this);
 			window.btnA.addActionListener(this);
 			window.btnCa.addActionListener(this);
@@ -24,22 +24,25 @@ import controlador.ControladorAgenda;
 	
 		}
 		public void actionPerformed (ActionEvent e) {
-			if(e.getSource()==window.btnC) {
-                Archivo a =new Archivo();
-				Controlador ctrl=new Controlador(window,a);
+			if(e.getSource() == window.btnC) {
+                Archivo a = new Archivo();
+				Controlador ctrl = new Controlador(window,a);
 				window.definirPanel(window.miPanelC);
 			}
-			if(e.getSource()==window.btnA) {
+			if(e.getSource() == window.btnA) {
+				
 				window.definirPanel(window.alar);	
 			}
-			if(e.getSource()==window.btnCa) {
+			if(e.getSource() == window.btnCa) {
+				
 				window.definirPanel(window.calendario);
 			}
-			if(e.getSource()==window.btnAg) {
+			if(e.getSource() == window.btnAg) {
 
 				window.definirPanel(window.vistaAgenda);
 			}
-			if(e.getSource()==window.btnP) {
+			if(e.getSource() == window.btnP) {
+				
 				JOptionPane.showMessageDialog(null, "No implementado TareasPendientes");	
 			}
 		}

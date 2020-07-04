@@ -1,10 +1,15 @@
 
 package VistaCalendario;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import controlador.ControladorAgenda;
 import lineales.ListaSE;
@@ -16,12 +21,13 @@ import modelo.Reloj;
 import vistaAgenda.VistaAgenda;
 
 
-public class Prueba extends JFrame {
-
-	
+public class Prueba extends JFrame implements ActionListener{
+        VistaAgenda va;
+        Navegacion nave;
+	    JButton botoncalendario, botonagenda;
 	public Prueba () {
 		//CalendarioMensual aux = new  CalendarioMensual(1,2020);
-		Agenda a = new Agenda();
+		/*Agenda a = new Agenda();
 		Cita cita1 = new Cita("dormir","a",new Reloj(11,0,0),new Reloj(14,50,0),new Fecha(16,5,2020),"asunto");
 		Cita cita2 = new Cita("asunto","b",new Reloj(15,0,0),new Reloj(16,30,0),new Fecha(16,5,2020),"asunto2");
 		Cita cita3 = new Cita("asunto","c",new Reloj(17,0,0),new Reloj(20,0,0),new Fecha(1,5,2020),"clases");
@@ -51,12 +57,35 @@ public class Prueba extends JFrame {
 		//VistaCalendarioCompleto ac = new VistaCalendarioCompleto(new CalendarioMensual(6,2020),a);
 		VistaDiaria diaria = new VistaDiaria(cit, 16, 5);
 		
-		  
+		*/  
 		//VistaDiaria ab = new VistaDiaria(a);
+		
+		JPanel ventana = new JPanel();
+		ventana.setLayout(new BorderLayout());
+		
+		JPanel cabecera = new JPanel();
+		botoncalendario = new JButton("Calendario");
+		botonagenda = new JButton("Agenda");
+		
+		botoncalendario.addActionListener(this);
+		botonagenda.addActionListener(this);
+		
+		cabecera.add(botoncalendario);
+		cabecera.add(botonagenda);
+		
+		Agenda a = new Agenda();
+	    va = new VistaAgenda();
+		ControladorAgenda ca = new ControladorAgenda(a,va);
+		va.setControlador(ca);
+		
+		CalendarioMensual mensual = new CalendarioMensual(5, 2020);
+	    nave = new Navegacion(a, mensual);
 		setSize(855,600);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		add(diaria);
+		add(va, BorderLayout.CENTER);
+		add(cabecera, BorderLayout.NORTH);
+		
 		
 	}
 	
@@ -65,6 +94,24 @@ public class Prueba extends JFrame {
 		Prueba prueba1 = new Prueba();
 		//VistaAgenda vista= new VistaAgenda() ;
 		
+		
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource().equals(botoncalendario)) {
+			add(nave, BorderLayout.CENTER);	
+			nave.setVisible(true);
+			va.setVisible(false);
+		}else {
+			if(e.getSource().equals(botonagenda)) {
+				add(va, BorderLayout.CENTER);
+				va.setVisible(true);
+				nave.setVisible(false);
+			}
+			
+		}
 		
 	}
 

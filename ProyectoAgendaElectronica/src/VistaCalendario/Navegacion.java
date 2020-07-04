@@ -1,12 +1,14 @@
 package VistaCalendario;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -16,29 +18,40 @@ import javax.swing.JScrollPane;
 
 import lineales.ListaSE;
 import modelo.*;
+import vista.VistaPrincipal;
 
 public class Navegacion extends JPanel {
-       VistaCalendarioCompleto completo;
+       
+	   VistaCalendarioCompleto completo;
        VistaSemanal vistasemanal;
        VistaDiariaCompleto diaria;
        JScrollPane contenedorDePaneles;
-       JButton botonmensual;
-       JButton botondiario;
+       JButton botonmensual,botondiario;
        ListaSE<Cita> citashoy;
-	public Navegacion(Agenda agenda, CalendarioMensual calen) {
+	
+       public Navegacion(Agenda agenda, CalendarioMensual calen) {
 		
-		  
 		setLayout(new BorderLayout());
 		completo = new VistaCalendarioCompleto(calen,agenda);
 		
 		contenedorDePaneles= new JScrollPane();
-		
+		contenedorDePaneles.setBorder(null);
 		diaria = new VistaDiariaCompleto(agenda,new CalendarioMensual(3,2019));
 		Box box = Box.createHorizontalBox();
-	    botonmensual = new JButton("Mensual");
-	    botondiario = new JButton("Diaria");
-		botonmensual.addActionListener(new AccionBoton());
+		
+	    botonmensual = new JButton();
+	    botonmensual.setBorder(null);
+	    botonmensual.setBackground(Color.WHITE);
+	    botonmensual.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/CalendarioMensual1.png")));
+	    
+	    botondiario = new JButton();
+	    botondiario.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/CalendarioDiaria1.png")));
+	    botondiario.setBorder(null);
+	    botondiario.setBackground(Color.WHITE);
+		
+	    botonmensual.addActionListener(new AccionBoton());
 		botondiario.addActionListener(new AccionBoton());
+		setBackground(Color.WHITE);
 		box.add(botonmensual);
 		box.add(botondiario);
 		
@@ -59,11 +72,9 @@ public class Navegacion extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource().equals(botonmensual)) {
 				definirPanel(completo);
-				System.out.println("se apreto mensual");
 			}else {
 				if(e.getSource().equals(botondiario)) {
 				   definirPanel(diaria);	
-				   System.out.println("se apreto semanal");
 				}
 				
 			}

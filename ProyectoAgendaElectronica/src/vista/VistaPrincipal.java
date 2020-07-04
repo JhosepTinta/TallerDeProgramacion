@@ -26,7 +26,6 @@ public class VistaPrincipal extends JFrame {
 	public VistaAgenda vistaAgenda;
     public PantallaAlarma alar;
 	public Navegacion calendario;
-	public Agenda agenda;
 	public Agenda modeloAgenda; 
 	public ControladorAgenda controlador;
 	
@@ -45,20 +44,22 @@ public class VistaPrincipal extends JFrame {
 		
 		private void iniciarComponentes() {
 		
-		miPanel1=new Panel1();
-		miPanel2=new Panel2();
-		miPanel3=new Panel3();
-		miPanelC=new PanelC();
-	    vistaAgenda = new VistaAgenda();
-		//b = new VistaMemo();
-	    alar= new PantallaAlarma();
-	    agenda = new Agenda();
-	    modeloAgenda= new Agenda();
-	    controlador = new ControladorAgenda(modeloAgenda, vistaAgenda);
-	    CalendarioMensual calendarioMensual = new CalendarioMensual(5, 2020);
-		calendario=new Navegacion(agenda,calendarioMensual);
+		miPanel1 = new Panel1();
+		miPanel2 = new Panel2();
+		miPanel3 = new Panel3();
+		miPanelC = new PanelC();
 		
-		scrollPaneles=new JScrollPane();
+		alar = new PantallaAlarma();
+	    
+		vistaAgenda = new VistaAgenda();
+	    modeloAgenda = new Agenda();
+	    controlador = new ControladorAgenda(modeloAgenda, vistaAgenda);
+	    vistaAgenda.setControlador(controlador);
+	    
+	    CalendarioMensual calendarioMensual = new CalendarioMensual(5, 2020);
+		calendario = new Navegacion(modeloAgenda,calendarioMensual);
+		
+		scrollPaneles = new JScrollPane();
 		scrollPaneles.setBounds(175, 0, 855, 600);
 		
 		//Boton Calendario

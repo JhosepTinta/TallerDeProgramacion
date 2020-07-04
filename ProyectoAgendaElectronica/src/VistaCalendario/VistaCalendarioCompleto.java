@@ -11,6 +11,7 @@ import modelo.Agenda;
 import modelo.CalendarioMensual;
 import modelo.Cita;
 import modelo.Fecha;
+import vista.VistaPrincipal;
 
 
 
@@ -19,67 +20,72 @@ import modelo.Fecha;
 public class VistaCalendarioCompleto extends JPanel implements ActionListener{
  
 	Agenda agenda;
-	VistaCalendarioMensual anterior;
-	VistaCalendarioMensual actual;
-	VistaCalendarioMensual siguiente;
+	VistaCalendarioMensual anterior,actual,siguiente;
 	CalendarioMensual calendario;
 	JButton back,next;
-	int mes;
-	int anio;
+	int mes, anio;
 	ListaSE<Cita> lista;
     public VistaCalendarioCompleto(CalendarioMensual calendario,Agenda agenda) {
        
     	this.agenda = agenda;
     	this.calendario = calendario;
-    	mes= calendario.getMes();
-    	anio= calendario.getAnio();
+    	mes = calendario.getMes();
+    	anio = calendario.getAnio();
 		setLayout(new BorderLayout());
+		setBackground(Color.WHITE);
 		
-		
-	    JPanel botones =new JPanel();
+	    JPanel botones = new JPanel();
+	    botones.setBackground(Color.WHITE);
 	    JPanel cabecera = new JPanel();
+	    cabecera.setBackground(Color.WHITE);
 	    cabecera.setLayout(new BorderLayout());
 	    cabecera.add(botones, BorderLayout.EAST);
-	   
-		next = new JButton(">");
-		back = new JButton("<") ;
+	    
+	    
+		next = new JButton();
+		next.setBackground(Color.WHITE);
+		next.setBorder(null);
+		next.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/CalendarioSiguiente1.png")));
+		
+		back = new JButton() ;
+		back.setBackground(Color.WHITE);
+		back.setBorder(null);
+		back.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/CalendarioAnterior1.png")));
+		
 		next.addActionListener(this);
 		back.addActionListener(this);
 		
 		botones.add(back);
-		
 		botones.add(next);
+		
 		addMesActual();
 		add(cabecera,BorderLayout.NORTH);
-		
-		
-		
-		
+	
 	}
     public void addMesSiguiente() {
 		if(mes == 11) {
-			anio = anio+1;
+			anio = anio + 1;
 			mes = 0;
 			
 			CalendarioMensual nuevo = new CalendarioMensual(mes,anio);
-			
 			siguiente = new VistaCalendarioMensual(nuevo,agenda);
-		 } else {
+		 
+		} else {
 			 mes++;
-			 CalendarioMensual nuevo = new CalendarioMensual(mes,anio);
-			
+		    CalendarioMensual nuevo = new CalendarioMensual(mes,anio);
 			siguiente = new VistaCalendarioMensual(nuevo, agenda);
-	     }
+	      }
+		
 		add(siguiente,BorderLayout.CENTER);
 	
 	}
     
     public void addMesActual() {
 		actual = new VistaCalendarioMensual(calendario,agenda);
-		
-		add(actual,BorderLayout.CENTER);
+	    add(actual,BorderLayout.CENTER);
 		
 	}
+    
     public void addMesAnterior() {
 		if(mes == 0) {
 			anio--;
