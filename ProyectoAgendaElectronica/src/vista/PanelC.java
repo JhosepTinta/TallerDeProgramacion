@@ -25,7 +25,7 @@ public class PanelC extends JPanel {
 	public JTable table;
 	private JLabel txtListaDeContactos;
 	DefaultTableModel model;
-	int numeroContactos=100;
+	int numeroContactos=150;
 	Object[][]data=new Object[numeroContactos][5];               
 	Object[] fila=new Object[5];
 	String titulos[]= {"Nombre","Apellido","Número","Correo","Dirección"};
