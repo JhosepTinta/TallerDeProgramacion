@@ -10,9 +10,8 @@ import javax.swing.JOptionPane;
 
 public class Archivo {
 
+	//Almacena el contacto creado en un archivo
 	public void escribirPersona(Contacto nuevo) {
-
-	
 		try {
 			File file= new File("agenda.txt");
 			FileWriter fw;
@@ -36,6 +35,7 @@ public class Archivo {
 		}
 	}
 
+	//Devuelve el numero del contacto
 	public String buscarN(String nombre,String apellido) {
 		try {
 			File file=new File("agenda.txt");
@@ -61,7 +61,7 @@ public class Archivo {
 		return ("No existe el Contacto");
 	  }
 	
-	
+	//Devuelve el correo del contacto
 	public String buscarC(String nombre,String apellido) {
 		try {
 			File file=new File("agenda.txt");
@@ -87,7 +87,7 @@ public class Archivo {
 		return ("No existe el Contacto");
 	  }
 	
-	
+	//Devuelve la direccion del contacto
 	public String buscarD(String nombre,String apellido) {
 		try {
 			File file=new File("agenda.txt");
@@ -113,63 +113,64 @@ public class Archivo {
 		return ("No existe el Contacto");
 	  }
 	
-	
+	//Elimina un contacto
 	public void eliminarC(String nombreE,String apellidoE) {
 		try {
-		File file=new File("agenda.txt");
-		if(file.exists()) {
-			FileReader fr= new FileReader(file);
-			BufferedReader br = new BufferedReader(fr);
-			String linea;
-			int numLineas=0;
-			while((linea=br.readLine())!=null) {
-				numLineas++;	
-			}
-			String contactos[]=new String [numLineas];
-			br = new BufferedReader (new FileReader(file));
-			int i=0;
-			while((linea=br.readLine())!=null) {
-				contactos[i]=linea;
-				i++;
-			}
-			br.close();
-			fr.close();
-			FileWriter fw=new FileWriter(file);
-			BufferedWriter bw = new BufferedWriter(fw);
-			boolean bandera=false;
-			boolean primeraL=true;
-			for(int j=0;j<contactos.length;j++) {
-				String l[]=contactos[j].split("%");
-				if((l[0].equals(nombreE))&&(l[1].equals(apellidoE))) {
-					bandera=true;
+			File file=new File("agenda.txt");
+			if(file.exists()) {
+				FileReader fr= new FileReader(file);
+				BufferedReader br = new BufferedReader(fr);
+				String linea;
+				int numLineas=0;
+				while((linea=br.readLine())!=null) {
+					numLineas++;	
 				}
-				else {
-					if(primeraL==true) {
-					bw.write(contactos[j]);
-					primeraL=false;}
+				String contactos[]=new String [numLineas];
+				br = new BufferedReader (new FileReader(file));
+				int i=0;
+				while((linea=br.readLine())!=null) {
+					contactos[i]=linea;
+					i++;
+				}
+				br.close();
+				fr.close();
+				FileWriter fw=new FileWriter(file);
+				BufferedWriter bw = new BufferedWriter(fw);
+				boolean bandera=false;
+				boolean primeraL=true;
+				for(int j=0;j<contactos.length;j++) {
+					String l[]=contactos[j].split("%");
+					if((l[0].equals(nombreE))&&(l[1].equals(apellidoE))) {
+						bandera=true;
+					}
 					else {
-						bw.newLine();
+						if(primeraL==true) {
 						bw.write(contactos[j]);
+						primeraL=false;}
+						else {
+							bw.newLine();
+							bw.write(contactos[j]);
+						}
 					}
 				}
+				if(bandera=false) {
+				}
+				bw.close();
+				fw.close();
+				if(numLineas==1 && bandera==true) {
+					file.delete();
+				}
+				
+			}else {
+				System.out.println("No hay contactos para eliminar");
+				JOptionPane.showMessageDialog(null, "No existe el Contacto");
 			}
-			if(bandera=false) {
+		    }catch(Exception e){
+		    	System.out.println(e);
 			}
-			bw.close();
-			fw.close();
-			if(numLineas==1 && bandera==true) {
-				file.delete();
-			}
-			
-		}else {
-			System.out.println("No hay contactos para eliminar");
-			JOptionPane.showMessageDialog(null, "No existe el Contacto");
-		}
-	    }catch(Exception e){
-	    	System.out.println(e);
-		}
 	}
 	
+	//Devuelve si el contacto existe o no
 	public boolean existeC(String nombre,String apellido) {
 		try {
 			File file=new File("agenda.txt");
@@ -194,6 +195,7 @@ public class Archivo {
 		return false;
 	  }
 	
+	//Devuelve el numero de Contactos existentes
 	public int numeroC() {
 		try {
 			File file=new File("agenda.txt");
@@ -217,13 +219,14 @@ public class Archivo {
 		return 0;
 	  }
 	
-	public String[][] enviarMatriz(String [][]m) {
+	//Devuelve una matriz de contactos y datos. Necesita una matriz previa para llenarla
+	public String[][] enviarMatriz(String [][] m) {
 		try {
 			File file=new File("agenda.txt");
 			if(file.exists()) {
 				FileReader fr=new FileReader(file);
 				BufferedReader br = new BufferedReader(fr);
-				String linea;
+				String linea;				
 				int numC=0;
 				while((linea=br.readLine())!=null) {
 					String contacto[]=linea.split("%");
