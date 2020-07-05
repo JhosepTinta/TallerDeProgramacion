@@ -70,7 +70,7 @@ public class Controlador implements ActionListener {
 			window.miPanel3.txtDireccion.setText(null);}
 				
 			}catch(NumberFormatException nfe){
-				JOptionPane.showMessageDialog(window, "Asegurese de que el nÃºmero sea correcto");
+				JOptionPane.showMessageDialog(window, "Asegurese de que el nÃƒÂºmero sea correcto");
 			}
 		}}
 		
@@ -87,8 +87,14 @@ public class Controlador implements ActionListener {
 			window.definirPanel(window.miPanel3);
 		}
 		if(e.getSource()==window.miPanel1.btnSalir) {			
-			window.definirPanel(window.miPanelC);
-			
+		    window.definirPanel(window.miPanelC);
+		    String m [][]=new String [150][5];
+			String matriz[][]=a.enviarMatriz(m);
+			for(int i=0;i<150;i++) {
+				for(int j=0;j<5;j++) {
+			      window.miPanelC.table.setValueAt(matriz[i][j], i, j);
+				}
+			}			
 		}
 		if(e.getSource()==window.miPanelC.btnG) {
 			window.definirPanel(window.miPanel1);         
@@ -111,15 +117,18 @@ public class Controlador implements ActionListener {
 	    }
 		if(e.getSource()==window.miPanel1.btnEliminarC) {
 			Archivo a=new Archivo();
-			a.eliminarC(window.miPanel1.txtNB.getText(), window.miPanel1.txtAB.getText());
+			String no=window.miPanel1.txtNB.getText();
+			String ap=window.miPanel1.txtAB.getText();
+			if(ap.equals("")) {				
+			ap=".";}
+			a.eliminarC(no,ap );
 			JOptionPane.showMessageDialog(window.miPanel1, "Contacto Eliminado");
 			window.miPanel1.txtMosN.setText(null);
 			window.miPanel1.txtMosC.setText(null);
 			window.miPanel1.txtMosD.setText(null);
 			window.miPanel1.txtNB.setText(null);
 			window.miPanel1.txtAB.setText(null);
-			
-			
+				
 		}
 		if(e.getSource()==window.miPanel1.btnIrEditar) {
 			window.miPanel2.txtNP.setText(window.miPanel1.txtNB.getText());
@@ -139,7 +148,7 @@ public class Controlador implements ActionListener {
 			window.definirPanel(window.miPanel2);
 		}
 	    if(e.getSource()==window.miPanel2.btnVolver2) {
-	    	window.definirPanel(window.miPanel1);                        //PodrÃ­a ir abajo
+	    	window.definirPanel(window.miPanel1);                        //PodrÃƒÂ­a ir abajo
 			window.miPanel1.txtMosN.setText(window.miPanel2.txtNuE.getText());
 			window.miPanel1.txtMosC.setText(window.miPanel2.txtCE.getText());
 			window.miPanel1.txtMosD.setText(window.miPanel2.txtDE.getText());
