@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -23,6 +24,11 @@ public class PanelC extends JPanel {
 	public JButton btnG;
 	public JTable table;
 	private JLabel txtListaDeContactos;
+	DefaultTableModel model;
+	int numeroContactos=100;
+	Object[][]data=new Object[numeroContactos][5];               
+	Object[] fila=new Object[5];
+	String titulos[]= {"Nombre","Apellido","Número","Correo","Dirección"};
 	
 	public PanelC() {
 
@@ -33,9 +39,24 @@ public class PanelC extends JPanel {
 	}
 
 	private void iniciarComponentes() {
+		//TITULO
+		txtListaDeContactos = new JLabel("Lista de Contactos");
+		txtListaDeContactos.setBackground(SystemColor.inactiveCaptionBorder);
+		txtListaDeContactos.setFont(new Font("Agency FB", Font.BOLD, 35));
+		add(txtListaDeContactos, BorderLayout.NORTH);
 		
-		Archivo a = new Archivo();
+		//TABLA DE CONTACTOS
+		model=new DefaultTableModel(data,titulos);
+		table=new JTable(model);
+		table.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		JScrollPane scroll=new JScrollPane(table);
+		table.setBackground(new Color(255, 255, 255));	
+		table.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		table.setRowHeight(28);
+               
+		add(scroll, BorderLayout.CENTER);
 		
+		//BOTON
 		btnG = new JButton();
 		btnG.setOpaque(false);
 		btnG.setContentAreaFilled(false);
@@ -48,43 +69,9 @@ public class PanelC extends JPanel {
 			}
 			public void mouseExited(MouseEvent arg0) {
 				btnG.setIcon(new ImageIcon(PanelC.class.getResource("/botones/botonGestionarC.png")));//
-			}
-			
+			}			
 		});
 		add(btnG, BorderLayout.SOUTH);
-		
-		table = new JTable();
-		table.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		table.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		table.setRowHeight(28);
-		table.setBackground(new Color(255, 255, 255));
-		int numC = a.numeroC();                                       //Remplazar 3 por numero de Contactos
-		mostrarMatriz(darMatriz(numC),numC);              
-		add(table, BorderLayout.CENTER);
-		
-		txtListaDeContactos = new JLabel("Lista de Contactos");
-		txtListaDeContactos.setBackground(SystemColor.inactiveCaptionBorder);
-		txtListaDeContactos.setFont(new Font("Agency FB", Font.BOLD, 35));
-		add(txtListaDeContactos, BorderLayout.NORTH);
-		
 	}
-	
-	public void mostrarMatriz(String matriz[][],int tamano) {
-		DefaultTableModel model=(DefaultTableModel)table.getModel();
-		model.setRowCount(tamano);                //filas
-		model.setColumnCount(5);             //Columnas
-		for(int i=0;i<tamano;i++) {
-		for(int j=0;j<5;j++) {
-			table.setValueAt(matriz[i][j], i, j);
-		}
-	}
-	}
-	public String[][] darMatriz(int numC){
-		Archivo a = new Archivo();
-		 String matrix[][]=new String[numC][5];//Remplazar 3 por numero de Contactos
-		  return a.enviarMatriz(matrix);     //Dará de Archivo
-         
-	}
-
 }
 
