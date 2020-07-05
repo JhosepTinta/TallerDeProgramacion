@@ -28,7 +28,7 @@ public class PanelC extends JPanel {
 	int numeroContactos=150;
 	Object[][]data=new Object[numeroContactos][5];               
 	Object[] fila=new Object[5];
-	String titulos[]= {"Nombre","Apellido","Número","Correo","Dirección"};
+	String titulos[]= {"Nombre","Apellido","Numero","Correo","Direccion"};
 	
 	public PanelC() {
 
