@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-lalalla%kdmkjdkfj%4354353%prueba@hotmail.com%35gmmgr
-=======
-DS%SD%34%34%34
->>>>>>> branch 'master' of https://github.com/JhosepTinta/TallerDeProgramacion.git
+Albert%Rojas%76560003%albert_r@gmail.com%c/Sucre #341
+Berta%Suarez%66560453%bertita_s@gmail.com%c/Calama #081
+Carlos%Martinez%6567753%carlosmart@hotmail.com%Heroinas/correo
+Daniel%Pinto%71705246%dani_pinto@gmail.com%Ayopaya #1169
