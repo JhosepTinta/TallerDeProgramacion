@@ -34,6 +34,7 @@ import controlador.ControladorAgenda;
 			}
 			if(e.getSource() == window.btnCa) {
 				
+				window.calendario.actualizar();
 				window.definirPanel(window.calendario);
 			}
 			if(e.getSource() == window.btnAg) {

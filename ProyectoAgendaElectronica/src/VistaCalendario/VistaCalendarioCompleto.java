@@ -103,7 +103,7 @@ public class VistaCalendarioCompleto extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object a = e.getSource();
 		if(a.equals(next)) {
-			System.out.println("ha sido presionado next");
+			
 			actual.setVisible(false);
 			addMesSiguiente();
 			actual = siguiente;

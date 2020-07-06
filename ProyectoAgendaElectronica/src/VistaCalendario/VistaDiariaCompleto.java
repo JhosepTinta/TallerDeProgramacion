@@ -39,8 +39,8 @@ public class VistaDiariaCompleto extends JPanel implements ActionListener{
 		
 		cal = new GregorianCalendar();
 		diaMaximo = cal.getMaximum(Calendar.DAY_OF_MONTH);
-        mes = cal.get(Calendar.MONTH);
-        anio = cal.get(Calendar.YEAR);
+        mes = calendario.getMes();
+        anio = calendario.getAnio();
         dia = cal.get(Calendar.DAY_OF_MONTH);
         
 		setLayout(new BorderLayout());
@@ -78,7 +78,7 @@ public class VistaDiariaCompleto extends JPanel implements ActionListener{
 	public void definirHoy() {
 		
 		listacitashoy = agenda.buscarCitasHoy();
-		vistadiaria = new VistaDiaria(listacitashoy,dia,mes);
+		vistadiaria = new VistaDiaria(listacitashoy,dia,mes,anio);
 		add(vistadiaria,BorderLayout.CENTER);
 	}
 	
@@ -86,12 +86,12 @@ public class VistaDiariaCompleto extends JPanel implements ActionListener{
     	
     	if(dia == diaMaximo) {
     	  dia = 1;	
-    	  listacitashoy = agenda.buscarFecha(new Fecha(dia, mes, anio));
-  	      siguiente = new VistaDiaria(listacitashoy,dia,mes);	
+    	  listacitashoy = agenda.buscarFecha(new Fecha(dia, mes+1, anio));
+  	      siguiente = new VistaDiaria(listacitashoy,dia,mes,anio);	
     	}else {
     	  dia = dia + 1;
-    	  listacitashoy = agenda.buscarFecha(new Fecha(dia, mes, anio));
-	      siguiente = new VistaDiaria(listacitashoy,dia,mes);
+    	  listacitashoy = agenda.buscarFecha(new Fecha(dia, mes+1, anio));
+	      siguiente = new VistaDiaria(listacitashoy,dia,mes,anio);
 	    
 	    }
     	
@@ -103,13 +103,13 @@ public class VistaDiariaCompleto extends JPanel implements ActionListener{
     	
     	if(dia == 1) {
     		dia = diaMaximo;
-    		listacitashoy = agenda.buscarFecha(new Fecha(dia, mes, anio));
-    	    anterior = new VistaDiaria(listacitashoy,dia,mes);
+    		listacitashoy = agenda.buscarFecha(new Fecha(dia, mes+1, anio));
+    	    anterior = new VistaDiaria(listacitashoy,dia,mes,anio);
     		
     	}else {   	
-       	    dia = dia-1;
-		    listacitashoy = agenda.buscarFecha(new Fecha(dia, mes, anio));
-	        anterior = new VistaDiaria(listacitashoy,dia,mes);
+       	    dia = dia - 1;
+		    listacitashoy = agenda.buscarFecha(new Fecha(dia, mes+1, anio));
+	        anterior = new VistaDiaria(listacitashoy,dia,mes,anio);
 	    
     	}
     	add(anterior,BorderLayout.CENTER);

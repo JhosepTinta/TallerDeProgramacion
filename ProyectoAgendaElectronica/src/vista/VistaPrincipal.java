@@ -1,5 +1,6 @@
 package vista;
 
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -16,6 +17,8 @@ import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class VistaPrincipal extends JFrame {
 
@@ -55,8 +58,9 @@ public class VistaPrincipal extends JFrame {
 	    modeloAgenda = new Agenda();
 	    controlador = new ControladorAgenda(modeloAgenda, vistaAgenda);
 	    vistaAgenda.setControlador(controlador);
-	    
-	    CalendarioMensual calendarioMensual = new CalendarioMensual(5, 2020);
+
+	    Calendar calendar = new GregorianCalendar();
+	    CalendarioMensual calendarioMensual = new CalendarioMensual(calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR));
 		calendario = new Navegacion(modeloAgenda,calendarioMensual);
 		
 		scrollPaneles = new JScrollPane();

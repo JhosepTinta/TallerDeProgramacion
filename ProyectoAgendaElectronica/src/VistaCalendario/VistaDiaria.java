@@ -19,17 +19,18 @@ import modelo.Reloj;
 public class VistaDiaria extends JPanel {
      
 	ListaCitas listacitas;
-     int dia,mes;
+     int dia,mes, anio;
      JButton botonmes,botonanio,botondia;
 	
-     public VistaDiaria(ListaSE<Cita> lista,int dia, int mes) {
+     public VistaDiaria(ListaSE<Cita> lista,int dia, int mes, int anio) {
 		this.dia = dia;
 		this.mes = mes;
+		this.anio = anio;
 		setLayout(new BorderLayout());
 		listacitas = new ListaCitas(lista,dia,mes) ;
-		botonmes = new JButton(mes+"");
-		botonanio= new JButton();
-	    botondia = new JButton(dia+"");
+		botonmes = new JButton((mes + 1)+"");
+		botonanio= new JButton(anio + "");
+	    botondia = new JButton(dia + "");
 	    JPanel cabecera = new JPanel();
 	    cabecera.add(botondia);
 	    cabecera.add(botonmes);
@@ -136,9 +137,9 @@ public class VistaDiaria extends JPanel {
 		 
 		 public Objeto(Cita cita) {
 			 setLayout(new BorderLayout());
-			 hora = new JButton(""+ cita.getHoraInicio());
+			 hora = new JButton( cita.getHoraInicio()+"");
 			 
-			 tituloCita = new JButton(""+ cita.getAsunto()+"                                               ");
+			 tituloCita = new JButton(cita.getAsunto()+"                       ");
 			 tituloCita.setBackground(Color.WHITE);
 			 tituloCita.setBorder(null);
 			 
@@ -151,7 +152,7 @@ public class VistaDiaria extends JPanel {
 			 setLayout(new BorderLayout());
 			 hora = new JButton(horario);
 			 
-			 tituloCita = new JButton("     "+ dia+"    "+mes);
+			 tituloCita = new JButton("     "+"    ");
 			 tituloCita.setBackground(Color.WHITE);
 			 tituloCita.setBorder(null);
 			 add(tituloCita,BorderLayout.CENTER);

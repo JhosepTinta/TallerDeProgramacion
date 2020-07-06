@@ -202,7 +202,11 @@ public class VistaCalendarioMensual extends JPanel {
 		//este metodo coloca cada dia en el lugar que corresponde
        public void inicializarDia(LaminaObjeto objeto) {
 			if(arrayMes[contador] == 0) {
-				if(contador < 10) {
+				
+				objeto = new LaminaObjeto( "");
+				objeto.setBorder(null);
+				contador++;
+				/*if(contador < 10) {
 				   
 					if(diaprimero == -1) {
 						diaprimero = 6;
@@ -222,7 +226,7 @@ public class VistaCalendarioMensual extends JPanel {
 						contador++;
 					}
 					
-				}
+				}*/
 				
 			}else {
 			     objeto = new LaminaObjeto( arrayMes[contador]+"                        ");

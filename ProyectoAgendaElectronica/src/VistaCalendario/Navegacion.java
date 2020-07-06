@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -28,15 +29,22 @@ public class Navegacion extends JPanel {
        JScrollPane contenedorDePaneles;
        JButton botonmensual,botondiario;
        ListaSE<Cita> citashoy;
-	
+	   Calendar calendar;
+	   int day, mes, year;
+	   Agenda agenda;
+	   CalendarioMensual calen;
        public Navegacion(Agenda agenda, CalendarioMensual calen) {
-		
+		this.agenda = agenda;
+		this.calen = calen;
 		setLayout(new BorderLayout());
 		completo = new VistaCalendarioCompleto(calen,agenda);
-		
+		calendar = new GregorianCalendar();
+		day = calendar.get(Calendar.DAY_OF_MONTH);
+		mes = calendar.get(Calendar.MONTH);
+		year = calendar.get(Calendar.YEAR);
 		contenedorDePaneles= new JScrollPane();
 		contenedorDePaneles.setBorder(null);
-		diaria = new VistaDiariaCompleto(agenda,new CalendarioMensual(3,2019));
+		diaria = new VistaDiariaCompleto(agenda,new CalendarioMensual(mes,year));
 		Box box = Box.createHorizontalBox();
 		
 	    botonmensual = new JButton();
@@ -63,6 +71,13 @@ public class Navegacion extends JPanel {
 	
 
 	}
+    
+    public void actualizar() {
+    	Navegacion navegacion = new Navegacion(agenda, calen);
+    	add(navegacion,BorderLayout.CENTER);
+    	
+    } 
+    
 	public void definirPanel(JPanel panel) {
 		contenedorDePaneles.setViewportView(panel);
 	}
