@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -19,6 +21,7 @@ import javax.swing.border.MatteBorder;
 import lineales.ListaSE;
 import modelo.*;
 import vista.VistaPrincipal;
+import vistaAgenda.VistaDetalleCitaVentana;
 
 public class VistaCalendarioMensual extends JPanel {
     
@@ -240,14 +243,15 @@ public class VistaCalendarioMensual extends JPanel {
 			     
 			     if(lista.vacia() == false && tamanio >= 2) {
 			         objeto.setTextoCita1(lista.acceder(0).getAsunto());
-			         objeto.setCita(lista.acceder(0));
+			         objeto.setpCita(lista.acceder(0));
 			         
 			         objeto.setTextoCita2(lista.acceder(1).getAsunto());
+			         objeto.setsCita(lista.acceder(1));
 			         objeto.cita2Bordenull();
 			      }
 			     if(lista.vacia() == false && tamanio == 1) {
 			    	 objeto.setTextoCita1(lista.acceder(0).getAsunto());
-			    	 objeto.setCita(lista.acceder(0));
+			    	 objeto.setpCita(lista.acceder(0));
 			     }
 			     contador++;
 			}
@@ -268,7 +272,7 @@ public class VistaCalendarioMensual extends JPanel {
 		
 		ObjetoDiaCitas objeto;
 		String numeroDia;
-		Cita cita;
+		Cita pcita,scita;
 		JButton numero,cita1,cita2;
 		
 		public LaminaObjeto(String numeroDia) {
@@ -277,6 +281,10 @@ public class VistaCalendarioMensual extends JPanel {
 			numero = new JButton("   " + numeroDia + "   ");
 			cita1 = new JButton("");
 			cita2 = new JButton("");
+			
+			AccionCitas accion = new AccionCitas();
+			cita1.addActionListener(accion);
+			cita2.addActionListener(accion);
 			
 		    numero.setBorder(null);
 		    cita1.setBorder(null);
@@ -311,10 +319,13 @@ public class VistaCalendarioMensual extends JPanel {
 			}
 			
 		}
-		public void setCita(Cita cita) {
-			this.cita = cita;
+		public void setpCita(Cita cita) {
+			this.pcita = cita;
 		}
-
+        public void setsCita(Cita cita) {
+        	this.scita = cita;
+        	
+        }
 		public ObjetoDiaCitas getObjeto() {
 			return objeto;
 		}
@@ -407,7 +418,23 @@ public class VistaCalendarioMensual extends JPanel {
 			
         }
 		
-		
+		private class AccionCitas implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(e.getSource().equals(cita1)) {
+				VistaDetalleCitaVentana  ventana= new VistaDetalleCitaVentana(pcita, Color.BLUE, Color.BLUE);
+				}else {
+					if(e.getSource().equals(cita2)) {
+						VistaDetalleCitaVentana  ventana= new VistaDetalleCitaVentana(scita, Color.BLUE, Color.BLUE);
+					}
+					
+					
+				}
+			}
+			
+			
+		}
 		
 		
 	}

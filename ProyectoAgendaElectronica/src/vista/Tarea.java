@@ -8,6 +8,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelo.ListaTareaPendiente;
+
 import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -44,6 +47,7 @@ public class Tarea extends JFrame {
 	DefaultListModel DLM = new DefaultListModel();
 	private JTextField texto;
 	
+	
 	public Tarea() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 674, 459);
@@ -64,12 +68,17 @@ public class Tarea extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 			//	DefaultListModel DLM = new DefaultListModel();
-		    	DLM.addElement("mARK");
+		     /*	DLM.addElement("mARK");
 				DLM.addElement("ZULMA");
 				DLM.addElement("VLADI");
-				DLM.addElement("RONIEE");
-				
-				list.setModel(DLM);
+				DLM.addElement("RONIEE");*/
+				 for(int i=0 ; i<lista.getListaRecordatorios().size(); i++)
+				   {
+					   DLM.addElement(.getListaRecordatorios().get(i));
+		                list.setModel(DLM);
+				   }
+				    
+				//list.setModel(DLM);
 				
 				//String txt = texto.getText();
 			//	DLM.addElement(txt);

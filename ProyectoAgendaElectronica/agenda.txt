@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 lalalla%kdmkjdkfj%4354353%prueba@hotmail.com%35gmmgr
+=======
+DS%SD%34%34%34
+>>>>>>> branch 'master' of https://github.com/JhosepTinta/TallerDeProgramacion.git

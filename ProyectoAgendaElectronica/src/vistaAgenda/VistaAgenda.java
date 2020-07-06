@@ -3,20 +3,32 @@ package vistaAgenda;
 import java.awt.*;
 import javax.swing.*;
 import controlador.*;
+import vista.VistaPrincipal;
 
 public class VistaAgenda extends JPanel {
 
 	public JPanel panelCitas;
 	public JScrollPane listaCitas ;
 	public JTextField buscar = new JTextField("buscar");
-	public JButton agregar = new JButton("añadir");
-	public JButton mas_opciones = new JButton("mas...");
+	public JButton agregar;
+	public JButton mas_opciones;
 	JLabel texto = new JLabel("");
 	public JButton buscarBoton;
+	public JButton volver = new JButton("Volver ...");
 	
 	public VistaAgenda() {
 		setLayout(null);
-		buscarBoton = new JButton(new ImageIcon("iconos\\buscar.gif"));
+		setBackground(Color.white);
+		//next.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/AgendaAnadir1.png")));
+		buscarBoton = new JButton(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaLupa1.png")));
+		buscarBoton.setBackground(Color.white);
+		buscarBoton.setBorder(null);
+		agregar = new JButton(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaAnadir1.png")));
+		agregar.setBackground(Color.white);
+		agregar.setBorder(null);
+		mas_opciones = new JButton(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaMas1.png")));
+		mas_opciones.setBackground(Color.white);
+		mas_opciones.setBorder(null);
 		panelCitas = new JPanel();
 		listaCitas = new JScrollPane(panelCitas);
 		panelCitas.setLayout(new GridLayout(20,0));
@@ -24,24 +36,29 @@ public class VistaAgenda extends JPanel {
 	}
 	
 	private void agregarElementos() {
-		buscarBoton.setBounds(510, 10, 20, 20);
-		buscar.setBounds(5, 10, 500, 20);
-		agregar.setBounds(645, 10, 95, 20);
-		mas_opciones.setBounds(748, 10, 95, 20);
-		listaCitas.setBounds(5, 35, 840, 520);
+		volver.setBounds(650, 10, 190, 20);
+		buscarBoton.setBounds(510, 3, 37, 37);
+		buscar.setBounds(5, 10, 500, 25);
+		agregar.setBounds(610, 3, 110, 34);
+		mas_opciones.setBounds(730, 3, 110, 34);
+		listaCitas.setBounds(5, 40, 840, 556);
 		texto.setBounds(340, 10, 200, 20);
 		texto.setVisible(false);
+		volver.setVisible(false);
 		add(texto);
 		add(buscar);
 		add(agregar);
 		add(mas_opciones);
 		add(listaCitas);
 		add(buscarBoton);
+		add(volver);
 	}
 	// cambiar el controlador cuando este terminado
 	public void setControlador(ControladorAgenda control) {
 		agregar.addActionListener(control);
 		mas_opciones.addActionListener(control);
+		buscarBoton.addActionListener(control);
+		volver.addActionListener(control);
 	}
 	
 	public void estadoTextoReferente(boolean estado) {
@@ -57,6 +74,12 @@ public class VistaAgenda extends JPanel {
 		agregar.setVisible(estado);
 		mas_opciones.setVisible(estado);
 		buscarBoton.setVisible(estado);
+	}
+	
+	public void visibilidadVolver(boolean estado) {
+		volver.setVisible(estado);
+		agregar.setVisible(!estado);
+		mas_opciones.setVisible(!estado);
 	}
 	
 }

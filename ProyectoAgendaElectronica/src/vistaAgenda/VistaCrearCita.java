@@ -20,7 +20,12 @@ public class VistaCrearCita extends JPanel {
 	JLabel fecha = new JLabel("Fecha: ");
 	JLabel lugar = new JLabel("Lugar: ");
 	JLabel contactos = new JLabel("Contactos: ");
-	JButton calendarioBoton = new JButton(new ImageIcon("iconos\\calendario.gif"));
+	JLabel notificaciones = new JLabel("Notificación:"); 
+	public JSpinner numeroSeleccionado = new JSpinner(new SpinnerNumberModel(30, 0, 30, 1));
+	public JComboBox tiempoSeleccionado;
+	public JRadioButton activarNotificaciones=new JRadioButton("", true);
+	
+	public JButton calendarioBoton = new JButton(new ImageIcon("iconos\\calendario.gif"));
 	public JTextField contactosC, asuntoC, horaInicioC, horaFinC, fechaC;
 	public JTextArea descripcionC, lugarC;
 	
@@ -52,6 +57,14 @@ public class VistaCrearCita extends JPanel {
 
 	private void agregarComponentes() {
 		setLayout(null);
+		String lista[] = {"minutos","horas","dias","semanas"};
+		tiempoSeleccionado = new JComboBox<String>(lista);
+		
+		activarNotificaciones.setBounds(570, 370,20, 20);
+		tiempoSeleccionado.setBounds(720, 370, 90, 20);
+		numeroSeleccionado.setBounds(675, 370, 35, 20);
+		
+		notificaciones.setBounds(595, 370, 100, 20);
 		asunto.setBounds(135, 25, 50, 10);
 		asuntoC.setBounds(185, 22, 500, 20);
 
@@ -95,11 +108,16 @@ public class VistaCrearCita extends JPanel {
 		add(aceptar);
 		add(calendarioBoton);
 		add(memo);
+		add(notificaciones);
+		add(numeroSeleccionado);
+		add(tiempoSeleccionado);
+		add(activarNotificaciones);
 	}
 
 	public void setControlador(ControladorAgenda control) {
 		aceptar.addActionListener(control);
 		cancelar.addActionListener(control);
+		calendarioBoton.addActionListener(control);
 	}
 
 	public void editarTextoBoton(String texto) {

@@ -52,7 +52,7 @@ public class VistaPrincipal extends JFrame {
 		miPanel3 = new Panel3();
 		miPanelC = new PanelC();
 		
-		alar = new PantallaAlarma();
+		//alar = new PantallaAlarma();
 	    
 		vistaAgenda = new VistaAgenda();
 	    modeloAgenda = new Agenda();
