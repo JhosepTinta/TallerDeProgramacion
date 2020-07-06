@@ -70,7 +70,7 @@ public class Controlador implements ActionListener {
 			window.miPanel3.txtDireccion.setText(null);}
 				
 			}catch(NumberFormatException nfe){
-				JOptionPane.showMessageDialog(window, "Asegurese de que el nÃƒÂºmero sea correcto");
+				JOptionPane.showMessageDialog(window, "Asegurese de que el nÃƒÆ’Ã‚Âºmero sea correcto");
 			}
 		}}
 		
@@ -148,7 +148,7 @@ public class Controlador implements ActionListener {
 			window.definirPanel(window.miPanel2);
 		}
 	    if(e.getSource()==window.miPanel2.btnVolver2) {
-	    	window.definirPanel(window.miPanel1);                        //PodrÃƒÂ­a ir abajo
+	    	window.definirPanel(window.miPanel1);                        //PodrÃƒÆ’Ã‚Â­a ir abajo
 			window.miPanel1.txtMosN.setText(window.miPanel2.txtNuE.getText());
 			window.miPanel1.txtMosC.setText(window.miPanel2.txtCE.getText());
 			window.miPanel1.txtMosD.setText(window.miPanel2.txtDE.getText());
