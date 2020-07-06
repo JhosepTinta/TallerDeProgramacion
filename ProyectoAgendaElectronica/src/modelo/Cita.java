@@ -2,6 +2,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Cita implements Comparable<Cita>, Serializable{
 	
@@ -29,7 +30,15 @@ public class Cita implements Comparable<Cita>, Serializable{
 	public String getAsunto() {
 		return asunto;
 	}
+///____
+	public ArrayList<Memo> getListaRecordatorios() {
+		return listaRecordatorios;
+	}
 
+	public void setListaRecordatorios(ArrayList<Memo> listaRecordatorios) {
+		this.listaRecordatorios = listaRecordatorios;
+	}
+////------
 	public void setAsunto(String asunto) {
 		this.asunto = asunto;
 	}
@@ -122,4 +131,6 @@ public class Cita implements Comparable<Cita>, Serializable{
 	public String toString() {
 		return asunto +"\n"+descripcion+"\n"+horaInicio+"  "+horaFin+"  "+fecha+"\n"+lugar;
 	}
+
+	
 }
