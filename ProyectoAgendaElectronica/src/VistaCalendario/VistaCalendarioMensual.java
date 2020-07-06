@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -15,6 +18,7 @@ import javax.swing.border.MatteBorder;
 
 import lineales.ListaSE;
 import modelo.*;
+import vista.VistaPrincipal;
 
 public class VistaCalendarioMensual extends JPanel {
     
@@ -166,7 +170,7 @@ public class VistaCalendarioMensual extends JPanel {
 			calendar = new GregorianCalendar(anio,month,1);
 			
 			setBackground(Color.WHITE);
-			setLayout(new GridLayout(6,7,5,5));
+			setLayout(new GridLayout(6,7,2,2));
 			
 			contador = 0;
 			contadorPrimerosDias = 1;
@@ -279,11 +283,11 @@ public class VistaCalendarioMensual extends JPanel {
 		    cita2.setBorder(null);
 		    numero.setBackground(Color.WHITE);
 		   
-		    
+		    addMouseListener(new AccionesBoton());
 		    setBackground(Color.WHITE);
 			Box box = Box.createVerticalBox();
-			Border border = LineBorder.createGrayLineBorder();
-			setBorder(border);
+			
+			setBorder(new LineBorder(new Color(36, 113, 163), 1, true));
 			box.add(numero);
 			box.add(cita1);
 			box.add(cita2);
@@ -354,6 +358,9 @@ public class VistaCalendarioMensual extends JPanel {
 		public void setCita2(JButton cita2) {
 			this.cita2 = cita2;
 		}
+		public String getTextonumero() {
+			return  numero.getText();
+		}
 		public void setTextoCita1(String text) {
 			cita1.setMinimumSize(new Dimension(30,10));
 			cita1.setMaximumSize(new Dimension(130,50));
@@ -371,6 +378,37 @@ public class VistaCalendarioMensual extends JPanel {
 			cita2.setBorder(border);
 			cita2.setText(text);
 		}
+		
+        private class AccionesBoton extends MouseAdapter implements MouseListener {
+        	
+            @Override
+			public void mouseEntered(MouseEvent e) {
+			//numero.setBackground(new Color(133, 193, 233 ));
+			
+				if(getTextonumero().equals("")) {
+					
+				}else {
+					setBorder(new LineBorder(Color.BLACK, 2, true));
+				}
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+		     //numero.setBackground(Color.WHITE);
+				LaminaObjeto a = (LaminaObjeto)e.getSource();
+				if(a.getTextonumero().equals("   " + "" + "   ")) {
+					setBorder(null);
+				}else {
+		            setBorder(new LineBorder(new Color(36, 113, 163 ), 1,false));
+		        }
+			}
+
+
+			
+        }
+		
+		
+		
 		
 	}
 

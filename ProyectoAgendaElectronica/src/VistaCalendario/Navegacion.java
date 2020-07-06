@@ -44,7 +44,7 @@ public class Navegacion extends JPanel {
 		year = calendar.get(Calendar.YEAR);
 		contenedorDePaneles= new JScrollPane();
 		contenedorDePaneles.setBorder(null);
-		diaria = new VistaDiariaCompleto(agenda,new CalendarioMensual(mes,year));
+		diaria = new VistaDiariaCompleto(agenda,day,mes,year);
 		Box box = Box.createHorizontalBox();
 		
 	    botonmensual = new JButton();

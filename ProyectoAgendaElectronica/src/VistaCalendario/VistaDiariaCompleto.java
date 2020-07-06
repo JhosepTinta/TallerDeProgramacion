@@ -23,7 +23,6 @@ public class VistaDiariaCompleto extends JPanel implements ActionListener{
        JButton next,back;
        Agenda agenda;
        ListaSE listacitashoy;
-       CalendarioMensual calendario;
        Calendar cal;
        int dia;
        int diapos;
@@ -33,17 +32,15 @@ public class VistaDiariaCompleto extends JPanel implements ActionListener{
        Integer[] diasmes;
        int diaMaximo;
        
-	public VistaDiariaCompleto(Agenda agenda, CalendarioMensual calendario) {
+	public VistaDiariaCompleto(Agenda agenda,int day, int month,int year) {
 		this.agenda = agenda;
-		this.calendario = calendario;
+		mes = month;
+        anio = year;
+		cal = new GregorianCalendar(anio,mes,day);
 		
-		cal = new GregorianCalendar();
-		diaMaximo = cal.getMaximum(Calendar.DAY_OF_MONTH);
-        mes = calendario.getMes();
-        anio = calendario.getAnio();
         dia = cal.get(Calendar.DAY_OF_MONTH);
         
-		setLayout(new BorderLayout());
+     	setLayout(new BorderLayout());
 		
 		JPanel cabecera = new JPanel();
 		cabecera.setBackground(Color.WHITE);
@@ -74,6 +71,12 @@ public class VistaDiariaCompleto extends JPanel implements ActionListener{
 		add(cabecera,BorderLayout.NORTH);
 		
 	}
+	public int calcularDiaMax(int mesahora) {
+		int res ;
+		Calendar a = new GregorianCalendar(anio, mesahora, 1);
+		res = a.getActualMaximum(Calendar.DAY_OF_MONTH);
+		return res;
+	}
 	
 	public void definirHoy() {
 		
@@ -83,36 +86,49 @@ public class VistaDiariaCompleto extends JPanel implements ActionListener{
 	}
 	
     public void definirSiguiente() {
+    	diaMaximo = calcularDiaMax(mes);
+    	if(mes == 11 && dia == diaMaximo) {
+    		anio++;
+    		mes = -1;
+    	}
     	
     	if(dia == diaMaximo) {
-    	  dia = 1;	
-    	  listacitashoy = agenda.buscarFecha(new Fecha(dia, mes+1, anio));
-  	      siguiente = new VistaDiaria(listacitashoy,dia,mes,anio);	
-    	}else {
-    	  dia = dia + 1;
-    	  listacitashoy = agenda.buscarFecha(new Fecha(dia, mes+1, anio));
-	      siguiente = new VistaDiaria(listacitashoy,dia,mes,anio);
-	    
-	    }
-    	
-    	add(siguiente,BorderLayout.CENTER);
+      	  dia = 1;
+      	  mes = mes + 1;
+      	  
+      	  listacitashoy = agenda.buscarFecha(new Fecha(dia, mes + 1, anio));
+    	  siguiente = new VistaDiaria(listacitashoy,dia,mes,anio);	
+      	}else {
+      	  dia = dia + 1;
+      	  listacitashoy = agenda.buscarFecha(new Fecha(dia, mes + 1, anio));
+  	      siguiente = new VistaDiaria(listacitashoy,dia,mes,anio);
+  	    
+  	    }
+      	
+      	add(siguiente,BorderLayout.CENTER);
     	
 	}
     
     public void definirAnterior() {
-    	
+    	diaMaximo = calcularDiaMax(mes-1);
+    	if(mes == 0 && dia == 1) {
+    		anio--;
+    		mes = 11;
+    	}
     	if(dia == 1) {
     		dia = diaMaximo;
-    		listacitashoy = agenda.buscarFecha(new Fecha(dia, mes+1, anio));
+    		mes = mes - 1;
+    		listacitashoy = agenda.buscarFecha(new Fecha(dia, mes + 1, anio));
     	    anterior = new VistaDiaria(listacitashoy,dia,mes,anio);
     		
     	}else {   	
-       	    dia = dia - 1;
-		    listacitashoy = agenda.buscarFecha(new Fecha(dia, mes+1, anio));
+       	    dia = dia-1;
+		    listacitashoy = agenda.buscarFecha(new Fecha(dia, mes + 1, anio));
 	        anterior = new VistaDiaria(listacitashoy,dia,mes,anio);
 	    
     	}
     	add(anterior,BorderLayout.CENTER);
+    	
     }
 	
 	
