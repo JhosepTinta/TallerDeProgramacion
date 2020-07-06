@@ -1,8 +1,8 @@
 package vistaAgenda;
 
 import javax.swing.*;
-import controlador.ControladorAgenda.ElementoCita;
-
+import controlador.ControladorAgenda;
+import vistaMemo.VistaMemo;
 
 public class VistaDetalleCitaPanel extends JPanel {
 	public JButton editar = new JButton("Editar");
@@ -15,6 +15,7 @@ public class VistaDetalleCitaPanel extends JPanel {
 	JLabel lugar = new JLabel("El lugar que escogio es: ");
 	JLabel contactos = new JLabel("Los contactos relacionados son: ");
 	JLabel contactosC, asuntoC, descripcionC, horaInicioC, horaFinC, fechaC, lugarC;
+	public VistaMemo detalleMemo;
 
 	public VistaDetalleCitaPanel(String asunto, String descripcion, String horaInicio, String horaFin, String fecha,
 			String contactos, String lugar) {
@@ -52,6 +53,10 @@ public class VistaDetalleCitaPanel extends JPanel {
 
 	private void agregarElementos() {
 		setLayout(null);
+		detalleMemo = new VistaMemo();
+		detalleMemo.visibilidadComponentesInferiores(false);
+		detalleMemo.setBounds(550, 100, 365, 340);
+		
 		asunto.setBounds(75, 50, 150, 10);
 		asuntoC.setBounds(240, 75, 150, 20);
 		
@@ -87,9 +92,10 @@ public class VistaDetalleCitaPanel extends JPanel {
 		add(horaFinC);
 		add(cancelar);
 		add(editar);
+		add(detalleMemo);
 	}
 	
-	public void setControlador(ElementoCita elementoCita) {
+	public void setControlador(ControladorAgenda elementoCita) {
 		editar.addActionListener(elementoCita);
 		cancelar.addActionListener(elementoCita);
 	}

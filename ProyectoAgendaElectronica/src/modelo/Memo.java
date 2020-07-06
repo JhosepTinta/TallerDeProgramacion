@@ -32,4 +32,24 @@ public class Memo {
 		fechaModificacion = new Fecha();
 		this.texto = texto;
 	}
+	
+	public Fecha getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	public Reloj getHoraCreacion() {
+		return horaCreacion;
+	}
+	
+	public Fecha getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	public void setFechaModificacion(Fecha fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
+	}
+
+	public String toString() {
+		return  titulo + "\n" + texto + "\n" + "Se creo: "+fechaCreacion + " " + " Se modifico: "+fechaModificacion;
+	}
 }

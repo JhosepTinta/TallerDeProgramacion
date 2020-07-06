@@ -11,7 +11,7 @@ public class VistaMemo extends JPanel {
 	public JPanel panelMemos;
 	public JScrollPane listaMemos;
 	JLabel textoMemos = new JLabel("Lista de recordatorios:");
-	JLabel textoSuperior = new JLabel("Creando Memo...");
+	public JLabel textoSuperior = new JLabel();
 	public JButton agregar = new JButton("Agregar");
 	public JButton mas_opciones = new JButton("mas...");
 	
@@ -24,8 +24,8 @@ public class VistaMemo extends JPanel {
 	
 	private void agregarElementos() {
 		setLayout(null);
-		textoMemos.setBounds(0, 0, 150, 20);
-		textoSuperior.setBounds(0, 0, 150, 20);
+		textoMemos.setBounds(0, 0, 250, 20);
+		textoSuperior.setBounds(0, 0, 190, 20);
 		listaMemos.setBounds(0, 25, 250, 275);
 		agregar.setBounds(90, 305, 80, 20);
 		mas_opciones.setBounds(170, 305, 80, 20);
@@ -47,7 +47,8 @@ public class VistaMemo extends JPanel {
 		listaMemos.setViewportView(panel);
 	}
 	
-	public void visibilidadTextoSuperior(boolean estado) {
+	public void visibilidadTextoSuperior(boolean estado, String texto) {
+		textoSuperior.setText(texto);
 		textoMemos.setVisible(!estado);
 		textoSuperior.setVisible(estado);
 	}
@@ -56,4 +57,5 @@ public class VistaMemo extends JPanel {
 		agregar.setVisible(estado);
 		mas_opciones.setVisible(estado);
 	}
+
 }
