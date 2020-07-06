@@ -13,7 +13,7 @@ public class Archivo {
 	//Almacena el contacto creado en un archivo
 	public void escribirPersona(Contacto nuevo) {
 		try {
-			File file= new File("agenda.txt");
+			File file= new File("contactos.txt");
 			FileWriter fw;
 			BufferedWriter bw;
 			
@@ -38,7 +38,7 @@ public class Archivo {
 	//Devuelve el numero del contacto
 	public String buscarN(String nombre,String apellido) {
 		try {
-			File file=new File("agenda.txt");
+			File file=new File("contactos.txt");
 			if(file.exists()) {
 				FileReader fr=new FileReader(file);
 				BufferedReader br = new BufferedReader(fr);
@@ -64,7 +64,7 @@ public class Archivo {
 	//Devuelve el correo del contacto
 	public String buscarC(String nombre,String apellido) {
 		try {
-			File file=new File("agenda.txt");
+			File file=new File("contactos.txt");
 			if(file.exists()) {
 				FileReader fr=new FileReader(file);
 				BufferedReader br = new BufferedReader(fr);
@@ -90,7 +90,7 @@ public class Archivo {
 	//Devuelve la direccion del contacto
 	public String buscarD(String nombre,String apellido) {
 		try {
-			File file=new File("agenda.txt");
+			File file=new File("contactos.txt");
 			if(file.exists()) {
 				FileReader fr=new FileReader(file);
 				BufferedReader br = new BufferedReader(fr);
@@ -116,7 +116,7 @@ public class Archivo {
 	//Elimina un contacto
 	public void eliminarC(String nombreE,String apellidoE) {
 		try {
-			File file=new File("agenda.txt");
+			File file=new File("contactos.txt");
 			if(file.exists()) {
 				FileReader fr= new FileReader(file);
 				BufferedReader br = new BufferedReader(fr);
@@ -173,7 +173,7 @@ public class Archivo {
 	//Devuelve si el contacto existe o no
 	public boolean existeC(String nombre,String apellido) {
 		try {
-			File file=new File("agenda.txt");
+			File file=new File("contactos.txt");
 			if(file.exists()) {
 				FileReader fr=new FileReader(file);
 				BufferedReader br = new BufferedReader(fr);
@@ -198,7 +198,7 @@ public class Archivo {
 	//Devuelve el numero de Contactos existentes
 	public int numeroC() {
 		try {
-			File file=new File("agenda.txt");
+			File file=new File("contactos.txt");
 			if(file.exists()) {
 				FileReader fr=new FileReader(file);
 				BufferedReader br = new BufferedReader(fr);
@@ -222,7 +222,7 @@ public class Archivo {
 	//Devuelve una matriz de contactos y datos. Necesita una matriz previa para llenarla
 	public String[][] enviarMatriz(String [][] m) {
 		try {
-			File file=new File("agenda.txt");
+			File file=new File("contactos.txt");
 			if(file.exists()) {
 				FileReader fr=new FileReader(file);
 				BufferedReader br = new BufferedReader(fr);
