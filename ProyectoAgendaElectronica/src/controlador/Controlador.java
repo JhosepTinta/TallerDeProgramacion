@@ -70,7 +70,7 @@ public class Controlador implements ActionListener {
 			window.miPanel3.txtDireccion.setText(null);}
 				
 			}catch(NumberFormatException nfe){
-				JOptionPane.showMessageDialog(window, "Asegurese de que el nÃƒÆ’Ã‚Âºmero sea correcto");
+				JOptionPane.showMessageDialog(window, "Asegurese de que el numero sea correcto");
 			}
 		}}
 		
