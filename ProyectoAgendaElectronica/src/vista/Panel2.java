@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -39,12 +38,10 @@ public class Panel2 extends JPanel {
 		//TEXTO PREVIO
 		txtNP = new JTextField();
 		txtNP.setBounds(515, 20, 130, 30);
-		add(txtNP);	
 		txtNP.setColumns(10);
 		
 		txtAP = new JTextField();
 		txtAP.setBounds(660, 20, 130, 30);
-		add(txtAP);
 		txtAP.setColumns(10);
 		
 		//DATOS PARA ACTUALIZAR
@@ -144,15 +141,15 @@ public class Panel2 extends JPanel {
 		btnEditar.setOpaque(false);
 		btnEditar.setContentAreaFilled(false);
 		btnEditar.setBorderPainted(false);
-		btnEditar.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/ContactosA1.png")));
+		btnEditar.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/botonIrEd.png")));
 		btnEditar.setBounds(450,500,130,50);
 		btnEditar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				btnEditar.setIcon(new ImageIcon(Panel2.class.getResource("/botones/ContactosA2.png")));
+				btnEditar.setIcon(new ImageIcon(Panel2.class.getResource("/botones/botonIrEd-p.png")));
 			}
 			public void mouseExited(MouseEvent arg0) {
-				btnEditar.setIcon(new ImageIcon(Panel2.class.getResource("/botones/ContactosA1.png")));//
+				btnEditar.setIcon(new ImageIcon(Panel2.class.getResource("/botones/botonIrEd.png")));//
 			}
 			
 		});
