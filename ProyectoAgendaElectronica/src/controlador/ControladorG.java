@@ -24,12 +24,11 @@ import controlador.ControladorAgenda;
 		}
 		public void actionPerformed (ActionEvent e) {
 			if(e.getSource() == window.btnC) {
-                                Archivo a = new Archivo();
+                                 Archivo a = new Archivo();
 				Controlador ctrl = new Controlador(window,a);
-				window.definirPanel(window.miPanelC);
-				String m [][]=new String [150][5];
-				String matriz[][]=a.enviarMatriz(m);
-				for(int i=0;i<150;i++) {
+				window.definirPanel(window.miPanelC);				
+				String matriz[][]=a.mC();
+				for(int i=0;i<a.numeroC();i++) {
 					for(int j=0;j<5;j++) {
 				      window.miPanelC.table.setValueAt(matriz[i][j], i, j);
 					}
