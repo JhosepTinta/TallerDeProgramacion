@@ -11,64 +11,72 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Panel3 extends JPanel{
-
-	public JTextField txtNombre;
-	public JTextField txtApellido;
-	public JTextField txtNumero;
-	public JTextField txtCorreo;
-	public JTextField txtDireccion;
-	public JButton btnGuardar;
-	public JButton btnVolver;
-	
-	public Panel3() {
+public class Panel2 extends JPanel {
+        public JTextField txtNE;
+		public JTextField txtAE;
+		public JTextField txtNuE;
+		public JTextField txtCE;
+		public JTextField txtDE;
+		public JButton btnEditar;
+		public JButton btnVolver2;
+		public JTextField txtNP;
+		public JTextField txtAP;
 		
+	public Panel2() {
 		setLayout(null);
 		setBackground(SystemColor.inactiveCaptionBorder);
 		iniciarComponentes();
 	}
+
 	private void iniciarComponentes() {
-		
 		//TITULO
-		JLabel lblNewLabel = new JLabel("Crear Contacto");
+		JLabel lblNewLabel = new JLabel("Editar Contacto");
 		lblNewLabel.setForeground(SystemColor.desktop);
 		lblNewLabel.setFont(new Font("Agency FB", Font.BOLD, 35));
 		lblNewLabel.setBounds(15, 15, 500, 32);
 		add(lblNewLabel);
+		//TEXTO PREVIO
+		txtNP = new JTextField();
+		txtNP.setBounds(515, 20, 130, 30);
+		txtNP.setColumns(10);
 		
-		//DATOS
-		txtNombre = new JTextField();
-		txtNombre.setBounds(120, 170, 285, 35);
-		txtNombre.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		add(txtNombre);
-		txtNombre.setColumns(10);
+		txtAP = new JTextField();
+		txtAP.setBounds(660, 20, 130, 30);
+		txtAP.setColumns(10);
+		
+		//DATOS PARA ACTUALIZAR
+		txtNE = new JTextField();
+		txtNE.setBounds(120, 170, 285, 35);
+		txtNE.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		add(txtNE);
+		txtNE.setColumns(10);
 
-		txtApellido = new JTextField();
-		txtApellido.setBounds(435, 170, 285, 35);
-		txtApellido.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		add(txtApellido);
-		txtApellido.setColumns(10);
+		txtAE = new JTextField();
+		txtAE.setBounds(435, 170, 285, 35);
+		txtAE.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		add(txtAE);
+		txtAE.setColumns(10);
 		
-		txtNumero = new JTextField();
-		txtNumero.setBounds(120, 275, 240, 35);
-		txtNumero.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		add(txtNumero);
-		txtNumero.setColumns(10);
+		txtNuE = new JTextField();
+		txtNuE.setBounds(120, 275, 240, 35);
+		txtNuE.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		add(txtNuE);
+		txtNuE.setColumns(10);
 		
-		txtCorreo = new JTextField();
-		txtCorreo.setBounds(390, 275, 330, 35);
-		txtCorreo.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		add(txtCorreo);
-		txtCorreo.setColumns(10);
+		txtCE = new JTextField();
+		txtCE.setBounds(390, 275, 330, 35);
+		txtCE.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		add(txtCE);
+		txtCE.setColumns(10);
 		
-		txtDireccion = new JTextField();
-		txtDireccion.setBounds(120, 380, 600, 35);
-		txtDireccion.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		add(txtDireccion);
-		txtDireccion.setColumns(10);
+		txtDE = new JTextField();
+		txtDE.setBounds(120, 380, 600, 35);
+		txtDE.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		add(txtDE);
+		txtDE.setColumns(10);
 
 		//TEXTOS
-		JLabel lblNewLabel_6 = new JLabel("Llenar los datos del contacto");
+		JLabel lblNewLabel_6 = new JLabel("Llenar los nuevos datos del contacto");
 		lblNewLabel_6.setFont(new Font("Agency FB", Font.BOLD, 29));
 		lblNewLabel_6.setForeground(new Color(51, 102, 204));
 		lblNewLabel_6.setBounds(60, 75, 350, 35);
@@ -109,42 +117,42 @@ public class Panel3 extends JPanel{
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel_1.setBounds(125, 420, 84, 14);
 		add(lblNewLabel_1);
-		
-		//BOTONES
-		btnVolver = new JButton();
-		btnVolver.setOpaque(false);
-		btnVolver.setContentAreaFilled(false);
-		btnVolver.setBorderPainted(false);
-		btnVolver.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/ContactosV1.png")));
-		btnVolver.setBounds(250, 500, 130, 50);
-		btnVolver.addMouseListener(new MouseAdapter() {
+	
+		//BOTONES 
+		btnVolver2 = new JButton();
+		btnVolver2.setOpaque(false);
+		btnVolver2.setContentAreaFilled(false);
+		btnVolver2.setBorderPainted(false);
+		btnVolver2.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/ContactosV1.png")));
+		btnVolver2.setBounds(250, 500, 130, 50);
+		btnVolver2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				btnVolver.setIcon(new ImageIcon(Panel3.class.getResource("/botones/ContactosV2.png")));
+				btnVolver2.setIcon(new ImageIcon(Panel2.class.getResource("/botones/ContactosV2.png")));
 			}
 			public void mouseExited(MouseEvent arg0) {
-				btnVolver.setIcon(new ImageIcon(Panel3.class.getResource("/botones/ContactosV1.png")));//
+				btnVolver2.setIcon(new ImageIcon(Panel2.class.getResource("/botones/ContactosV1.png")));//
 			}
 			
 		});
-		add(btnVolver);
+		add(btnVolver2);
 		
-		btnGuardar = new JButton();
-		btnGuardar.setOpaque(false);
-		btnGuardar.setContentAreaFilled(false);
-		btnGuardar.setBorderPainted(false);
-		btnGuardar.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/botonCrearC.png")));
-		btnGuardar.setBounds(450,500,130,50);
-		btnGuardar.addMouseListener(new MouseAdapter() {
+		btnEditar = new JButton();
+		btnEditar.setOpaque(false);
+		btnEditar.setContentAreaFilled(false);
+		btnEditar.setBorderPainted(false);
+		btnEditar.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/botonIrEd.png")));
+		btnEditar.setBounds(450,500,130,50);
+		btnEditar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				btnGuardar.setIcon(new ImageIcon(Panel3.class.getResource("/botones/botonCrearC-p.png")));
+				btnEditar.setIcon(new ImageIcon(Panel2.class.getResource("/botones/botonIrEd-p.png")));
 			}
 			public void mouseExited(MouseEvent arg0) {
-				btnGuardar.setIcon(new ImageIcon(Panel3.class.getResource("/botones/botonCrearC.png")));//
+				btnEditar.setIcon(new ImageIcon(Panel2.class.getResource("/botones/botonIrEd.png")));//
 			}
 			
 		});
-		add(btnGuardar);	
+		add(btnEditar);	
 	}
 }
