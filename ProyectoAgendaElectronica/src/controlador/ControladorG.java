@@ -24,7 +24,8 @@ import controlador.ControladorAgenda;
 		}
 		public void actionPerformed (ActionEvent e) {
 			if(e.getSource() == window.btnC) {
-                                 Archivo a = new Archivo();
+                               if(e.getSource() == window.btnC) {
+                               Archivo a = new Archivo();
 				Controlador ctrl = new Controlador(window,a);
 				window.definirPanel(window.miPanelC);				
 				String matriz[][]=a.mC();
