@@ -52,7 +52,9 @@ import controlador.ControladorAgenda;
 			}
 			if(e.getSource() == window.btnP) {
 				
-				JOptionPane.showMessageDialog(null, "No implementado TareasPendientes");	
+				window.definirPanel(window.mitarea);
+				
+				//JOptionPane.showMessageDialog(null, "No implementado TareasPendientes");	
 			}
 		}
       }

@@ -31,6 +31,7 @@ public class VistaPrincipal extends JFrame {
 	public Navegacion calendario;
 	public Agenda modeloAgenda; 
 	public ControladorAgenda controlador;
+	public TareaVista mitarea;
 	
 	public JButton btnC,btnA,btnCa,btnAg,btnP;
 	JScrollPane scrollPaneles;
@@ -52,7 +53,8 @@ public class VistaPrincipal extends JFrame {
 		miPanel3 = new Panel3();
 		miPanelC = new PanelC();
 		
-		//alar = new PantallaAlarma();
+		alar = new PantallaAlarma();
+		mitarea = new TareaVista();
 	    
 		vistaAgenda = new VistaAgenda();
 	    modeloAgenda = new Agenda();

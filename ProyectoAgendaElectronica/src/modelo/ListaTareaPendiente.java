@@ -13,6 +13,7 @@ public class ListaTareaPendiente {
 	 private ArrayList<TareaPendiente> listadetareas;
 	    
 	 private ArrayList<Memo> memos;
+
 	 
 	    public ListaTareaPendiente(Agenda lista1) {
 	    	listadetareas = new ArrayList<>();
@@ -33,21 +34,11 @@ public class ListaTareaPendiente {
    
 
 		public ArrayList<Memo> getListarecordatorios(){
-	    	   
-	    	
-	    	
+	   
        		return memos;
-       	
-    			
-    	   
+       
        }
-        public void eliminarTarea(String codigo){
-	        for (int i = 0; i < listadetareas.size(); i++) {
-	            if(codigo.equals(listadetareas.get(i).getTarea())){
-	            	listadetareas.remove(i);
-	            }
-	        }
-	    }
+  
 	    
 
 	    public void agregarTarea(String tarea, Date fechalimite,  String categoria){
@@ -55,23 +46,13 @@ public class ListaTareaPendiente {
 	        listadetareas.add(nuevo);;
 	    }
 	    
-	   
-	/*
-	    public void agregarTarea(TareaPendiente tarea){
-		      listadetareas.add(tarea);
-		    }
+	    public ArrayList<TareaPendiente> getTareaPendiente(){
+	    	   
+	    	
+       		return listadetareas;
+       		   
+       }
 	    
-	    
-	    public void visualizarTarea(){
-	        
-	            System.out.println(listadetareas);
-	        
-	    }*/
-
 	
-
-	
-
-	    
 
 }
