@@ -38,8 +38,9 @@ public class Controlador implements ActionListener {
 		if(e.getSource()==window.miPanelC.btnBorrar) {
 			 Archivo a =new Archivo();
 			int fila=window.miPanelC.table.getSelectedRow();		 
-			 if(a.existeC(window.miPanelC.model.getValueAt(fila,0),window.miPanelC.model.getValueAt(fila,1))){
-				 int v= JOptionPane.showConfirmDialog(window.miPanelC, "¿Estas seguro de eliminar a "+window.miPanelC.model.getValueAt(fila,0)+window.miPanelC.model.getValueAt(fila,1)+"?");
+			if(fila>=0) {
+			if(a.existeC(window.miPanelC.model.getValueAt(fila,0),window.miPanelC.model.getValueAt(fila,1))){
+				 int v= JOptionPane.showConfirmDialog(window.miPanelC, "Â¿Estas seguro de eliminar a "+window.miPanelC.model.getValueAt(fila,0)+window.miPanelC.model.getValueAt(fila,1)+"?");
 				if(v==0) { 
 				a.eliminarC(window.miPanelC.model.getValueAt(fila,0), window.miPanelC.model.getValueAt(fila,1));
 				JOptionPane.showMessageDialog(window.miPanelC, "Contacto Eliminado");
@@ -59,6 +60,7 @@ public class Controlador implements ActionListener {
 					window.definirPanel(window.miPanelC);	
 				}
 			 }
+		   }
 		}
 		//-----------------------------------------------------------------------------
 		if(e.getSource()==window.miPanelC.btnBuscar) {
@@ -92,6 +94,7 @@ public class Controlador implements ActionListener {
 		if(e.getSource()==window.miPanelC.btnEdicion) {
 			 Archivo a=new Archivo();
 			int fila=window.miPanelC.table.getSelectedRow();
+			if(fila>=0) {
 			if(a.existeC(window.miPanelC.model.getValueAt(fila,0), window.miPanelC.model.getValueAt(fila,1))) {
 			window.miPanel2.txtNE.setText((String) window.miPanelC.model.getValueAt(fila,0));
 			window.miPanel2.txtAE.setText((String) window.miPanelC.model.getValueAt(fila,1));
@@ -100,25 +103,26 @@ public class Controlador implements ActionListener {
 			window.miPanel2.txtNuE.setText((String) window.miPanelC.model.getValueAt(fila,2));
 			window.miPanel2.txtCE.setText((String) window.miPanelC.model.getValueAt(fila,3));
 			window.miPanel2.txtDE.setText((String) window.miPanelC.model.getValueAt(fila,4));
-			window.definirPanel(window.miPanel2);}
+			window.definirPanel(window.miPanel2);}}
 		}
 		//-------------------------------------------------------------------------------
 		if(e.getSource()==window.miPanelC.btnVer) {
 			 Archivo a =new Archivo();
 				int fila=window.miPanelC.table.getSelectedRow();
+				if(fila>=0) {
 				if(a.existeC(window.miPanelC.model.getValueAt(fila,0), window.miPanelC.model.getValueAt(fila,1))) {
 				window.miPanel1.txtNB.setText((String) window.miPanelC.model.getValueAt(fila,0));
 				window.miPanel1.txtAB.setText((String) window.miPanelC.model.getValueAt(fila,1));
 				window.miPanel1.txtMosN.setText((String) window.miPanelC.model.getValueAt(fila,2));
 				window.miPanel1.txtMosC.setText((String) window.miPanelC.model.getValueAt(fila,3));
 				window.miPanel1.txtMosD.setText((String) window.miPanelC.model.getValueAt(fila,4));
-				window.definirPanel(window.miPanel1);}
+				window.definirPanel(window.miPanel1);}}
 		}
 		//Panel1////////////////////////////////////////////////////////////////////////////
 		if(e.getSource()==window.miPanel1.btnEliminarC) {
 			Archivo a=new Archivo();
 			if(a.existeC(window.miPanel1.txtNB.getText(), window.miPanel1.txtAB.getText())) {
-			int v=JOptionPane.showConfirmDialog(window.miPanel1, "¿Seguro de eliminar a "+window.miPanel1.txtNB.getText()+" "+window.miPanel1.txtAB.getText()+"?");
+			int v=JOptionPane.showConfirmDialog(window.miPanel1, "Â¿Seguro de eliminar a "+window.miPanel1.txtNB.getText()+" "+window.miPanel1.txtAB.getText()+"?");
 			if(v==0) {
 			a.eliminarC(window.miPanel1.txtNB.getText(), window.miPanel1.txtAB.getText());
 			window.miPanel1.txtMosN.setText(null);
