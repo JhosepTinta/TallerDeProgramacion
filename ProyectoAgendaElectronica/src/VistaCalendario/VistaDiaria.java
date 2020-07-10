@@ -2,11 +2,15 @@ package VistaCalendario;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -21,26 +25,116 @@ public class VistaDiaria extends JPanel {
 	ListaCitas listacitas;
      int dia,mes, anio;
      JButton botonmes,botonanio,botondia;
-	
+	 Calendar calendar;
      public VistaDiaria(ListaSE<Cita> lista,int dia, int mes, int anio) {
-		this.dia = dia;
-		this.mes = mes;
-		this.anio = anio;
-		setLayout(new BorderLayout());
-		listacitas = new ListaCitas(lista,dia,mes) ;
-		botonmes = new JButton((mes + 1)+"");
-		botonanio= new JButton(anio + "");
-	    botondia = new JButton(dia + "");
-	    JPanel cabecera = new JPanel();
-	    cabecera.add(botondia);
-	    cabecera.add(botonmes);
-	    cabecera.add(botonanio);
-		add(listacitas,BorderLayout.CENTER);
-		add(cabecera,BorderLayout.NORTH);
-		
-	}
-		
+ 		this.dia = dia;
+ 		this.mes = mes;
+ 		this.anio = anio;
+ 		calendar = new GregorianCalendar(anio,mes,dia);
+ 		int diasemana = calendar.get(Calendar.DAY_OF_WEEK);
+ 		JLabel informacionfecha = new JLabel(preguntarDia(diasemana)+ " "+dia + " de "+ nombrarMes(mes)+ " " + anio);
+ 	    Font fuente = new Font("Calibri", 3, 20);
+ 	    informacionfecha.setFont(fuente);
+ 	    informacionfecha.setForeground(new Color(52, 152, 219 ));
+ 		//String textodeldia = preguntarDia(diasemana);
+ 		setLayout(new BorderLayout());
+ 		listacitas = new ListaCitas(lista,dia,mes) ;
+ 		//botonmes = new JButton(nombrarMes(mes)+"");
+ 		//botonanio= new JButton(anio + "");
+ 	    //botondia = new JButton(textodeldia+"    "+dia+ "");
+ 	    JPanel cabecera = new JPanel();
+ 	    cabecera.setBackground(Color.WHITE);
+ 	   // cabecera.add(botondia);
+ 	    //cabecera.add(botonmes);
+ 	    cabecera.add(informacionfecha);
+ 		add(listacitas,BorderLayout.CENTER);
+ 		add(cabecera,BorderLayout.NORTH);
+ 		
+ 	}
+ 	 
+      public String nombrarMes (int month) {
+ 			String res = "";
+ 			
+ 		    switch (month) {
+ 			case 0:
+ 				res = "ENERO";
+ 				break;
+ 			case 1:
+ 				res = "FEBRERO";
+ 				break;
+ 			case 2:
+ 				res = "MARZO";
+ 				break;
+ 			case 3:
+ 				res = "ABRIL";
+ 				break;
+ 			case 4:
+ 				res = "MAYO";
+ 				break;
+ 			case 5:
+ 				res = "JUNIO";
+ 				break;
+ 			case 6:
+ 				res = "JULIO";
+ 				break;
+ 			case 7:
+ 				res = "AGOSTO";
+ 				break;
+ 			case 8:
+ 				res = "SEPTIEMBRE";
+ 				break;
+ 			case 9:
+ 				res = "OCTUBRE";
+ 				break;
+ 			case 10:
+ 				res = "NOVIEMBRE";
+ 				break;
+ 			case 11:
+ 				res = "DICIEMBRE";
+ 				break;
+ 			
+ 			default:
+ 				break;
+ 			}
+ 			
+ 			return res;
+ 			
+ 		}
+      
+      public String preguntarDia(int numerodia) {
+     	 String textodia;
+     	 switch (numerodia) {
+ 		case 1:
+ 			textodia = "Lunes"; 
+ 			break;
+         case 2:
+ 			textodia = "Martes";
+ 			break;
+         case 3:
+ 			textodia = "Miercoles";
+ 			break;
+ 		case 4:
+ 			textodia = "Jueves";
+ 			break;
+ 		case 5:
+ 			textodia = "Viernes";
+ 			break;
+ 		case 6:
+ 			textodia = "Sabado";
+ 			break;
+ 		case 7:
+ 			textodia = "Domingo";
+ 			
+ 			break;	
+ 		default:
+ 			textodia = "dianoexiste";
+ 			break;
+ 		}
+     	 
+     	 return textodia;
+      }
 
+ 
 
 
    private class ListaCitas extends JPanel{

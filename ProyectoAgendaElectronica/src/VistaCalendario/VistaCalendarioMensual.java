@@ -3,6 +3,7 @@ package VistaCalendario;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,58 +33,69 @@ public class VistaCalendarioMensual extends JPanel {
 	int month;
 	int anio;
 	public VistaCalendarioMensual(CalendarioMensual aux,Agenda agenda) {
-	   
-	   month = aux.getMes();
-	   anio = aux.getAnio();
-	   this.aux = aux;		
-       setLayout(new BorderLayout());
-       setBackground(Color.WHITE);
-       LaminaMes mes = new LaminaMes(this.aux,agenda);
-      
-      //Encabezado para el mes
-       mesElegido = nombrarMes(month);
-	  
+		   
+		   month = aux.getMes();
+		   anio = aux.getAnio();
+		   this.aux = aux;		
+	       setLayout(new BorderLayout());
+	       setBackground(Color.WHITE);
+	       LaminaMes mes = new LaminaMes(this.aux,agenda);
+	      
+	      //Encabezado para el mes
+	       mesElegido = nombrarMes(month);
+		  
 
 
-       JPanel encabezado = new JPanel(new GridLayout(1,7,5,5));
-		JLabel a1 = new JLabel("        LU  ");
-		JLabel a2 = new JLabel("        MA  ");
-		JLabel a3 = new JLabel("        MI  ");
-		JLabel a4 = new JLabel("        JU  ");
-		JLabel a5 = new JLabel("        VI  ");
-		JLabel a6 = new JLabel("        SA  ");
-		JLabel a7 = new JLabel("        DO  ");
-		JPanel todo = new JPanel();
-		BoxLayout nuevo = new BoxLayout(todo, BoxLayout.Y_AXIS);
-	    JButton tituloMes = new JButton(mesElegido);
-	    JButton tituloanio= new JButton("     " + anio+"    ");
-	    todo.setLayout(nuevo);
-	    JPanel contenedorAM = new JPanel();
-	    contenedorAM.setBackground(Color.WHITE);
-	    contenedorAM.setLayout(new BorderLayout());
-	    JPanel contenedorwest = new JPanel();
-	    contenedorwest.setBackground(Color.WHITE);
-	    contenedorwest.add(tituloanio);
-	    contenedorwest.add(tituloMes);
-	    contenedorAM.add(contenedorwest,BorderLayout.WEST);
-	    
-		encabezado.add(a1);
-		encabezado.add(a2);
-		encabezado.add(a3);
-		encabezado.add(a4);
-		encabezado.add(a5);
-		encabezado.add(a6);
-		encabezado.add(a7);
-		
-		todo.add(contenedorAM);
-	    todo.add(encabezado);
-		
-		add(todo,BorderLayout.NORTH);
-	    add(mes,BorderLayout.CENTER);
-     
+	       JPanel encabezado = new JPanel(new GridLayout(1,7,5,5));
+	        encabezado.setBackground(new Color(174, 214, 241 ));
+			JLabel a1 = new JLabel("        LU  ");
+			JLabel a2 = new JLabel("        MA  ");
+			JLabel a3 = new JLabel("        MI  ");
+			JLabel a4 = new JLabel("        JU  ");
+			JLabel a5 = new JLabel("        VI  ");
+			JLabel a6 = new JLabel("        SA  ");
+			JLabel a7 = new JLabel("        DO  ");
+			JPanel todo = new JPanel();
+			BoxLayout nuevo = new BoxLayout(todo, BoxLayout.Y_AXIS);
+		  
+			JButton tituloMes = new JButton(mesElegido);
+			tituloMes.setOpaque(false);
+		    JLabel textoanio = new JLabel("    " +mesElegido+"   "+anio+"");
+		    Font fuente = new Font("Calibri", 3, 20);
+		    textoanio.setFont(fuente);
+		    textoanio.setForeground(new Color(52, 152, 219 ));
+			
+		    JButton tituloanio= new JButton("     " + anio+"    ");
+			tituloanio.setBackground(Color.WHITE);
+			tituloanio.setBorder(new MatteBorder(2,2,2,2,new Color(52, 152, 219 ) ));
+		    tituloanio.setOpaque(false);
+		    
+		    todo.setLayout(nuevo);
+		    JPanel contenedorAM = new JPanel();
+		    contenedorAM.setBackground(Color.WHITE);
+		    contenedorAM.setLayout(new BorderLayout());
+		    JPanel contenedorwest = new JPanel();
+		    contenedorwest.setBackground(Color.WHITE);
+		    contenedorwest.add(textoanio);
+		  //  contenedorwest.add(tituloMes);
+		    contenedorAM.add(contenedorwest,BorderLayout.WEST);
+		    
+			encabezado.add(a1);
+			encabezado.add(a2);
+			encabezado.add(a3);
+			encabezado.add(a4);
+			encabezado.add(a5);
+			encabezado.add(a6);
+			encabezado.add(a7);
+			
+			todo.add(contenedorAM);
+		    todo.add(encabezado);
+			
+			add(todo,BorderLayout.NORTH);
+		    add(mes,BorderLayout.CENTER);
+	     
 
-	}
-	
+		}
      public int getMonth() {
 		return month;
 	}
