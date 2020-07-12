@@ -20,17 +20,21 @@ public class VistaCrearCita extends JPanel {
 	JLabel fecha = new JLabel("Fecha: ");
 	JLabel lugar = new JLabel("Lugar: ");
 	JLabel contactos = new JLabel("Contactos: ");
-	JLabel notificaciones = new JLabel("Notificación:"); 
+	JLabel notificaciones = new JLabel("Notificación:");
 	public JSpinner numeroSeleccionado = new JSpinner(new SpinnerNumberModel(30, 0, 30, 1));
 	public JComboBox tiempoSeleccionado;
-	public JRadioButton activarNotificaciones=new JRadioButton("", true);
-	
+	public JRadioButton activarNotificaciones = new JRadioButton("", true);
+
 	public JButton calendarioBoton = new JButton(new ImageIcon("iconos\\calendario.gif"));
 	public JTextField contactosC, asuntoC, horaInicioC, horaFinC, fechaC;
 	public JTextArea descripcionC, lugarC;
-	
+
 	public VistaMemo memo;
-	
+
+////////////////////////////////////////////////////
+	public JPanel listaContactos;
+
+///////////////////////////////////////////////////////
 	public VistaCrearCita() {
 		memo = new VistaMemo();
 		contactosC = new JTextField();
@@ -40,6 +44,10 @@ public class VistaCrearCita extends JPanel {
 		horaFinC = new JTextField("   00  :  00  :  00");
 		fechaC = new JTextField(" 00  /  00  /  2020");
 		lugarC = new JTextArea();
+		////////////////////////////////////////////////////
+		listaContactos = new JPanel();
+		listaContactos.setBackground(Color.blue);
+		///////////////////////////////////////////////////////
 		agregarComponentes();
 	}
 
@@ -57,13 +65,13 @@ public class VistaCrearCita extends JPanel {
 
 	private void agregarComponentes() {
 		setLayout(null);
-		String lista[] = {"minutos","horas","dias","semanas"};
+		String lista[] = { "minutos", "horas", "dias", "semanas" };
 		tiempoSeleccionado = new JComboBox<String>(lista);
-		
-		activarNotificaciones.setBounds(570, 370,20, 20);
+
+		activarNotificaciones.setBounds(570, 370, 20, 20);
 		tiempoSeleccionado.setBounds(720, 370, 90, 20);
 		numeroSeleccionado.setBounds(675, 370, 35, 20);
-		
+
 		notificaciones.setBounds(595, 370, 100, 20);
 		asunto.setBounds(135, 25, 50, 10);
 		asuntoC.setBounds(185, 22, 500, 20);
@@ -87,9 +95,14 @@ public class VistaCrearCita extends JPanel {
 		contactosC.setBounds(120, 422, 400, 20);
 		cancelar.setBounds(715, 475, 100, 25);
 		aceptar.setBounds(595, 475, 100, 25);
-		
+
 		memo.setBounds(20, 60, 365, 340);
-		
+
+		////////////////////////////////////////////////////
+		listaContactos.setBounds(120, 435, 399, 75);
+		listaContactos.setVisible(false);
+		///////////////////////////////////////////////////////
+
 		add(asunto);
 		add(asuntoC);
 		add(horaInicio);
@@ -112,11 +125,16 @@ public class VistaCrearCita extends JPanel {
 		add(numeroSeleccionado);
 		add(tiempoSeleccionado);
 		add(activarNotificaciones);
+
+		////////////////////////////////////////////////////
+		add(listaContactos);
+		///////////////////////////////////////////////////////
 	}
 
 	public void setControlador(ControladorAgenda control) {
 		aceptar.addActionListener(control);
 		cancelar.addActionListener(control);
+		contactosC.addFocusListener(control);
 		calendarioBoton.addActionListener(control);
 	}
 
@@ -160,7 +178,7 @@ public class VistaCrearCita extends JPanel {
 		}
 		return resultado;
 	}
-	
+
 	public void limpiarEspacios() {
 		contactosC.setText("");
 		asuntoC.setText("");
@@ -168,18 +186,27 @@ public class VistaCrearCita extends JPanel {
 		horaInicioC.setText("   00  :  00  :  00");
 		horaFinC.setText("   00  :  00  :  00");
 		fechaC.setText(" 00  /  00  /  2020");
-		lugarC.setText("");;
+		lugarC.setText("");
+		;
 	}
-	
+
 	public void darValores(String asunto, String descripcion, String horaInicio, String horaFin, String fecha,
 			String contactos, String lugar) {
-		contactosC.setText(contactos);;
+		contactosC.setText(contactos);
+		
 		asuntoC.setText(asunto);
 		descripcionC.setText(descripcion);
-		horaInicioC.setText("   "+horaInicio);
-		horaFinC.setText("   "+horaFin);
-		fechaC.setText(" "+fecha);
+		horaInicioC.setText("   " + horaInicio);
+		horaFinC.setText("   " + horaFin);
+		fechaC.setText(" " + fecha);
 		lugarC.setText(lugar);
 	}
 
+///////////////////////////////////////////////////////////////////////////////////////
+	public void hacerVisiblePanelContactos(boolean estado) {
+		listaContactos.setVisible(estado);
+	}
+///////////////////////////////////////////////////////////////////////////////////////
+
 }
+

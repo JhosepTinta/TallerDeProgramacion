@@ -12,9 +12,12 @@ public class VistaAgenda extends JPanel {
 	public JTextField buscar = new JTextField("buscar");
 	public JButton agregar;
 	public JButton mas_opciones;
+	
 	JLabel texto = new JLabel("");
 	public JButton buscarBoton;
 	public JButton volver = new JButton("Volver ...");
+	public JButton eliminar = new JButton("Eliminar");
+	public JRadioButton seleccion = new JRadioButton("Seleccionar todo", false);
 	
 	public VistaAgenda() {
 		setLayout(null);
@@ -29,6 +32,7 @@ public class VistaAgenda extends JPanel {
 		mas_opciones = new JButton(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaMas1.png")));
 		mas_opciones.setBackground(Color.white);
 		mas_opciones.setBorder(null);
+		seleccion.setBackground(Color.white);
 		panelCitas = new JPanel();
 		listaCitas = new JScrollPane(panelCitas);
 		panelCitas.setLayout(new GridLayout(20,0));
@@ -36,15 +40,19 @@ public class VistaAgenda extends JPanel {
 	}
 	
 	private void agregarElementos() {
+		seleccion.setBounds(5, 10, 180, 20);
+		eliminar.setBounds(540, 10, 95, 20);
 		volver.setBounds(650, 10, 190, 20);
 		buscarBoton.setBounds(510, 3, 37, 37);
 		buscar.setBounds(5, 10, 500, 25);
 		agregar.setBounds(610, 3, 110, 34);
 		mas_opciones.setBounds(730, 3, 110, 34);
-		listaCitas.setBounds(5, 40, 840, 556);
+		listaCitas.setBounds(4, 40, 845, 553);
 		texto.setBounds(340, 10, 200, 20);
 		texto.setVisible(false);
 		volver.setVisible(false);
+		eliminar.setVisible(false);
+		seleccion.setVisible(false);
 		add(texto);
 		add(buscar);
 		add(agregar);
@@ -52,6 +60,8 @@ public class VistaAgenda extends JPanel {
 		add(listaCitas);
 		add(buscarBoton);
 		add(volver);
+		add(eliminar);
+		add(seleccion);
 	}
 	// cambiar el controlador cuando este terminado
 	public void setControlador(ControladorAgenda control) {
@@ -59,6 +69,8 @@ public class VistaAgenda extends JPanel {
 		mas_opciones.addActionListener(control);
 		buscarBoton.addActionListener(control);
 		volver.addActionListener(control);
+		eliminar.addActionListener(control);
+		seleccion.addFocusListener(control);
 	}
 	
 	public void estadoTextoReferente(boolean estado) {
@@ -80,6 +92,22 @@ public class VistaAgenda extends JPanel {
 		volver.setVisible(estado);
 		agregar.setVisible(!estado);
 		mas_opciones.setVisible(!estado);
+	}
+	
+	public void visibilidadVolverDos(boolean estado) {
+		volver.setVisible(estado);
+		eliminar.setVisible(estado);
+		agregar.setVisible(!estado);
+		mas_opciones.setVisible(!estado);
+		visibilidadBuscar(!estado);
+		seleccion.setVisible(estado);
+	}
+	
+	public void visibilidadBuscar(boolean estado) {
+		buscar.setVisible(estado);
+		buscarBoton.setVisible(estado);
+		eliminar.setVisible(!estado);
+		seleccion.setVisible(!estado);
 	}
 	
 }

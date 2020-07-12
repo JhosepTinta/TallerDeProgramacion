@@ -27,7 +27,7 @@ class AgendaTest {
 		agenda.agregarCita(cita4);
 		agenda.agregarCita(cita5);
 		
-		assertEquals(true,agenda.eliminatCita(cita1));
+		assertEquals(true,agenda.eliminarCita(cita1));
 		assertEquals(4,agenda.cantidadCitas());
 	}
 	@Test

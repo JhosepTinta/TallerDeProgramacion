@@ -25,13 +25,17 @@ public class Agenda implements Serializable {
 		return listaCita;
 	}
 	
+	public void setLista(ArbolBB<Cita> lista) {
+		listaCita = lista;
+	}
+	
 	public int cantidadCitas() {
 		return listaCita.inOrden().longitud();
 	}
 
-	public boolean eliminatCita(Cita otra) {
-		Cita aux = listaCita.eliminar(otra);
-		return aux != null ? true : false;
+	public boolean eliminarCita(Cita otra) {
+		Cita aux = otra!=null?listaCita.eliminar(otra):null;
+		return aux == null ? false : true;
 	}
 
 	public ListaSE<Cita> buscarHora(Reloj hora) {
