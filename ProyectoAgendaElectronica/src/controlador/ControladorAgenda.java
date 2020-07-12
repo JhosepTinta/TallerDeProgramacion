@@ -116,6 +116,15 @@ public class ControladorAgenda implements ActionListener {
 				paraAgregar.setListaRecordatorios(generarLista(listaMemoDeMomento));
 				if(crearCita.activarNotificaciones.isSelected()) {
 					System.out.println("notificacion marcada");
+					Reloj alarmaRescatada = traducirNotificacion(Integer.parseInt(crearCita.numeroSeleccionado.getValue().toString())
+							,(String)crearCita.tiempoSeleccionado.getSelectedItem(), 
+							paraAgregar.getFecha(),paraAgregar.getHoraInicio());
+					String dia_noche = diaNocheCita(paraAgregar.getHoraInicio());
+					AlertaAlarma alarma = new AlertaAlarma();
+					alarma.CrearAlarma(filtroNumero(alarmaRescatada.getHora()),
+							filtroNumero(alarmaRescatada.getMinutos()),filtroNumero(alarmaRescatada.getSegundos()), 
+							dia_noche);
+					paraAgregar.setAlarmaCita(alarma);
 				}
 				agregarCita(paraAgregar);
 				crearCita.limpiarEspacios();// limpia los recuadros despues de usarlos
@@ -340,6 +349,57 @@ public class ControladorAgenda implements ActionListener {
 		vistaControlada.estadoTextoReferente(!estado);
 		vistaControlada.visibilidadComponentes(estado);
 	}
+	
+	//metodo para traducir la notificacion a la clase AlertaAlarma
+		private Reloj traducirNotificacion(int tiempo, String medida,Fecha fechaCita,Reloj inicioCita) {
+			Reloj res = inicioCita;
+			if(medida.equals("minutos")) {
+				if(tiempo <= inicioCita.getMinutos()) {
+					res = new Reloj(inicioCita.getHora(),inicioCita.getMinutos()-tiempo,inicioCita.getSegundos());
+				}else {
+					res = inicioCita.getHora()!=0 ? new Reloj(inicioCita.getHora()-1,60-tiempo,inicioCita.getSegundos()):
+						 new Reloj(23,60-tiempo,inicioCita.getSegundos());
+				}
+			}else if(medida.equals("horas")) {
+				if(tiempo <=inicioCita.getHora()) {
+					res = new Reloj(inicioCita.getHora()-tiempo,inicioCita.getMinutos(),inicioCita.getSegundos());
+				}
+			}else if(medida.equals("dias")) {
+				
+			}else if(medida.equals("semanas")) {
+				
+			}
+			return res;
+		}
+		
+		//metodo para saber si la cita inicia en el dia o la noche
+		private String diaNocheCita(Reloj inicioCita) {
+			String res = "";
+			if(inicioCita.getHora()<=12) {
+				res = "AM";
+			}else {
+				res = "PM";
+			}
+			return res;
+		}
+		
+		//filtro de numeros 
+		private int filtroNumero(int n) {
+			int res = n;
+			if(n == 13) {res = 1;}
+			else if(n == 14) {res = 2;}
+			else if(n == 15) {res = 3;}
+			else if(n == 16) {res = 4;}
+			else if(n == 17) {res = 5;}
+			else if(n == 18) {res = 6;}
+			else if(n == 19) {res = 7;}
+			else if(n == 20) {res = 8;}
+			else if(n == 21) {res = 9;}
+			else if(n == 22) {res = 10;}
+			else if(n == 23) {res = 11;}
+			else if(n == 0) {res = 12;}
+			return res;
+		}
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
