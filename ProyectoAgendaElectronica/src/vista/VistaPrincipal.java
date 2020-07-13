@@ -58,7 +58,9 @@ public class VistaPrincipal extends JFrame {
 		mitarea = new TareaVista();
 	    
 		vistaAgenda = new VistaAgenda();
-	    modeloAgenda = new Agenda();
+		modeloAgenda = new Agenda();
+		Agenda recuperada = modeloAgenda.leerDatosGuardadosAgenda();
+		modeloAgenda = recuperada!=null?recuperada: new Agenda();
 	    controlador = new ControladorAgenda(modeloAgenda, vistaAgenda);
 	    vistaAgenda.setControlador(controlador);
 

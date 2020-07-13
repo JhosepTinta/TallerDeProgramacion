@@ -2,6 +2,10 @@ package modelo;
 
 import noLineales.*;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import lineales.*;
@@ -24,17 +28,17 @@ public class Agenda implements Serializable {
 	public ArbolBB<Cita> getLista() {
 		return listaCita;
 	}
-	
+
 	public void setLista(ArbolBB<Cita> lista) {
 		listaCita = lista;
 	}
-	
+
 	public int cantidadCitas() {
 		return listaCita.inOrden().longitud();
 	}
 
 	public boolean eliminarCita(Cita otra) {
-		Cita aux = otra!=null?listaCita.eliminar(otra):null;
+		Cita aux = otra != null ? listaCita.eliminar(otra) : null;
 		return aux == null ? false : true;
 	}
 
@@ -43,7 +47,7 @@ public class Agenda implements Serializable {
 		ListaSE<Cita> listaRespuesta = new ListaSE<Cita>();
 		for (int i = 0; i < citasCompletas.longitud(); i++) {
 			Cita aux = citasCompletas.acceder(i);
-			if (aux.getHoraInicio().getHora()==hora.getHora()) {
+			if (aux.getHoraInicio().getHora() == hora.getHora()) {
 				listaRespuesta.insertar(aux);
 			}
 		}
@@ -51,15 +55,15 @@ public class Agenda implements Serializable {
 	}
 
 	public ListaSE<Cita> buscarFecha(Fecha fechaElegida) {
-		return darCitasPorEstado(0,fechaElegida);
+		return darCitasPorEstado(0, fechaElegida);
 	}
 
 	public ListaSE<Cita> buscarCitasHoy() {
 		Fecha fechaHoy = new Fecha();
-		return darCitasPorEstado(0,fechaHoy);
+		return darCitasPorEstado(0, fechaHoy);
 	}
-	
-	public ListaSE<Cita> buscarHorayFecha(Reloj hora,Fecha fecha) {
+
+	public ListaSE<Cita> buscarHorayFecha(Reloj hora, Fecha fecha) {
 		ListaSE<Cita> citasCompletas = (ListaSE) listaCita.inOrden();
 		ListaSE<Cita> listaRespuesta = new ListaSE<Cita>();
 		for (int i = 0; i < citasCompletas.longitud(); i++) {
@@ -74,9 +78,9 @@ public class Agenda implements Serializable {
 	public ListaSE<Cita> buscarLugarAsunto(String lugar, String asunto) {
 		ListaSE<Cita> citasCompletas = (ListaSE) listaCita.inOrden();
 		ListaSE<Cita> listaRespuesta = new ListaSE<Cita>();
-		for(int i=0; i<citasCompletas.longitud();i++) {
+		for (int i = 0; i < citasCompletas.longitud(); i++) {
 			Cita aux = citasCompletas.acceder(i);
-			if(buscarPalabra(aux.getLugar(),lugar) || buscarPalabra(aux.getAsunto(),asunto)) {
+			if (buscarPalabra(aux.getLugar(), lugar) || buscarPalabra(aux.getAsunto(), asunto)) {
 				listaRespuesta.insertar(aux);
 			}
 		}
@@ -85,15 +89,15 @@ public class Agenda implements Serializable {
 
 	public ListaSE<Cita> darCitasPrevias() {
 		Fecha fechaHoy = new Fecha();
-		return darCitasPorEstado(1,fechaHoy);
+		return darCitasPorEstado(1, fechaHoy);
 	}
 
 	public ListaSE<Cita> darCitasVencidas() {
 		Fecha fechaHoy = new Fecha();
-		return darCitasPorEstado(-1,fechaHoy);
+		return darCitasPorEstado(-1, fechaHoy);
 	}
-	
-	private ListaSE<Cita> darCitasPorEstado(int estado,Fecha fecha){
+
+	private ListaSE<Cita> darCitasPorEstado(int estado, Fecha fecha) {
 		Fecha fechaElegida = fecha;
 		ListaSE<Cita> citasCompletas = (ListaSE) listaCita.inOrden();
 		ListaSE<Cita> listaRespuesta = new ListaSE<Cita>();
@@ -105,25 +109,57 @@ public class Agenda implements Serializable {
 		}
 		return listaRespuesta;
 	}
-	//metodo que ayuda a encontrar palabras
-	private boolean buscarPalabra(String frase,String palabra) {
+
+	// metodo que ayuda a encontrar palabras
+	private boolean buscarPalabra(String frase, String palabra) {
 		boolean encontrado = false;
 		int i = 0;
 		int c = 0;
-		while(i<frase.length() && !encontrado) {
+		while (i < frase.length() && !encontrado) {
 			char letraFrase = frase.charAt(i);
-			if(letraFrase == palabra.charAt(c)) {
+			if (letraFrase == palabra.charAt(c)) {
 				c++;
-				encontrado = c == palabra.length()?true:false;
-				
-			}else {
+				encontrado = c == palabra.length() ? true : false;
+
+			} else {
 				c = 0;
 			}
 			i++;
 		}
 		return encontrado;
 	}
-	
+
+////////////////////////////////////////////Guardar
+////////////////////////////////////////////Datos///////////////////////////////////////////////
+	public void guardarDatosAgenda() {
+		try {
+			ObjectOutputStream escribiendo = new ObjectOutputStream(
+					new FileOutputStream("archivos dat\\datosAgenda.dat"));
+			escribiendo.writeObject(this);
+			escribiendo.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage() + "ocurrio algun error al guardar");
+		}
+	}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////// Leer Datos
+///////////////////////////////////// Guardados///////////////////////////////////////////////
+	public Agenda leerDatosGuardadosAgenda() {
+		Agenda datosRecogidos = null;
+		try {
+			ObjectInputStream leendo = new ObjectInputStream(
+					new FileInputStream("archivos dat\\datosAgenda.dat"));
+			datosRecogidos = (Agenda) leendo.readObject();
+			leendo.close();
+		} catch (Exception e) {
+			System.out.println("No se encontro el archivo datosAgenda.dat");
+			System.out.println(e.getMessage());
+		}
+		return datosRecogidos;
+	}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	public String toString() {
 		return listaCita.inOrden().toString();
 	}

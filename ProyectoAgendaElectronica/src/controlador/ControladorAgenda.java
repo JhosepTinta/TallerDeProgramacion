@@ -58,38 +58,8 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 		crearMemo.setControlador(this);
 		detalleCita.setControlador(this);
 		detalleMemo.setControlador(this);
+		llenarPanelCitas((ListaSE<Cita>) agendaControlada.getLista().inOrden());
 	}
-
-	//////////////////////////////////////////// Guardar
-	//////////////////////////////////////////// Datos///////////////////////////////////////////////
-	public void guardarDatosAgenda() {
-		try {
-			ObjectOutputStream escribiendo = new ObjectOutputStream(
-					new FileOutputStream("C:\\Users\\IBM LENOVO\\Desktop\\datos generados\\datosAgenda.dat"));
-			escribiendo.writeObject(agendaControlada);
-			escribiendo.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage() + "ocurrio algun error al guardar");
-		}
-	}
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	///////////////////////////////////// Leer Datos
-	///////////////////////////////////// Guardados///////////////////////////////////////////////
-	public Agenda leerDatosGuardadosAgenda() {
-		Agenda datosRecogidos = null;
-		try {
-			ObjectInputStream leendo = new ObjectInputStream(
-					new FileInputStream("C:\\Users\\IBM LENOVO\\Desktop\\datos generados\\datosAgenda.dat"));
-			datosRecogidos = (Agenda) leendo.readObject();
-			leendo.close();
-		} catch (Exception e) {
-			System.out.println("No se encontro el archivo datosAgenda.dat");
-			System.out.println(e.getMessage());
-		}
-		return datosRecogidos;
-	}
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////// Zona de Eventos para la
@@ -309,7 +279,7 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 
 			}
 		}
-
+		agendaControlada.guardarDatosAgenda();
 	}
 
 	// metodo para cambiar de paneles
@@ -482,14 +452,14 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 			System.out.println("ganaste el foco");
 			crearCita.hacerVisiblePanelContactos(true);
 		} else if (e.getSource() == vistaControlada.seleccion) {
-			/*if (vistaControlada.seleccion.isSelected()) {
+			if (vistaControlada.seleccion.isSelected()) {
 				llenarPanelCitasDos((ListaSE<Cita>) agendaControlada.getLista().inOrden(), false);
 				System.out.println("1");
 			} else {
 				llenarPanelCitasDos((ListaSE<Cita>) agendaControlada.getLista().inOrden(), true);
 				System.out.println("2");
-			}*/
-			llenarPanelCitasDos((ListaSE<Cita>) agendaControlada.getLista().inOrden(),true);
+			}
+			//llenarPanelCitasDos((ListaSE<Cita>) agendaControlada.getLista().inOrden(),true);
 
 			definirPanel(vistaControlada.panelCitas);
 		}
@@ -574,7 +544,7 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 					llenarPanelCitas((ListaSE<Cita>) agendaControlada.getLista().inOrden());
 					definirPanel(vistaControlada.panelCitas);
 				}
-
+				agendaControlada.guardarDatosAgenda();
 			}
 		}
 	}

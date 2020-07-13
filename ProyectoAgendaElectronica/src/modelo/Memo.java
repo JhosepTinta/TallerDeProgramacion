@@ -1,6 +1,8 @@
 package modelo;
 
-public class Memo {
+import java.io.Serializable;
+
+public class Memo implements Serializable{
 	private String titulo;
 	private String texto;
 	private Fecha fechaCreacion;

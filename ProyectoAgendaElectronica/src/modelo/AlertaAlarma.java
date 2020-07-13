@@ -1,12 +1,13 @@
 package modelo;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 import java.util.GregorianCalendar;
 
 import javax.swing.JOptionPane;
 
-public class AlertaAlarma {
+public class AlertaAlarma implements Serializable {
 	
 	
 
