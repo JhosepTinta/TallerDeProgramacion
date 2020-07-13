@@ -19,6 +19,7 @@ import modelo.CalendarioMensual;
 import modelo.Cita;
 import modelo.Fecha;
 import modelo.Reloj;
+
 import vistaAgenda.VistaAgenda;
 import vistaAgenda.VistaDetalleCitaVentana;
 
@@ -81,21 +82,23 @@ public class Prueba extends JFrame implements ActionListener{
 		va.setControlador(ca);
 		
 		CalendarioMensual mensual = new CalendarioMensual(5, 2020);
+	
 	    nave = new Navegacion(a, mensual);
-	    VistaCalendarioCompletoCita citacalen= new VistaCalendarioCompletoCita(new CalendarioMensual(7, 2020));
+	  //  VistaCalendarioCompletoCita citacalen= new VistaCalendarioCompletoCita(new CalendarioMensual(7, 2020));
 		setSize(350,300);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//add(va, BorderLayout.CENTER);
-		add(citacalen);
 		
 		
 	}
 	
 	
 	public static void main(String[] args) {
-		//Prueba prueba1 = new Prueba();
-		VentanaCalendarioCita ventanacalendariocita = new VentanaCalendarioCita();
+		
+		
+		Prueba prueba1 = new Prueba();
+	//	VentanaCalendarioCita ventanacalendariocita = new VentanaCalendarioCita();
 		//VistaAgenda vista= new VistaAgenda() ;
 		//Cita cita1 = new Cita("dormir","a",new Reloj(11,0,0),new Reloj(14,50,0),new Fecha(16,5,2020),"asunto");
 		//VistaDetalleCitaVentana a = new VistaDetalleCitaVentana(cita1, Color.BLUE, Color.BLUE);

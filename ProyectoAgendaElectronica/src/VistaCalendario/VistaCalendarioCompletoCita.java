@@ -12,6 +12,7 @@ import modelo.CalendarioMensual;
 import modelo.Cita;
 import modelo.Fecha;
 import vista.VistaPrincipal;
+import vistaAgenda.VistaCrearCita;
 
 
 
@@ -24,10 +25,10 @@ public class VistaCalendarioCompletoCita extends JPanel implements ActionListene
 	CalendarioMensual calendario;
 	JButton back,next;
 	int mes, anio;
-	
-    public VistaCalendarioCompletoCita(CalendarioMensual calendario) {
+	VistaCrearCita crearcita;
+    public VistaCalendarioCompletoCita(CalendarioMensual calendario, VistaCrearCita vistacrear) {
        
-    	
+    	this.crearcita = vistacrear;
     	this.calendario = calendario;
     	mes = calendario.getMes();
     	anio = calendario.getAnio();
@@ -71,12 +72,12 @@ public class VistaCalendarioCompletoCita extends JPanel implements ActionListene
 			mes = 0;
 			
 			CalendarioMensual nuevo = new CalendarioMensual(mes,anio);
-			siguiente = new VistaCalendarioCita(nuevo);
+			siguiente = new VistaCalendarioCita(nuevo,crearcita);
 		 
 		} else {
 			 mes++;
 		    CalendarioMensual nuevo = new CalendarioMensual(mes,anio);
-			siguiente = new VistaCalendarioCita(nuevo);
+			siguiente = new VistaCalendarioCita(nuevo,crearcita);
 	      }
 		
 		add(siguiente,BorderLayout.CENTER);
@@ -84,7 +85,7 @@ public class VistaCalendarioCompletoCita extends JPanel implements ActionListene
 	}
     
     public void addMesActual() {
-		actual = new VistaCalendarioCita(calendario);
+		actual = new VistaCalendarioCita(calendario,crearcita);
 	    add(actual,BorderLayout.CENTER);
 		
 	}
@@ -94,14 +95,20 @@ public class VistaCalendarioCompletoCita extends JPanel implements ActionListene
 			anio--;
 			mes = 11;
 			CalendarioMensual nuevo = new CalendarioMensual(mes--,anio);
-			anterior = new VistaCalendarioCita(nuevo);
+			anterior = new VistaCalendarioCita(nuevo,crearcita);
 		}else{
 			mes--;
 			CalendarioMensual nuevo = new CalendarioMensual(mes,anio);
-			anterior = new VistaCalendarioCita(nuevo);
+			anterior = new VistaCalendarioCita(nuevo,crearcita);
 		}
 		add(anterior,BorderLayout.CENTER);
 	}
+    public String getFechaMarcada() {
+    	String res;
+    	res = actual.diaapretado;
+    	return res;
+    	
+    }
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object a = e.getSource();
@@ -126,8 +133,7 @@ public class VistaCalendarioCompletoCita extends JPanel implements ActionListene
 		
 	}
    
-    	
-    	
+	
     
 }
 

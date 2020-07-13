@@ -17,6 +17,7 @@ import controlador.ControladorAgenda.ElementoCitaDos.PanelDescripcion;
 import lineales.ListaSE;
 import modelo.*;
 import noLineales.ArbolBB;
+
 import vistaAgenda.*;
 import vistaMemo.*;
 
@@ -273,9 +274,8 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 			vistaControlada.buscar.setText("buscar");
 			definirPanel(vistaControlada.panelCitas);
 		} else if (evento.getSource() == crearCita.calendarioBoton) {
-			ventanacalendariocita = new VentanaCalendarioCita();
-			String fecha = ventanacalendariocita.calen.getActual().diaapretado;
-			crearCita.fechaC.setText(fecha);
+			ventanacalendariocita = new VentanaCalendarioCita(crearCita);
+		 //   crearCita.fechaC.setText(ventanacalendariocita.calen.getFechaMarcada());
 		} else if (evento.getSource() instanceof JMenuItem) {
 			JMenuItem item = (JMenuItem) evento.getSource();
 			if (item.getText().equals("Eliminar Varios")) {

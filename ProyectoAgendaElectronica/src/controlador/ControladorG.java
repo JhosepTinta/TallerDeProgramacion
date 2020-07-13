@@ -20,6 +20,8 @@ import controlador.ControladorAgenda;
 			window.btnCa.addActionListener(this);
 			window.btnAg.addActionListener(this);
 			window.btnP.addActionListener(this);
+			
+			
 	
 		}
 		public void actionPerformed (ActionEvent e) {
@@ -40,14 +42,12 @@ import controlador.ControladorAgenda;
 			}
 			if(e.getSource() == window.btnCa) {
 				
-				window.calendario.actualizar();
+				window.arrancarCalendario();
 				window.definirPanel(window.calendario);
 			}
 			if(e.getSource() == window.btnAg) {
 
-				Agenda modeloAgenda=new Agenda();
-				ControladorAgenda controlador=new ControladorAgenda(modeloAgenda,window.vistaAgenda);
-				window.vistaAgenda.setControlador(controlador);
+				
 				window.definirPanel(window.vistaAgenda);
 			}
 			if(e.getSource() == window.btnP) {

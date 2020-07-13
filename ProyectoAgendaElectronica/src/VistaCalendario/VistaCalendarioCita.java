@@ -18,24 +18,26 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
+import controlador.ControladorAgenda;
 import lineales.ListaSE;
 import modelo.*;
 
 import vista.VistaPrincipal;
+import vistaAgenda.VistaAgenda;
+import vistaAgenda.VistaCrearCita;
 import vistaAgenda.VistaDetalleCitaVentana;
 
 public class VistaCalendarioCita extends JPanel {
     
-	CalendarioMensual aux;
-	JButton back;
-	JButton next;
-	String mesElegido;
-	int month;
-	int anio;
-	public String diaapretado;
-	 public LaminaMes mes;
-	public VistaCalendarioCita(CalendarioMensual aux) {
-	   
+	 CalendarioMensual aux;
+	 JButton back,next;
+	 String mesElegido;
+	 int month,anio;
+	 public String diaapretado;
+     public LaminaMes mes;
+     public VistaCrearCita vistaagen;
+	public VistaCalendarioCita(CalendarioMensual aux,VistaCrearCita vista) {
+	   vistaagen = vista;
 	   month = aux.getMes();
 	   anio = aux.getAnio();
 	   this.aux = aux;		
@@ -45,7 +47,7 @@ public class VistaCalendarioCita extends JPanel {
       
       //Encabezado para el mes
        mesElegido = nombrarMes(month);
-	   diaapretado = mes.darFecha();
+	  
 
 
        JPanel encabezado = new JPanel(new GridLayout(1,7,5,5));
@@ -86,10 +88,7 @@ public class VistaCalendarioCita extends JPanel {
      
 
 	}
-	public String darFechaaapre() {
-		return diaapretado;
-	}
-	
+
      public int getMonth() {
 		return month;
 	}
@@ -166,7 +165,7 @@ public class VistaCalendarioCita extends JPanel {
 	    int anio, month;
 	    int contadorPrimerosDias;
 	    int maximo, diaprimero;
-	    private JButton a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,a1,a2,a3,a4,a5,a6,a7,a8,a9,a0,b1,b2,b3,b4,b5,b6;
+	    public JButton a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,a1,a2,a3,a4,a5,a6,a7,a8,a9,a0,b1,b2,b3,b4,b5,b6;
 		String fecha;
 		public LaminaMes(CalendarioMensual calendario) {
 	
@@ -237,31 +236,19 @@ public class VistaCalendarioCita extends JPanel {
 			arrayMes = calendario.generarMes();
 		}
 	   
-	    public String darFecha() {
-	    	
-	    	return diaapretado +"/"+ (month+1) +"/"+ anio;
-	    	
-	    }
-		
+	  
 		private class Accion implements ActionListener{
-             String fecha;
+            
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String evento = e.getActionCommand();
-				diaapretado = evento + "/"+ (month+1) +"/"+ ""+anio;
-				this.fecha = evento;
-			    guardarFecha();
-				//System.out.println( diaapretado +"/"+ (month+1) +"/"+ anio );
-			}
-			public String guardarFecha() {
-				int nuevomes = month +1;
-				String res= fecha + "/"+ nuevomes +"/"+ ""+anio;
+				diaapretado = "  "+evento + " / "+ (month+1) +" / "+anio;
+				vistaagen.fechaC.setText(diaapretado);
 				
-				return res;
+				
 			}
-			public String getFecha() {
-				return this.fecha;
-			}
+			
+			
 
 		}
 		

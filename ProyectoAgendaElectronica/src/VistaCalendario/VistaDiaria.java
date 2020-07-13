@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.MatteBorder;
 
 import lineales.ListaSE;
 import modelo.Agenda;
@@ -32,20 +34,17 @@ public class VistaDiaria extends JPanel {
  		this.anio = anio;
  		calendar = new GregorianCalendar(anio,mes,dia);
  		int diasemana = calendar.get(Calendar.DAY_OF_WEEK);
- 		JLabel informacionfecha = new JLabel(preguntarDia(diasemana)+ " "+dia + " de "+ nombrarMes(mes)+ " " + anio);
+ 		JLabel informacionfecha = new JLabel(preguntarDia(diasemana)+ " "+dia + " DE "+ nombrarMes(mes)+ " " + anio);
  	    Font fuente = new Font("Calibri", 3, 20);
  	    informacionfecha.setFont(fuente);
  	    informacionfecha.setForeground(new Color(52, 152, 219 ));
- 		//String textodeldia = preguntarDia(diasemana);
+ 		
  		setLayout(new BorderLayout());
  		listacitas = new ListaCitas(lista,dia,mes) ;
- 		//botonmes = new JButton(nombrarMes(mes)+"");
- 		//botonanio= new JButton(anio + "");
- 	    //botondia = new JButton(textodeldia+"    "+dia+ "");
+ 		
  	    JPanel cabecera = new JPanel();
  	    cabecera.setBackground(Color.WHITE);
- 	   // cabecera.add(botondia);
- 	    //cabecera.add(botonmes);
+ 	  
  	    cabecera.add(informacionfecha);
  		add(listacitas,BorderLayout.CENTER);
  		add(cabecera,BorderLayout.NORTH);
@@ -105,25 +104,25 @@ public class VistaDiaria extends JPanel {
      	 String textodia;
      	 switch (numerodia) {
  		case 1:
- 			textodia = "Lunes"; 
+ 			textodia = "LUNES"; 
  			break;
          case 2:
- 			textodia = "Martes";
+ 			textodia = "MARTES";
  			break;
          case 3:
- 			textodia = "Miercoles";
+ 			textodia = "MIERCOLES";
  			break;
  		case 4:
- 			textodia = "Jueves";
+ 			textodia = "JUEVES";
  			break;
  		case 5:
- 			textodia = "Viernes";
+ 			textodia = "VIERNES";
  			break;
  		case 6:
- 			textodia = "Sabado";
+ 			textodia = "SABADO";
  			break;
  		case 7:
- 			textodia = "Domingo";
+ 			textodia = "DOMINGO";
  			
  			break;	
  		default:
@@ -147,7 +146,7 @@ public class VistaDiaria extends JPanel {
     int contadorpos;
     Box box;
     int dia,mes;
-	
+	int horaminutos;
     public ListaCitas(ListaSE<Cita> lista,int dia, int mes) {
 		this.citas = lista;
 		this.dia = dia;
@@ -155,6 +154,7 @@ public class VistaDiaria extends JPanel {
 		tamaniolista = lista.longitud();
 		contadorpos = 0;
 		contador2 = 1;
+		
 		setLayout(new GridLayout(24,1,5,5 ));
 	   
 	    addCitas(a);
@@ -187,65 +187,79 @@ public class VistaDiaria extends JPanel {
 	}
     
 	public void addCitas(Objeto objeto) {
-		 
-		if(contadorpos< tamaniolista) {
+		if(contador2 <= 24) {
+			
+		
+		   if(contadorpos < tamaniolista) {
 		  
-		  Cita citaahora = citas.acceder(contadorpos);
-		  int horaini = citaahora.getHoraInicio().getHora();
-		  int horafi = citaahora.getHoraFin().getHora();
-		  if(horaini == contador2) {
+		    Cita citaahora = citas.acceder(contadorpos);
+		    int horaini = citaahora.getHoraInicio().getHora();
+		    int horafi = citaahora.getHoraFin().getHora();
+		    if(horaini == contador2) {
 			         objeto = new Objeto(citaahora);
 			         contadorpos++;
-			         contador2++;
+			         contador2 = horafi;
+			         horaminutos = citaahora.getHoraFin().getMinutos();
+		    }else {
+		  	  if(contador2 < 10) {
+					objeto = new Objeto("0"+contador2+"  :  00  :  00");
+			        contador2++;
+				 }else {
+				    objeto = new Objeto(contador2+"  : 00  :  00");
+		            contador2++;
+		       }
+			  
+		     }
+		  
+		  
 		  }else {
 			  if(contador2 < 10) {
-					objeto = new Objeto("0"+contador2+":00:00");
+					objeto = new Objeto("0"+contador2+"  :  00  :  00");
 			        contador2++;
 				}else {
-				    objeto = new Objeto(contador2+":00:00");
+				    objeto = new Objeto(contador2+"  :  00  :  00");
 		            contador2++;
-		      }
-			  
-		  }
-		  
-		  
-		}else {
-			 if(contador2 < 10) {
-					objeto = new Objeto("0"+contador2+":00:00");
-			        contador2++;
-				}else {
-				    objeto = new Objeto(contador2+":00:00");
-		            contador2++;
-		      }
+		        }
 			
+		  }
+		   add(objeto);
 		}
 		
-		add(objeto);
+		
 	}
 	
 	 private class Objeto extends JPanel{
 		 
 		 JButton hora;
 		 JButton tituloCita;
+		 JButton horafin;
 		 Cita cita;
 		 
 		 public Objeto(Cita cita) {
 			 setLayout(new BorderLayout());
-			 hora = new JButton( cita.getHoraInicio()+"");
-			 
+			 hora = new JButton("          "+ cita.getHoraInicio()+"");
+             
+             JPanel objetohoras = new JPanel();
+             objetohoras.setLayout(new GridLayout(2,1));
 			 tituloCita = new JButton(cita.getAsunto()+"                       ");
 			 tituloCita.setBackground(Color.WHITE);
 			 tituloCita.setBorder(null);
+			 horafin = new JButton("          "+cita.getHoraFin().toString());
 			 
+			 vistaBotonHora(hora);
+			 vistaBotonHora(horafin);
+			 objetohoras.add(hora);
+			 objetohoras.add(horafin);
+			 add(objetohoras,BorderLayout.WEST);
 			 add(tituloCita,BorderLayout.CENTER);
-			 add(hora,BorderLayout.WEST);
+			 //add(hora,BorderLayout.WEST);
 	
 		 }
 		 
 		 public Objeto(String horario) {
 			 setLayout(new BorderLayout());
-			 hora = new JButton(horario);
-			 
+			 hora = new JButton("          "+horario);
+			 vistaBotonHora(hora);
 			 tituloCita = new JButton("     "+"    ");
 			 tituloCita.setBackground(Color.WHITE);
 			 tituloCita.setBorder(null);
@@ -253,7 +267,13 @@ public class VistaDiaria extends JPanel {
 			 add(hora,BorderLayout.WEST);
 	
 		 }
-		 
+		 public void vistaBotonHora(JButton boton) {
+			 boton.setBackground(Color.WHITE);
+			 boton.setForeground(new Color(52, 152, 219));
+			 Font fuente = new Font("Calibri", 3, 17);
+		 	 boton.setFont(fuente);
+			 boton.setBorder(new BevelBorder(3,Color.BLACK, Color.BLUE));
+		 }
 	 }
 
 	

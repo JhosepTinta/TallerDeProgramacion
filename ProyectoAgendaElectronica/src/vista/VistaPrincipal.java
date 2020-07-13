@@ -32,6 +32,7 @@ public class VistaPrincipal extends JFrame {
 	public Agenda modeloAgenda; 
 	public ControladorAgenda controlador;
 	public TareaVista mitarea;
+	public CalendarioMensual calendarioMensual;
 	
 	public JButton btnC,btnA,btnCa,btnAg,btnP;
 	JScrollPane scrollPaneles;
@@ -62,12 +63,12 @@ public class VistaPrincipal extends JFrame {
 	    vistaAgenda.setControlador(controlador);
 
 	    Calendar calendar = new GregorianCalendar();
-	    CalendarioMensual calendarioMensual = new CalendarioMensual(calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR));
+	    calendarioMensual = new CalendarioMensual(calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR));
 		calendario = new Navegacion(modeloAgenda,calendarioMensual);
 		
 		scrollPaneles = new JScrollPane();
 		scrollPaneles.setBounds(175, 0, 855, 600);
-		
+		scrollPaneles.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 		//Boton Calendario
 		btnCa = new JButton("New button");
 		btnCa.setOpaque(false);
@@ -166,6 +167,11 @@ public class VistaPrincipal extends JFrame {
 		add(scrollPaneles);
 		definirPanel(calendario);
 	}
+		public void arrancarCalendario() {
+
+			calendario = new Navegacion(modeloAgenda, calendarioMensual);
+			calendario.arrancarDia();
+		}
 		public void definirPanel(Panel1 miPanel) {
 			scrollPaneles.setViewportView(miPanel);
 		}

@@ -25,7 +25,7 @@ public class Navegacion extends JPanel {
        
 	   VistaCalendarioCompleto completo;
        VistaSemanal vistasemanal;
-       VistaDiariaCompleto diaria;
+       public VistaDiariaCompleto diaria;
        JScrollPane contenedorDePaneles;
        JButton botonmensual,botondiario;
        ListaSE<Cita> citashoy;
@@ -33,7 +33,8 @@ public class Navegacion extends JPanel {
 	   int day, mes, year;
 	   Agenda agenda;
 	   CalendarioMensual calen;
-       public Navegacion(Agenda agenda, CalendarioMensual calen) {
+   
+	   public Navegacion(Agenda agenda, CalendarioMensual calen) {
 		this.agenda = agenda;
 		this.calen = calen;
 		setLayout(new BorderLayout());
@@ -63,6 +64,7 @@ public class Navegacion extends JPanel {
 		box.add(botonmensual);
 		box.add(botondiario);
 		
+		contenedorDePaneles.setAutoscrolls(false);
 		definirPanel(completo);
 		add(box, BorderLayout.NORTH);
 		
@@ -71,13 +73,12 @@ public class Navegacion extends JPanel {
 	
 
 	}
+	public void arrancarDia() {
+		
+		diaria = new VistaDiariaCompleto(agenda, day, mes, year);
+	}   
     
-    public void actualizar() {
-    	Navegacion navegacion = new Navegacion(agenda, calen);
-    	add(navegacion,BorderLayout.CENTER);
-    	
-    } 
-    
+   
 	public void definirPanel(JPanel panel) {
 		contenedorDePaneles.setViewportView(panel);
 	}
