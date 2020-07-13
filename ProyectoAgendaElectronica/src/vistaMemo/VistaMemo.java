@@ -1,5 +1,6 @@
 package vistaMemo;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ public class VistaMemo extends JPanel {
 	JLabel textoMemos = new JLabel("Lista de recordatorios:");
 	public JLabel textoSuperior = new JLabel();
 	public JButton agregar = new JButton("Agregar");
-	public JButton mas_opciones = new JButton("mas...");
+	public JButton eliminar = new JButton("Vaciar Lista");
 	
 	public VistaMemo() {
 		panelMemos = new JPanel();
@@ -24,15 +25,17 @@ public class VistaMemo extends JPanel {
 	
 	private void agregarElementos() {
 		setLayout(null);
+		setBackground(new Color(167, 255, 186));
+		panelMemos.setBackground(Color.white);
 		textoMemos.setBounds(0, 0, 250, 20);
 		textoSuperior.setBounds(0, 0, 190, 20);
 		listaMemos.setBounds(0, 25, 250, 275);
-		agregar.setBounds(90, 305, 80, 20);
-		mas_opciones.setBounds(170, 305, 80, 20);
+		agregar.setBounds(60, 305, 80, 20);
+		eliminar.setBounds(140, 305, 110, 20);
 		textoSuperior.setVisible(false);
 		add(listaMemos);
 		add(agregar);
-		add(mas_opciones);
+		add(eliminar);
 		add(textoMemos);
 		add(textoSuperior);
 		
@@ -40,7 +43,7 @@ public class VistaMemo extends JPanel {
 	
 	public void setControlador(ControladorAgenda control) {
 		agregar.addActionListener(control);
-		mas_opciones.addActionListener(control);
+		eliminar.addActionListener(control);
 	}
 	
 	public void definirPanel(JPanel panel) {
@@ -55,7 +58,7 @@ public class VistaMemo extends JPanel {
 	
 	public void visibilidadComponentesInferiores(boolean estado) {
 		agregar.setVisible(estado);
-		mas_opciones.setVisible(estado);
+		eliminar.setVisible(estado);
 	}
 
 }

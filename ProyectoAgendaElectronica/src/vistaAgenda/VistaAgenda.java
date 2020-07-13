@@ -11,7 +11,6 @@ public class VistaAgenda extends JPanel {
 	public JScrollPane listaCitas ;
 	public JTextField buscar = new JTextField("buscar");
 	public JButton agregar;
-	public JButton mas_opciones;
 	
 	JLabel texto = new JLabel("");
 	public JButton buscarBoton;
@@ -29,9 +28,6 @@ public class VistaAgenda extends JPanel {
 		agregar = new JButton(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaAnadir1.png")));
 		agregar.setBackground(Color.white);
 		agregar.setBorder(null);
-		mas_opciones = new JButton(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaMas1.png")));
-		mas_opciones.setBackground(Color.white);
-		mas_opciones.setBorder(null);
 		seleccion.setBackground(Color.white);
 		panelCitas = new JPanel();
 		listaCitas = new JScrollPane(panelCitas);
@@ -45,8 +41,7 @@ public class VistaAgenda extends JPanel {
 		volver.setBounds(650, 10, 190, 20);
 		buscarBoton.setBounds(510, 3, 37, 37);
 		buscar.setBounds(5, 10, 500, 25);
-		agregar.setBounds(610, 3, 110, 34);
-		mas_opciones.setBounds(730, 3, 110, 34);
+		agregar.setBounds(730, 3, 110, 34);
 		listaCitas.setBounds(4, 40, 845, 553);
 		texto.setBounds(340, 10, 200, 20);
 		texto.setVisible(false);
@@ -56,7 +51,6 @@ public class VistaAgenda extends JPanel {
 		add(texto);
 		add(buscar);
 		add(agregar);
-		add(mas_opciones);
 		add(listaCitas);
 		add(buscarBoton);
 		add(volver);
@@ -66,7 +60,6 @@ public class VistaAgenda extends JPanel {
 	// cambiar el controlador cuando este terminado
 	public void setControlador(ControladorAgenda control) {
 		agregar.addActionListener(control);
-		mas_opciones.addActionListener(control);
 		buscarBoton.addActionListener(control);
 		volver.addActionListener(control);
 		eliminar.addActionListener(control);
@@ -84,21 +77,18 @@ public class VistaAgenda extends JPanel {
 	public void visibilidadComponentes(boolean estado) {
 		buscar.setVisible(estado);
 		agregar.setVisible(estado);
-		mas_opciones.setVisible(estado);
 		buscarBoton.setVisible(estado);
 	}
 	
 	public void visibilidadVolver(boolean estado) {
 		volver.setVisible(estado);
 		agregar.setVisible(!estado);
-		mas_opciones.setVisible(!estado);
 	}
 	
 	public void visibilidadVolverDos(boolean estado) {
 		volver.setVisible(estado);
 		eliminar.setVisible(estado);
 		agregar.setVisible(!estado);
-		mas_opciones.setVisible(!estado);
 		visibilidadBuscar(!estado);
 		seleccion.setVisible(estado);
 	}

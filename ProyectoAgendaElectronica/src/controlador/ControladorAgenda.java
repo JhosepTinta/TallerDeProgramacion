@@ -80,8 +80,6 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 
 			definirPanel(crearCita);// pone en pantalla el panel para creae citas
 
-		} else if (evento.getSource() == vistaControlada.mas_opciones) {
-			contar();
 		} else if (evento.getSource() == crearCita.aceptar) {
 			quitarTextoSuperioDelPanel(true);
 
@@ -140,7 +138,15 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 			crearCita.memo.visibilidadTextoSuperior(true, "Usted esta creando un Memo ...");
 			crearCita.memo.visibilidadComponentesInferiores(false);
 			crearCita.memo.definirPanel(crearMemo);
-		} else if (evento.getSource() == crearMemo.aceptar) {
+		} else if (evento.getSource() == crearCita.memo.eliminar) {
+			if (JOptionPane.showConfirmDialog(vistaControlada, "Esta seguro de eliminar la lista de Recordatorios", "Titulo", 2,
+					2) == 0) {
+				listaMemoDeMomento = new ArrayList<Memo>();
+				llenarPanelMemo(listaMemoDeMomento, crearCita.memo.panelMemos);
+				crearCita.memo.definirPanel(crearCita.memo.panelMemos);
+			}
+
+		}  else if (evento.getSource() == crearMemo.aceptar) {
 			crearCita.memo.visibilidadTextoSuperior(false, "");
 			crearCita.memo.visibilidadComponentesInferiores(true);
 
@@ -245,7 +251,7 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 			definirPanel(vistaControlada.panelCitas);
 		} else if (evento.getSource() == crearCita.calendarioBoton) {
 			ventanacalendariocita = new VentanaCalendarioCita(crearCita);
-		 //   crearCita.fechaC.setText(ventanacalendariocita.calen.getFechaMarcada());
+			// crearCita.fechaC.setText(ventanacalendariocita.calen.getFechaMarcada());
 		} else if (evento.getSource() instanceof JMenuItem) {
 			JMenuItem item = (JMenuItem) evento.getSource();
 			if (item.getText().equals("Eliminar Varios")) {
@@ -459,7 +465,8 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 				llenarPanelCitasDos((ListaSE<Cita>) agendaControlada.getLista().inOrden(), true);
 				System.out.println("2");
 			}
-			//llenarPanelCitasDos((ListaSE<Cita>) agendaControlada.getLista().inOrden(),true);
+			// llenarPanelCitasDos((ListaSE<Cita>)
+			// agendaControlada.getLista().inOrden(),true);
 
 			definirPanel(vistaControlada.panelCitas);
 		}
@@ -555,11 +562,15 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 ///////////////////////// Clase ElementoMemo para mostrar un memo en un panel/////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
-	class ElementoMemo extends JButton {
+	class ElementoMemo extends JButton implements ActionListener {
 		private JLabel tituloMemo, resumenMemo;
 		private Memo memo;
 
+		JPopupMenu emergente = new JPopupMenu();
+		JMenuItem opcion1 = new JMenuItem("Eliminar");
+
 		public ElementoMemo(Memo memo, ControladorAgenda control) {
+			setBackground(new Color(182, 248, 188));
 			this.memo = memo;
 			addActionListener(control);
 			Border bordePanel = new TitledBorder(new EtchedBorder());
@@ -568,12 +579,32 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 			setLayout(new GridLayout(2, 0));
 			tituloMemo = new JLabel(memo.getTitulo());
 			resumenMemo = new JLabel(memo.getTexto());
+
+			emergente.add(opcion1);
+			setComponentPopupMenu(emergente);
+			opcion1.addActionListener(this);
+
 			add(tituloMemo);
 			add(resumenMemo);
 		}
 
 		public Memo getMemo() {
 			return memo;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if (e.getSource() == opcion1) {
+				if (!observandoCita) {
+					if (JOptionPane.showConfirmDialog(vistaControlada, "Esta seguro de eliminar este Memo", "Titulo", 2,
+							2) == 0) {
+						listaMemoDeMomento.remove(memo);
+						llenarPanelMemo(listaMemoDeMomento, crearCita.memo.panelMemos);
+						crearCita.memo.definirPanel(crearCita.memo.panelMemos);
+					}
+				}
+			}
 		}
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -3,6 +3,9 @@ package vistaAgenda;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 import controlador.*;
 import modelo.Cita;
@@ -36,6 +39,7 @@ public class VistaCrearCita extends JPanel {
 
 ///////////////////////////////////////////////////////
 	public VistaCrearCita() {
+		setBackground(new Color(167, 255, 186));
 		memo = new VistaMemo();
 		contactosC = new JTextField();
 		asuntoC = new JTextField();
@@ -65,6 +69,11 @@ public class VistaCrearCita extends JPanel {
 
 	private void agregarComponentes() {
 		setLayout(null);
+		
+		Border bordePanel = new TitledBorder(new EtchedBorder());
+		descripcionC.setBorder(bordePanel);
+		lugarC.setBorder(bordePanel);
+		
 		String lista[] = { "minutos", "horas", "dias", "semanas" };
 		tiempoSeleccionado = new JComboBox<String>(lista);
 

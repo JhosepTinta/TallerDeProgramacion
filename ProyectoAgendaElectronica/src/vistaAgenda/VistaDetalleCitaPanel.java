@@ -1,5 +1,7 @@
 package vistaAgenda;
 
+import java.awt.Color;
+
 import javax.swing.*;
 import controlador.ControladorAgenda;
 import vistaMemo.VistaMemo;
@@ -52,8 +54,10 @@ public class VistaDetalleCitaPanel extends JPanel {
 	}
 
 	private void agregarElementos() {
+		setBackground(new Color(193, 255, 229));
 		setLayout(null);
 		detalleMemo = new VistaMemo();
+		detalleMemo.setBackground(new Color(193, 255, 229));
 		detalleMemo.visibilidadComponentesInferiores(false);
 		detalleMemo.setBounds(550, 100, 365, 340);
 		

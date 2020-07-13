@@ -1,5 +1,7 @@
  package vistaMemo;
 
+import java.awt.Color;
+
 import javax.swing.*;
 
 import controlador.ControladorAgenda;
@@ -19,6 +21,7 @@ public class VistaCrearMemo extends JPanel {
 	}
 	
 	private void agregarElementos() {
+		setBackground(new Color(193, 255, 229));
 		setLayout(null);
 		titulo.setBounds(5, 10, 100, 20);
 		tituloC.setBounds(5,40,237,20);
