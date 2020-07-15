@@ -13,9 +13,9 @@ import vistaMemo.VistaMemo;
 
 public class VistaCrearCita extends JPanel {
 
-	public JButton aceptar = new JButton("Aceptar");
-	public JButton cancelar = new JButton("Cancelar");
-
+	public JButton aceptar;
+	public JButton cancelar;
+	private Color colorDeFondo = new Color(167, 255, 186);
 	JLabel asunto = new JLabel("Asunto: ");
 	JLabel descripcion = new JLabel("Descripción: ");
 	JLabel horaInicio = new JLabel("Hora de Inicio: ");
@@ -28,7 +28,7 @@ public class VistaCrearCita extends JPanel {
 	public JComboBox tiempoSeleccionado;
 	public JRadioButton activarNotificaciones = new JRadioButton("", true);
 
-	public JButton calendarioBoton = new JButton(new ImageIcon("iconos\\calendario.gif"));
+	public JButton calendarioBoton = new JButton(new ImageIcon(VistaCrearCita.class.getResource("/botones/AgendaBotonCalendario.png")));
 	public JTextField contactosC, asuntoC, horaInicioC, horaFinC, fechaC;
 	public JTextArea descripcionC, lugarC;
 
@@ -39,7 +39,16 @@ public class VistaCrearCita extends JPanel {
 
 ///////////////////////////////////////////////////////
 	public VistaCrearCita() {
-		setBackground(new Color(167, 255, 186));
+		calendarioBoton.setBackground(colorDeFondo);
+		calendarioBoton.setBorder(null);
+		activarNotificaciones.setBackground(colorDeFondo);
+		aceptar = new JButton(new ImageIcon(VistaCrearCita.class.getResource("/botones/AgendaAceptar1.png")));
+		aceptar.setBackground(colorDeFondo);
+		aceptar.setBorder(null);
+		cancelar = new JButton(new ImageIcon(VistaCrearCita.class.getResource("/botones/AgendaCancelar1.png")));
+		cancelar.setBackground(colorDeFondo);
+		cancelar.setBorder(null);
+		setBackground(colorDeFondo);
 		memo = new VistaMemo();
 		contactosC = new JTextField();
 		asuntoC = new JTextField();
@@ -76,6 +85,7 @@ public class VistaCrearCita extends JPanel {
 		
 		String lista[] = { "minutos", "horas", "dias", "semanas" };
 		tiempoSeleccionado = new JComboBox<String>(lista);
+		tiempoSeleccionado.setBackground(Color.white);
 
 		activarNotificaciones.setBounds(570, 370, 20, 20);
 		tiempoSeleccionado.setBounds(720, 370, 90, 20);
@@ -90,7 +100,7 @@ public class VistaCrearCita extends JPanel {
 		horaFin.setBounds(580, 320, 100, 10);
 		horaFinC.setBounds(680, 317, 100, 20);
 		fecha.setBounds(300, 265, 100, 10);
-		calendarioBoton.setBounds(480, 262, 20, 20);
+		calendarioBoton.setBounds(472, 257, 30, 30);
 		fechaC.setBounds(370, 262, 100, 20);
 		lugarC.setLineWrap(true);
 		lugar.setBounds(300, 305, 100, 15);
@@ -102,8 +112,8 @@ public class VistaCrearCita extends JPanel {
 
 		contactos.setBounds(20, 425, 100, 10);
 		contactosC.setBounds(120, 422, 400, 20);
-		cancelar.setBounds(715, 475, 100, 25);
-		aceptar.setBounds(595, 475, 100, 25);
+		cancelar.setBounds(705, 490, 120, 40);
+		aceptar.setBounds(575, 490, 120, 40);
 
 		memo.setBounds(20, 60, 365, 340);
 

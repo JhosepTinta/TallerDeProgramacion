@@ -8,7 +8,7 @@ import vistaMemo.VistaMemo;
 
 public class VistaDetalleCitaPanel extends JPanel {
 	public JButton editar = new JButton("Editar");
-	public JButton cancelar = new JButton("Cancelar");
+	public JButton cancelar;
 	JLabel asunto = new JLabel("El asunto de la cita es: ");
 	JLabel descripcion = new JLabel("El motivo es: ");
 	JLabel horaInicio = new JLabel("Su cita inica: ");
@@ -18,20 +18,12 @@ public class VistaDetalleCitaPanel extends JPanel {
 	JLabel contactos = new JLabel("Los contactos relacionados son: ");
 	JLabel contactosC, asuntoC, descripcionC, horaInicioC, horaFinC, fechaC, lugarC;
 	public VistaMemo detalleMemo;
-
-	public VistaDetalleCitaPanel(String asunto, String descripcion, String horaInicio, String horaFin, String fecha,
-			String contactos, String lugar) {
-		contactosC = new JLabel(contactos);
-		asuntoC = new JLabel(asunto);
-		descripcionC = new JLabel(descripcion);
-		horaInicioC = new JLabel(horaInicio);
-		horaFinC = new JLabel(horaFin);
-		fechaC = new JLabel(fecha);
-		lugarC = new JLabel(lugar);
-		agregarElementos();
-	}
+	private Color colorDeFondo = new Color(193, 255, 229);
 	
 	public VistaDetalleCitaPanel() {
+		cancelar = new JButton(new ImageIcon(VistaDetalleCitaPanel.class.getResource("/botones/AgendaCancelar1.png")));
+		cancelar.setBackground(colorDeFondo);
+		cancelar.setBorder(null);
 		contactosC = new JLabel();
 		asuntoC = new JLabel();
 		descripcionC = new JLabel();
@@ -54,10 +46,10 @@ public class VistaDetalleCitaPanel extends JPanel {
 	}
 
 	private void agregarElementos() {
-		setBackground(new Color(193, 255, 229));
+		setBackground(colorDeFondo);
 		setLayout(null);
 		detalleMemo = new VistaMemo();
-		detalleMemo.setBackground(new Color(193, 255, 229));
+		detalleMemo.setBackground(colorDeFondo);
 		detalleMemo.visibilidadComponentesInferiores(false);
 		detalleMemo.setBounds(550, 100, 365, 340);
 		
@@ -78,8 +70,8 @@ public class VistaDetalleCitaPanel extends JPanel {
 		horaFin.setBounds(305, 375, 100, 10);
 		horaFinC.setBounds(420, 375, 100, 10);
 
-		cancelar.setBounds(715, 475, 100, 25);
-		editar.setBounds(595, 475, 100, 25);
+		editar.setBounds(575, 490, 120, 40);
+		cancelar.setBounds(705, 490, 120, 40);
 		add(asunto);
 		add(asuntoC);
 		add(fecha);
