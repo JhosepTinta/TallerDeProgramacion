@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import VistaCalendario.Navegacion;
 import controlador.ControladorAgenda;
+import controlador.ControladorTarea;
 import modelo.Agenda;
 import modelo.CalendarioMensual;
 import vistaAgenda.VistaAgenda;
@@ -29,9 +30,13 @@ public class VistaPrincipal extends JFrame {
 	public VistaAgenda vistaAgenda;
     public PantallaAlarma alar;
 	public Navegacion calendario;
-	public Agenda modeloAgenda; 
+ 
 	public ControladorAgenda controlador;
+	//------
+	public Agenda modeloAgenda;
 	public TareaVista mitarea;
+	public ControladorTarea controladortarea;
+	//-----
 	public CalendarioMensual calendarioMensual;
 	
 	public JButton btnC,btnA,btnCa,btnAg,btnP;
@@ -67,6 +72,9 @@ public class VistaPrincipal extends JFrame {
 	    Calendar calendar = new GregorianCalendar();
 	    calendarioMensual = new CalendarioMensual(calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR));
 		calendario = new Navegacion(modeloAgenda,calendarioMensual);
+		
+		controladortarea = new ControladorTarea(mitarea, modeloAgenda);
+		mitarea.setControlador(controladortarea);
 		
 		scrollPaneles = new JScrollPane();
 		scrollPaneles.setBounds(175, 0, 855, 600);
