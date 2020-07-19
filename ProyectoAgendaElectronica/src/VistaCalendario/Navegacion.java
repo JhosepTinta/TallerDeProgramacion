@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -38,26 +40,47 @@ public class Navegacion extends JPanel {
 		this.agenda = agenda;
 		this.calen = calen;
 		setLayout(new BorderLayout());
-		completo = new VistaCalendarioCompleto(calen,agenda);
+		
 		calendar = new GregorianCalendar();
 		day = calendar.get(Calendar.DAY_OF_MONTH);
 		mes = calendar.get(Calendar.MONTH);
 		year = calendar.get(Calendar.YEAR);
 		contenedorDePaneles= new JScrollPane();
 		contenedorDePaneles.setBorder(null);
+		completo = new VistaCalendarioCompleto(calen,agenda);
 		diaria = new VistaDiariaCompleto(agenda,day,mes,year);
 		Box box = Box.createHorizontalBox();
-		
+		// --------
 	    botonmensual = new JButton();
 	    botonmensual.setBorder(null);
 	    botonmensual.setBackground(Color.WHITE);
 	    botonmensual.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/CalendarioMensual1.png")));
-	    
+	    botonmensual.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				botonmensual.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/CalendarioMensual2.png")));
+			}
+			public void mouseExited(MouseEvent arg0) {
+				botonmensual.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/CalendarioMensual1.png")));//
+			}
+			
+		});
+	    //----------
 	    botondiario = new JButton();
 	    botondiario.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/CalendarioDiaria1.png")));
 	    botondiario.setBorder(null);
 	    botondiario.setBackground(Color.WHITE);
-		
+	    botondiario.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				botondiario.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/CalendarioDiaria2.png")));
+			}
+			public void mouseExited(MouseEvent arg0) {
+				botondiario.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/CalendarioDiaria1.png")));//
+			}
+			
+		});
+		//--------
 	    botonmensual.addActionListener(new AccionBoton());
 		botondiario.addActionListener(new AccionBoton());
 		setBackground(Color.WHITE);
@@ -87,10 +110,10 @@ public class Navegacion extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource().equals(botonmensual)) {
-				definirPanel(completo);
+				   definirPanel(completo);
 			}else {
 				if(e.getSource().equals(botondiario)) {
-				   diaria = new VistaDiariaCompleto(agenda, day-1,mes,year);
+				   
 				   definirPanel(diaria);	
 				}
 				

@@ -3,6 +3,8 @@ package VistaCalendario;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
@@ -46,11 +48,31 @@ public class VistaCalendarioCompleto extends JPanel implements ActionListener{
 		next.setBackground(Color.WHITE);
 		next.setBorder(null);
 		next.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/CalendarioSiguiente1.png")));
+		next.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+			    next.setIcon(new ImageIcon(this.getClass().getResource("/botones/CalendarioSiguiente2.png")));
+			}
+			public void mouseExited(MouseEvent arg0) {
+				next.setIcon(new ImageIcon(this.getClass().getResource("/botones/CalendarioSiguiente1.png")));//
+			}
+			
+		});
 		
 		back = new JButton() ;
 		back.setBackground(Color.WHITE);
 		back.setBorder(null);
 		back.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/CalendarioAnterior1.png")));
+		back.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				back.setIcon(new ImageIcon(this.getClass().getResource("/botones/CalendarioAnterior2.png")));
+			}
+			public void mouseExited(MouseEvent arg0) {
+				back.setIcon(new ImageIcon(this.getClass().getResource("/botones/CalendarioAnterior1.png")));//
+			}
+			
+		});
 		
 		next.addActionListener(this);
 		back.addActionListener(this);
