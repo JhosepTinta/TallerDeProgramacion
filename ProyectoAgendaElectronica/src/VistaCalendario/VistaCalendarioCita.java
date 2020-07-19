@@ -3,6 +3,7 @@ package VistaCalendario;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,6 +52,7 @@ public class VistaCalendarioCita extends JPanel {
 
 
        JPanel encabezado = new JPanel(new GridLayout(1,7,5,5));
+       encabezado.setBackground(new Color(174, 214, 241 ));
 		JLabel a1 = new JLabel("    L ");
 		JLabel a2 = new JLabel("    M  ");
 		JLabel a3 = new JLabel("    M  ");
@@ -60,8 +62,11 @@ public class VistaCalendarioCita extends JPanel {
 		JLabel a7 = new JLabel("    D  ");
 		JPanel todo = new JPanel();
 		BoxLayout nuevo = new BoxLayout(todo, BoxLayout.Y_AXIS);
-	    JButton tituloMes = new JButton(mesElegido);
-	    JButton tituloanio= new JButton("     " + anio+"    ");
+	    
+	    JLabel tituloanio= new JLabel("     " +mesElegido+" DE "+ anio+"    ");
+	    Font fuente = new Font("Calibri", 3, 20);
+	    tituloanio.setFont(fuente);
+	    tituloanio.setForeground(new Color(52, 152, 219 ));
 	    todo.setLayout(nuevo);
 	    JPanel contenedorAM = new JPanel();
 	    contenedorAM.setBackground(Color.WHITE);
@@ -69,7 +74,7 @@ public class VistaCalendarioCita extends JPanel {
 	    JPanel contenedorwest = new JPanel();
 	    contenedorwest.setBackground(Color.WHITE);
 	    contenedorwest.add(tituloanio);
-	    contenedorwest.add(tituloMes);
+	    
 	    contenedorAM.add(contenedorwest,BorderLayout.WEST);
 	    
 		encabezado.add(a1);
@@ -155,7 +160,7 @@ public class VistaCalendarioCita extends JPanel {
 			
 		}
 
-	private class LaminaMes extends JPanel{
+	private class LaminaMes extends JPanel implements MouseListener{
 		
 		Integer[] arrayMes;
 	    
@@ -223,6 +228,7 @@ public class VistaCalendarioCita extends JPanel {
 				
 			}else {
 			     objeto = new JButton( arrayMes[contador]+"  ");
+			     objeto.addMouseListener(this);
 			     objeto.setBackground(Color.WHITE);
 			     objeto.setBorder(null);
 			     objeto.addActionListener(new Accion());
@@ -244,12 +250,47 @@ public class VistaCalendarioCita extends JPanel {
 				String evento = e.getActionCommand();
 				diaapretado = "  "+evento + " / "+ (month+1) +" / "+anio;
 				vistaagen.fechaC.setText(diaapretado);
-				
+			
 				
 			}
 			
 			
 
+		}
+
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			if(e.getSource() instanceof JButton) {
+			 JButton evento = (JButton)e.getSource();
+			 evento.setBorder(new LineBorder(new Color(52, 152, 219 )));
+			 evento.setBackground(new Color(52, 152, 219 ));
+			}
+			
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			
+			if(e.getSource() instanceof JButton) {
+				 JButton evento = (JButton)e.getSource();
+				 evento.setBorder(null);
+				 evento.setBackground(Color.WHITE);
+				}
+		}
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
 		}
 		
 	}
@@ -259,7 +300,4 @@ public class VistaCalendarioCita extends JPanel {
 	
 	
 }
-
-
-
 
