@@ -23,16 +23,18 @@ import java.awt.SystemColor;
 import javax.swing.JScrollPane;
 
 public class TareaVista extends JPanel {
-	private JTextField texto1;
+//	private JTextField texto1;
 	public DefaultListModel DLM = new DefaultListModel();
 
 	public JList list;
 	public JScrollPane scrollPane;
 	public JButton actualizar;
 	public JLabel texto;
-	public JLabel tex;
-	public JButton eliminar;
-	public JButton eliminartodo;
+//	public JLabel tex;
+	public JButton realizada;
+	public JButton realizadatodos;
+
+
 	
 	public TareaVista() {
 		
@@ -41,6 +43,7 @@ public class TareaVista extends JPanel {
 		setLayout(null);
 		
 		list = new JList();
+		list.setSelectionBackground(Color.orange);
 		scrollPane = new JScrollPane();
 		
 		actualizar = new JButton();
@@ -50,25 +53,25 @@ public class TareaVista extends JPanel {
 		actualizar.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendientesActualizar1.png")));
 		
 		texto = new JLabel("TAREAS PENDIENTES");
-		tex = new JLabel("Ingresar Tarea : ");
-		tex.setFont(new Font("Tahoma", Font.PLAIN, 18));
+	//	tex = new JLabel("Ingresar Tarea : ");
+	//	tex.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
-		eliminar = new JButton();
-		eliminar.setOpaque(false);
-		eliminar.setContentAreaFilled(false);
-		eliminar.setBorderPainted(false);
-		eliminar.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendientesRealizada1.png")));
+		realizada = new JButton();
+		realizada.setOpaque(false);
+		realizada.setContentAreaFilled(false);
+		realizada.setBorderPainted(false);
+		realizada.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendientesRealizada1.png")));
 		
-		eliminartodo = new JButton();
-		eliminartodo.setOpaque(false);
-		eliminartodo.setContentAreaFilled(false);
-		eliminartodo.setBorderPainted(false);
-		eliminartodo.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendintesTodas1.png")));
+		realizadatodos = new JButton();
+		realizadatodos.setOpaque(false);
+		realizadatodos.setContentAreaFilled(false);
+		realizadatodos.setBorderPainted(false);
+		realizadatodos.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendintesTodas1.png")));
 		
 		texto.setFont(new Font("Agency FB", Font.BOLD, 35));
-		texto1 = new JTextField();
-		texto1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		texto1.setColumns(10);
+		//texto1 = new JTextField();
+		//texto1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		//texto1.setColumns(10);
 	
 		scrollPane.setViewportView(list);
 		AgregarElementos();
@@ -77,10 +80,10 @@ public class TareaVista extends JPanel {
 	
 	private void AgregarElementos()
 	{
-		scrollPane.setBounds(70, 210, 480, 320);
+		scrollPane.setBounds(70, 100, 480, 450);
 		texto.setBounds(15, 15, 278, 66);
-		tex.setBounds(70, 90, 250, 35);
-		actualizar.setBounds(400, 117, 200, 50);
+	//	tex.setBounds(70, 90, 250, 35);
+		actualizar.setBounds(580, 117, 200, 50);
 		actualizar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
@@ -91,43 +94,43 @@ public class TareaVista extends JPanel {
 			}
 			
 		});
-		eliminar.setBounds(580, 300, 200, 50);
-		eliminar.addMouseListener(new MouseAdapter() {
+		realizada.setBounds(580, 300, 200, 50);
+		realizada.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				eliminar.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendientesRealizada2.png")));
+				realizada.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendientesRealizada2.png")));
 			}
 			public void mouseExited(MouseEvent arg0) {
-				eliminar.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendientesRealizada1.png")));//
+				realizada.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendientesRealizada1.png")));//
 			}
 			
 		});
-		eliminartodo.setBounds(580, 400, 200, 50);
-		eliminartodo.addMouseListener(new MouseAdapter() {
+		realizadatodos.setBounds(580, 400, 200, 50);
+		realizadatodos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				eliminartodo.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendintesTodas2.png")));
+				realizadatodos.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendintesTodas2.png")));
 			}
 			public void mouseExited(MouseEvent arg0) {
-				eliminartodo.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendintesTodas1.png")));//
+				realizadatodos.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendintesTodas1.png")));//
 			}
 			
 		});
-		texto1.setBounds(70, 120, 300, 45);
+	//	texto1.setBounds(70, 120, 300, 45);
 		add(scrollPane);
 		add(texto);
 		add(actualizar);
-		add(eliminar);
-		add(eliminartodo);
-		add(texto1);
-		add(tex);
+		add(realizada);
+		add(realizadatodos);
+		//add(texto1);
+		//add(tex);
 	}
 	
 	public void setControlador(ControladorTarea entrar)
 	{
 		actualizar.addActionListener(entrar);
-		eliminar.addActionListener(entrar);
-		eliminartodo.addActionListener(entrar);
+		realizada.addActionListener(entrar);
+		realizadatodos.addActionListener(entrar);
 	}
 
 

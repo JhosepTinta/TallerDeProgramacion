@@ -51,7 +51,8 @@ public class Memo implements Serializable{
 		this.fechaModificacion = fechaModificacion;
 	}
 
+	@Override
 	public String toString() {
-		return  titulo + "\n" + texto + "\n" + "Se creo: "+fechaCreacion + " " + " Se modifico: "+fechaModificacion;
+		return " [ TITULO = " + titulo + "  , TEXTO = " + texto + "  , SE CREO = " + fechaCreacion +  "  , SE MODIFICO = " + fechaModificacion + "]";
 	}
 }
