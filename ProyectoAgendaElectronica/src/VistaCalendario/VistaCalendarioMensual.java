@@ -388,7 +388,8 @@ public class VistaCalendarioMensual extends JPanel {
 			cita1.setMinimumSize(new Dimension(30,10));
 			cita1.setMaximumSize(new Dimension(130,50));
 			cita1.setPreferredSize(new Dimension(95,25));
-			Border border = new LineBorder(Color.GRAY);
+			cita1.setBackground(new Color(174, 214, 241 ));
+			Border border = new LineBorder(new Color(127, 179, 213));
 			cita1.setBorder(border);
 			cita1.setText(text);
 			
@@ -397,7 +398,8 @@ public class VistaCalendarioMensual extends JPanel {
 			cita2.setMinimumSize(new Dimension(30,10));
 			cita2.setMaximumSize(new Dimension(130,50));
 			cita2.setPreferredSize(new Dimension(95,25));
-			Border border = new LineBorder(Color.GRAY);
+			cita2.setBackground(new Color(174, 214, 241 ));
+			Border border = new LineBorder(new Color(127, 179, 213));
 			cita2.setBorder(border);
 			cita2.setText(text);
 		}
@@ -435,10 +437,10 @@ public class VistaCalendarioMensual extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource().equals(cita1)) {
-				VistaDetalleCitaVentana  ventana= new VistaDetalleCitaVentana(pcita, Color.BLUE, Color.BLUE);
+				VistaDetalleCitaVentana  ventana= new VistaDetalleCitaVentana(pcita, new Color(36, 113, 163 ), new Color(36, 113, 163));
 				}else {
 					if(e.getSource().equals(cita2)) {
-						VistaDetalleCitaVentana  ventana= new VistaDetalleCitaVentana(scita, Color.BLUE, Color.BLUE);
+						VistaDetalleCitaVentana  ventana= new VistaDetalleCitaVentana(scita, new Color(36, 113, 163 ), new Color(36, 113, 163));
 					}
 					
 					

@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,7 +38,8 @@ public class VistaDetalleCitaVentana extends JFrame implements ActionListener {
     
     public VistaDetalleCitaVentana(Cita cita,Color linea,Color letras) {
     	this.cita = cita;
-    	
+    	Image icon = new ImageIcon(getClass().getResource("/botones/iconcalendario.png")).getImage();
+	    setIconImage(icon);
     	
         contactosC = new JLabel(cita.getContactosEnCita().toString());
         asuntoC = new JLabel(cita.getAsunto());
@@ -56,7 +58,7 @@ public class VistaDetalleCitaVentana extends JFrame implements ActionListener {
         
         editar.addActionListener(this);
         
-        setBounds(410, 220, 625, 330);	
+        setBounds(410, 240, 625, 330);	
     	setBackground(Color.white);
     	setVisible(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

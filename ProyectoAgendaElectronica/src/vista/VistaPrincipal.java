@@ -27,18 +27,21 @@ public class VistaPrincipal extends JFrame {
 	public Panel2 miPanel2;
 	public Panel3 miPanel3;
 	public PanelC miPanelC;
-	public VistaAgenda vistaAgenda;
+	
     public PantallaAlarma alar;
-	public Navegacion calendario;
+	
  
 	public ControladorAgenda controlador;
 	//------
+	public VistaAgenda vistaAgenda;
 	public Agenda modeloAgenda;
 	public TareaVista mitarea;
 	public ControladorTarea controladortarea;
 	//-----
 	public CalendarioMensual calendarioMensual;
-	
+	public Navegacion calendario;
+	public Calendar calendar;
+	//-----
 	public JButton btnC,btnA,btnCa,btnAg,btnP;
 	JScrollPane scrollPaneles;
 
@@ -68,11 +71,11 @@ public class VistaPrincipal extends JFrame {
 		modeloAgenda = recuperada!=null?recuperada: new Agenda();
 	    controlador = new ControladorAgenda(modeloAgenda, vistaAgenda);
 	    vistaAgenda.setControlador(controlador);
-
-	    Calendar calendar = new GregorianCalendar();
+        //-----  
+	    calendar = new GregorianCalendar();
 	    calendarioMensual = new CalendarioMensual(calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR));
 		calendario = new Navegacion(modeloAgenda,calendarioMensual);
-		
+		//-----
 		controladortarea = new ControladorTarea(mitarea, modeloAgenda);
 		mitarea.setControlador(controladortarea);
 		
@@ -180,7 +183,7 @@ public class VistaPrincipal extends JFrame {
 		public void arrancarCalendario() {
 
 			calendario = new Navegacion(modeloAgenda, calendarioMensual);
-			calendario.arrancarDia();
+			calendario.arrancarDia(modeloAgenda);
 		}
 		public void definirPanel(Panel1 miPanel) {
 			scrollPaneles.setViewportView(miPanel);

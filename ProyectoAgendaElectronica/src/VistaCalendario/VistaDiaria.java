@@ -5,6 +5,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -14,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 import lineales.ListaSE;
@@ -228,7 +232,7 @@ public class VistaDiaria extends JPanel {
 		
 	}
 	
-	 private class Objeto extends JPanel{
+	 private class Objeto extends JPanel {
 		 
 		 JButton hora;
 		 JButton tituloCita;
@@ -245,11 +249,13 @@ public class VistaDiaria extends JPanel {
 			 tituloCita.setBackground(Color.WHITE);
 			 tituloCita.setBorder(null);
 			 horafin = new JButton("          "+cita.getHoraFin().toString());
-			 
+			 setBorder(new LineBorder(new Color(127, 179, 213 )));
 			 vistaBotonHora(hora);
 			 vistaBotonHora(horafin);
 			 objetohoras.add(hora);
 			 objetohoras.add(horafin);
+			
+			 tituloCita.addMouseListener(new AccionObjeto());
 			 add(objetohoras,BorderLayout.WEST);
 			 add(tituloCita,BorderLayout.CENTER);
 			 //add(hora,BorderLayout.WEST);
@@ -263,6 +269,8 @@ public class VistaDiaria extends JPanel {
 			 tituloCita = new JButton("     "+"    ");
 			 tituloCita.setBackground(Color.WHITE);
 			 tituloCita.setBorder(null);
+			 hora.addMouseListener(new AccionObjeto());
+			 tituloCita.addMouseListener(new AccionObjeto());
 			 add(tituloCita,BorderLayout.CENTER);
 			 add(hora,BorderLayout.WEST);
 	
@@ -274,6 +282,30 @@ public class VistaDiaria extends JPanel {
 		 	 boton.setFont(fuente);
 			 boton.setBorder(new BevelBorder(3,Color.BLACK, Color.BLUE));
 		 }
+
+		private class AccionObjeto extends MouseAdapter implements MouseListener{
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				
+					tituloCita.setBorder(new LineBorder(new Color(127, 179, 213)));
+				   
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				
+					tituloCita.setBorder(new LineBorder(Color.WHITE));
+					
+				
+				
+			}
+
+			
+			
+			
+		}
 	 }
 
 	

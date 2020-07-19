@@ -73,9 +73,9 @@ public class Navegacion extends JPanel {
 	
 
 	}
-	public void arrancarDia() {
+	public void arrancarDia(Agenda modelo) {
 		
-		diaria = new VistaDiariaCompleto(agenda, day, mes, year);
+		this.diaria = new VistaDiariaCompleto(modelo, day, mes, year);
 	}   
     
    
@@ -90,6 +90,7 @@ public class Navegacion extends JPanel {
 				definirPanel(completo);
 			}else {
 				if(e.getSource().equals(botondiario)) {
+				   diaria = new VistaDiariaCompleto(agenda, day-1,mes,year);
 				   definirPanel(diaria);	
 				}
 				
