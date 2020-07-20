@@ -259,7 +259,7 @@ public class VistaDiaria extends JPanel {
 			 objetohoras.add(horafin);
 			
 			 
-			 tituloCita.addActionListener(new AccionCita());
+			 tituloCita.addMouseListener(new AccionObjeto());
 			 add(objetohoras,BorderLayout.WEST);
 			 add(tituloCita,BorderLayout.CENTER);
 			 
@@ -270,7 +270,7 @@ public class VistaDiaria extends JPanel {
 			 setLayout(new BorderLayout());
 			 hora = new JButton("          "+horario);
 			 vistaBotonHora(hora);
-			 tituloCita = new JButton("     "+"    ");
+			 tituloCita = new JButton("      ");
 			 tituloCita.setBackground(Color.WHITE);
 			 tituloCita.setBorder(null);
 			 hora.addMouseListener(new AccionObjeto());
@@ -286,40 +286,35 @@ public class VistaDiaria extends JPanel {
 		 	 boton.setFont(fuente);
 			 boton.setBorder(new BevelBorder(3,Color.BLACK, Color.BLUE));
 		 }
-        private class AccionCita implements ActionListener{
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-               
-			    VistaDetalleCitaVentana ventana = new VistaDetalleCitaVentana(cita, new Color(52, 152, 219), new Color(52, 152, 219));
-                   
-               
-			}
-        	
-        	
-        }
+        
 		private class AccionObjeto extends MouseAdapter implements MouseListener{
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				
 					tituloCita.setBorder(new LineBorder(new Color(127, 179, 213)));
-				   
-				
+				 
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				
 					tituloCita.setBorder(new LineBorder(Color.WHITE));
+				  
 					
-				
 				
 			}
 
-			
-			
-			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(tituloCita.getText().equals("      ")) {
+					
+				}else {
+				  VistaDetalleCitaVentana ventana = new VistaDetalleCitaVentana(cita, new Color(52, 152, 219), new Color(52, 152, 219));
+				}
+			}
+
+		
 		}
 	 }
 

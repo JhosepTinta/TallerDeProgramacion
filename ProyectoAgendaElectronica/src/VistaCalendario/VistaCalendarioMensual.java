@@ -254,12 +254,15 @@ public class VistaCalendarioMensual extends JPanel {
 			     int tamanio = lista.longitud();
 			     
 			     if(lista.vacia() == false && tamanio >= 2) {
-			         objeto.setTextoCita1(lista.acceder(0).getAsunto());
-			         objeto.setpCita(lista.acceder(0));
-			         
-			         objeto.setTextoCita2(lista.acceder(1).getAsunto());
-			         objeto.setsCita(lista.acceder(1));
-			         objeto.cita2Bordenull();
+			    	 int pregunta = pregunarPosicion(lista);
+			         objeto.setTextoCita1(lista.acceder(pregunta).getAsunto());
+			         objeto.setpCita(lista.acceder(pregunta));
+			         if(pregunta+1 < lista.longitud()) {
+			        	     objeto.setTextoCita2(lista.acceder(pregunta+1).getAsunto());
+					         objeto.setsCita(lista.acceder(pregunta+1));
+					         objeto.cita2Bordenull(); 
+			         }
+			       
 			      }
 			     if(lista.vacia() == false && tamanio == 1) {
 			    	 objeto.setTextoCita1(lista.acceder(0).getAsunto());
@@ -277,7 +280,18 @@ public class VistaCalendarioMensual extends JPanel {
 		public void pedirArrayMes() {
 			arrayMes = calendario.generarMes();
 		}
-	
+	    public int  pregunarPosicion(ListaSE<Cita> lista) {
+	    	Cita cita;
+	    	int hora = calendar.get(Calendar.HOUR_OF_DAY);
+	    	int i = 0;
+	    	cita = lista.acceder(i);
+	    	while(cita.getHoraInicio().getHora() == hora) {
+	    		i++;
+	    		
+	    	}
+	    	
+	    	return i;	
+	    }
 	}
 	
 	private class LaminaObjeto extends JPanel{
@@ -410,10 +424,11 @@ public class VistaCalendarioMensual extends JPanel {
 			public void mouseEntered(MouseEvent e) {
 			//numero.setBackground(new Color(133, 193, 233 ));
 			
-				if(getTextonumero().equals("")) {
+				if(getTextonumero().equals("      ")) {
 					
 				}else {
 					setBorder(new LineBorder(Color.BLACK, 2, true));
+					numero.setBackground(new Color(212, 230, 241 ));
 				}
 			}
 
@@ -425,7 +440,8 @@ public class VistaCalendarioMensual extends JPanel {
 					setBorder(null);
 				}else {
 		            setBorder(new LineBorder(new Color(36, 113, 163 ), 1,false));
-		        }
+		            numero.setBackground(Color.WHITE);
+				}
 			}
 
 
