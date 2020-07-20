@@ -47,7 +47,7 @@ import controlador.ControladorAgenda;
 			}
 			if(e.getSource() == window.btnAg) {
 
-				
+				window.controlador.llenarPanelCitaRapido();
 				window.definirPanel(window.vistaAgenda);
 			}
 			if(e.getSource() == window.btnP) {

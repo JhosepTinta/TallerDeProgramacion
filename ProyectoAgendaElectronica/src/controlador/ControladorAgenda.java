@@ -350,6 +350,16 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 			aLlenar.add(new ElementoMemo(aux, this));
 		}
 	}
+	
+	// metodo para actualizar el panel de cita cuando se hace click en agenda
+		public void llenarPanelCitaRapido() {
+			vistaControlada.panelCitas.removeAll();
+			ListaSE<Cita> listaCitas = (ListaSE<Cita>) agendaControlada.getLista().inOrden();
+			for (int i = 0; i < listaCitas.longitud(); i++) {
+				Cita aux = listaCitas.acceder(i);
+				vistaControlada.panelCitas.add(new ElementoCita(aux, this));
+			}
+		}
 
 	// metodo que agragega elementos
 	public void agregarMemo(Memo otro) {
