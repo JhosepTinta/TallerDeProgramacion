@@ -75,6 +75,7 @@ public class VistaPrincipal extends JFrame {
 	    calendar = new GregorianCalendar();
 	    calendarioMensual = new CalendarioMensual(calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR));
 		calendario = new Navegacion(modeloAgenda,calendarioMensual);
+		calendario.setEstado();
 		//-----
 		controladortarea = new ControladorTarea(mitarea, modeloAgenda);
 		mitarea.setControlador(controladortarea);

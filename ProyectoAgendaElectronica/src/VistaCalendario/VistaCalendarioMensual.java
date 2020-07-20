@@ -437,10 +437,10 @@ public class VistaCalendarioMensual extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource().equals(cita1)) {
-				VistaDetalleCitaVentana  ventana= new VistaDetalleCitaVentana(pcita, new Color(36, 113, 163 ), new Color(36, 113, 163));
+				VistaDetalleCitaVentana  ventana = new VistaDetalleCitaVentana(pcita, new Color(36, 113, 163 ), new Color(36, 113, 163));
 				}else {
 					if(e.getSource().equals(cita2)) {
-						VistaDetalleCitaVentana  ventana= new VistaDetalleCitaVentana(scita, new Color(36, 113, 163 ), new Color(36, 113, 163));
+						VistaDetalleCitaVentana  ventana = new VistaDetalleCitaVentana(scita, new Color(36, 113, 163 ), new Color(36, 113, 163));
 					}
 					
 					

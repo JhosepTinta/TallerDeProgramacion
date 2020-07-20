@@ -15,10 +15,6 @@ import modelo.Cita;
 import modelo.Fecha;
 import vista.VistaPrincipal;
 
-
-
-
-
 public class VistaCalendarioCompleto extends JPanel implements ActionListener{
  
 	Agenda agenda;
@@ -79,6 +75,10 @@ public class VistaCalendarioCompleto extends JPanel implements ActionListener{
 		
 		botones.add(back);
 		botones.add(next);
+		
+		setMaximumSize(new Dimension(855,550));
+		setMinimumSize(new Dimension(800, 500));
+		setPreferredSize(new Dimension(850,525));
 		
 		addMesActual();
 		add(cabecera,BorderLayout.NORTH);

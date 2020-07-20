@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -25,6 +27,7 @@ import modelo.Agenda;
 import modelo.Cita;
 import modelo.Fecha;
 import modelo.Reloj;
+import vistaAgenda.VistaDetalleCitaVentana;
 
 public class VistaDiaria extends JPanel {
      
@@ -242,7 +245,7 @@ public class VistaDiaria extends JPanel {
 		 public Objeto(Cita cita) {
 			 setLayout(new BorderLayout());
 			 hora = new JButton("          "+ cita.getHoraInicio()+"");
-             
+             this.cita = cita;
              JPanel objetohoras = new JPanel();
              objetohoras.setLayout(new GridLayout(2,1));
 			 tituloCita = new JButton(cita.getAsunto()+"                       ");
@@ -255,10 +258,11 @@ public class VistaDiaria extends JPanel {
 			 objetohoras.add(hora);
 			 objetohoras.add(horafin);
 			
-			 tituloCita.addMouseListener(new AccionObjeto());
+			 
+			 tituloCita.addActionListener(new AccionCita());
 			 add(objetohoras,BorderLayout.WEST);
 			 add(tituloCita,BorderLayout.CENTER);
-			 //add(hora,BorderLayout.WEST);
+			 
 	
 		 }
 		 
@@ -282,7 +286,18 @@ public class VistaDiaria extends JPanel {
 		 	 boton.setFont(fuente);
 			 boton.setBorder(new BevelBorder(3,Color.BLACK, Color.BLUE));
 		 }
+        private class AccionCita implements ActionListener{
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+               
+			    VistaDetalleCitaVentana ventana = new VistaDetalleCitaVentana(cita, new Color(52, 152, 219), new Color(52, 152, 219));
+                   
+               
+			}
+        	
+        	
+        }
 		private class AccionObjeto extends MouseAdapter implements MouseListener{
 
 			@Override

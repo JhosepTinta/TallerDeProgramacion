@@ -35,10 +35,13 @@ public class Navegacion extends JPanel {
 	   int day, mes, year;
 	   Agenda agenda;
 	   CalendarioMensual calen;
-   
+	   JPanel estado;
+       
+       
 	   public Navegacion(Agenda agenda, CalendarioMensual calen) {
 		this.agenda = agenda;
 		this.calen = calen;
+		estado = completo;
 		setLayout(new BorderLayout());
 		
 		calendar = new GregorianCalendar();
@@ -48,7 +51,7 @@ public class Navegacion extends JPanel {
 		contenedorDePaneles= new JScrollPane();
 		contenedorDePaneles.setBorder(null);
 		completo = new VistaCalendarioCompleto(calen,agenda);
-		diaria = new VistaDiariaCompleto(agenda,day,mes,year);
+		diaria = new VistaDiariaCompleto(agenda,day-1,mes,year);
 		Box box = Box.createHorizontalBox();
 		// --------
 	    botonmensual = new JButton();
@@ -96,8 +99,11 @@ public class Navegacion extends JPanel {
 	
 
 	}
+	public void setEstado() {
+		estado = completo;
+	}   
 	public void arrancarDia(Agenda modelo) {
-		
+		estado = completo;
 		this.diaria = new VistaDiariaCompleto(modelo, day, mes, year);
 	}   
     
@@ -110,11 +116,17 @@ public class Navegacion extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource().equals(botonmensual)) {
+				   estado = completo;
 				   definirPanel(completo);
 			}else {
 				if(e.getSource().equals(botondiario)) {
-				   
-				   definirPanel(diaria);	
+				   VistaDiariaCompleto nuevo = new VistaDiariaCompleto(agenda,day-1,mes,year);
+				  
+				   if(estado == completo ) {
+					   nuevo.next.doClick();;
+				   }
+				   estado = diaria;
+				   definirPanel(nuevo);	
 				}
 				
 			}

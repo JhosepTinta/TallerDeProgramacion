@@ -58,7 +58,7 @@ public class VistaDetalleCitaVentana extends JFrame implements ActionListener {
         
         editar.addActionListener(this);
         
-        setBounds(410, 240, 625, 330);	
+        setBounds(410, 200, 625, 330);	
     	setBackground(Color.white);
     	setVisible(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -114,7 +114,7 @@ public class VistaDetalleCitaVentana extends JFrame implements ActionListener {
     	        add(horaFin);
     	        add(horaFinC);
     	        add(vistaMemo);
-    	      
+    	        
     	    }
     	 public void paintComponent(Graphics g) {
     		 g.drawLine(35, 70, 575, 70);
