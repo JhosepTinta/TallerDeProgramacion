@@ -5,7 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class Archivo {
@@ -298,7 +298,7 @@ public class Archivo {
 					m[numC][3]=contacto[3];
 					m[numC][4]=contacto[4];
 					numC++;
-					}				
+					}	
 			  }
 				return m;
 			}
@@ -312,5 +312,72 @@ public class Archivo {
 		return null;
 	}
 	
+	public ArrayList<String> contactos(String busqueda){
+		ArrayList<String> lista;
+		lista=new ArrayList<String>();
+		try {
+			File file=new File("agenda.txt");
+			if(file.exists()) {
+				FileReader fr=new FileReader(file);
+				BufferedReader br = new BufferedReader(fr);
+				String linea;
+				String [][]m =new String[numeroC()][5];
+				while((linea=br.readLine())!=null) {
+					String contacto[]=linea.split("%");
+					Contacto c = new Contacto(contacto[0],contacto[1],contacto[2],contacto[3],contacto[4]);
+					if(busqueda.charAt(0)==(contacto[0].charAt(0))) {
+					lista.add(contacto[0]+contacto[1]);
+					}
+					else if(busqueda.charAt(0)==0) {
+						String [][]mAux=mC();
+						for(int i=0;i>numeroC();i++) {
+							lista.add(mAux[0][i]+" "+mAux[1][i]);
+						}
+					}
+					else {
+						String [][]mAux=mC();
+						for(int i=0;i>numeroC();i++) {
+							lista.add(mAux[0][i]+" "+mAux[1][i]);
+						}
+					}
+			  }
+				return lista;
+			}
+			else {
+				System.out.println("No hay nada por buscar");
+				return null;
+				}
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return null;
 	}
+	
+	public boolean eCaracter(String caracter) {
+		try {
+			File file=new File("agenda.txt");
+			if(file.exists()) {
+				FileReader fr=new FileReader(file);
+				BufferedReader br = new BufferedReader(fr);
+				String linea;
+				while((linea=br.readLine())!=null) {
+					String contacto[]=linea.split("%");
+					if((caracter.charAt(0))==(contacto[0].charAt(0))) {
+				     return true;     
+				}
+			  }
+				 return false;
+			}
+			else {
+				System.out.println("No hay nada por buscar");
+				return false;
+				}
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return false;
+	}
+	
+	}
+
 
