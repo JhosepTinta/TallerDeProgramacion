@@ -40,7 +40,7 @@ public class Controlador implements ActionListener {
 			int fila=window.miPanelC.table.getSelectedRow();		 
 			if(fila>=0) {
 			if(a.existeC(window.miPanelC.model.getValueAt(fila,0),window.miPanelC.model.getValueAt(fila,1))){
-				 int v= JOptionPane.showConfirmDialog(window.miPanelC, "Â¿Estas seguro de eliminar a "+window.miPanelC.model.getValueAt(fila,0)+window.miPanelC.model.getValueAt(fila,1)+"?");
+				 int v= JOptionPane.showConfirmDialog(window.miPanelC, "Ã‚Â¿Estas seguro de eliminar a "+window.miPanelC.model.getValueAt(fila,0)+window.miPanelC.model.getValueAt(fila,1)+"?");
 				if(v==0) { 
 				a.eliminarC(window.miPanelC.model.getValueAt(fila,0), window.miPanelC.model.getValueAt(fila,1));
 				JOptionPane.showMessageDialog(window.miPanelC, "Contacto Eliminado");
@@ -77,13 +77,23 @@ public class Controlador implements ActionListener {
 				
 			}
 			
-			else {
+			else if(a.eCaracter(window.miPanelC.busqueda.getText())){
 			String matriz[][]=a.MatrizBusqueda(window.miPanelC.busqueda.getText());
 			for(int i=0;i<a.numeroC();i++) {
 				for(int j=0;j<5;j++) {
 			      window.miPanelC.table.setValueAt(matriz[i][j], i, j);
 				}
 			}
+			}
+			
+			else {
+				window.definirPanel(window.miPanelC);				
+				String matriz[][]=a.mC();
+				for(int i=0;i<a.numeroC();i++) {
+					for(int j=0;j<5;j++) {
+				      window.miPanelC.table.setValueAt(matriz[i][j], i, j);
+					}
+				}
 			}
 		}
 		//------------------------------------------------------------------------------
@@ -122,7 +132,7 @@ public class Controlador implements ActionListener {
 		if(e.getSource()==window.miPanel1.btnEliminarC) {
 			Archivo a=new Archivo();
 			if(a.existeC(window.miPanel1.txtNB.getText(), window.miPanel1.txtAB.getText())) {
-			int v=JOptionPane.showConfirmDialog(window.miPanel1, "Â¿Seguro de eliminar a "+window.miPanel1.txtNB.getText()+" "+window.miPanel1.txtAB.getText()+"?");
+			int v=JOptionPane.showConfirmDialog(window.miPanel1, "Ã‚Â¿Seguro de eliminar a "+window.miPanel1.txtNB.getText()+" "+window.miPanel1.txtAB.getText()+"?");
 			if(v==0) {
 			a.eliminarC(window.miPanel1.txtNB.getText(), window.miPanel1.txtAB.getText());
 			window.miPanel1.txtMosN.setText(null);
@@ -281,5 +291,8 @@ public class Controlador implements ActionListener {
 		/////////////////////////////////////////////////////////////////////////////////////	    
   }
 }
+
+
+
 
 
