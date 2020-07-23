@@ -130,8 +130,7 @@ public class Cita implements Comparable<Cita>, Serializable{
 
 	@Override
 	public String toString() {
-		return "TAREA PENDIENTE  [ ASUNTO = " + asunto + " , DESCRIPCION = " + descripcion + " , HORA INICIO = " + horaInicio + " , HORA FIN = "
-				+ horaFin + " , FECHA = " + fecha + " ,  LUGAR = " + lugar +  " , CONTACTO DE CITA = " + contactosEnCita + ", RECORDATORIO = " + listaRecordatorios + "]";
+		return " ASUNTO  =  " + asunto + "  ,  DESCRIPCION  =  " +  descripcion +  "  , FECHA  =  " + fecha + "  ,  LUGAR  =  " + lugar ;
 	}
 
 	

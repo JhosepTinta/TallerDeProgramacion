@@ -53,6 +53,6 @@ public class Memo implements Serializable{
 
 	@Override
 	public String toString() {
-		return " [ TITULO = " + titulo + "  , TEXTO = " + texto + "  , SE CREO = " + fechaCreacion +  "  , SE MODIFICO = " + fechaModificacion + "]";
+		return  titulo ;
 	}
 }
