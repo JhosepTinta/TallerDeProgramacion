@@ -14,7 +14,12 @@ import modelo.CalendarioMensual;
 import modelo.Cita;
 import modelo.Fecha;
 import vista.VistaPrincipal;
-
+/**
+ * Esta clase tiene elementos como el panel caledario y este los reune en una sola clase
+ * Es un panel que muestra tando el calendario como la barra con los botones next y back
+ * @author Karen Choquecallata Mancilla
+ * @version 0.1
+ */
 public class VistaCalendarioCompleto extends JPanel implements ActionListener{
  
 	Agenda agenda;
@@ -23,8 +28,15 @@ public class VistaCalendarioCompleto extends JPanel implements ActionListener{
 	JButton back,next;
 	int mes, anio;
 	ListaSE<Cita> lista;
+	/**
+	 * 
+	 * @param calendario
+	 * @param agenda
+	 */
     public VistaCalendarioCompleto(CalendarioMensual calendario,Agenda agenda) {
-       
+       /**
+        * Comienzo del constructor
+        */
     	this.agenda = agenda;
     	this.calendario = calendario;
     	mes = calendario.getMes();
@@ -84,6 +96,10 @@ public class VistaCalendarioCompleto extends JPanel implements ActionListener{
 		add(cabecera,BorderLayout.NORTH);
 	
 	}
+    // Cierre constructor
+    /**
+     * Metodo que da la accion al calendario para ir ak siguiente mes
+     */
     public void addMesSiguiente() {
 		if(mes == 11) {
 			anio = anio + 1;
@@ -101,13 +117,17 @@ public class VistaCalendarioCompleto extends JPanel implements ActionListener{
 		add(siguiente,BorderLayout.CENTER);
 	
 	}
-    
+    /**
+     * Este metodo define en el constructor como el mes con el que se inicializara el CalendarioCompleto
+     */
     public void addMesActual() {
 		actual = new VistaCalendarioMensual(calendario,agenda);
 	    add(actual,BorderLayout.CENTER);
 		
 	}
-    
+    /**
+     *  Este metodo define el mes anterior en el panel
+     */
     public void addMesAnterior() {
 		if(mes == 0) {
 			anio--;
@@ -121,6 +141,9 @@ public class VistaCalendarioCompleto extends JPanel implements ActionListener{
 		}
 		add(anterior,BorderLayout.CENTER);
 	}
+    /**
+     * Este metodo que gestiona las acciones de los botones next y back
+     */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object a = e.getSource();
@@ -149,6 +172,8 @@ public class VistaCalendarioCompleto extends JPanel implements ActionListener{
     	
     
 }
+// Cierre de la clase
+
 
 
 

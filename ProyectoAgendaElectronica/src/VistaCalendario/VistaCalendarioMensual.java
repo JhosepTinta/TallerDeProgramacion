@@ -23,7 +23,11 @@ import lineales.ListaSE;
 import modelo.*;
 import vista.VistaPrincipal;
 import vistaAgenda.VistaDetalleCitaVentana;
-
+/**
+ * Esta clase genera solo un mes con su titulo( nombre mes, numero de año) y cada dia del mes contiene sus correspondientes citas
+ * @author Karen Choquecallata Mancilla
+ *
+ */
 public class VistaCalendarioMensual extends JPanel {
     
 	CalendarioMensual aux;
@@ -32,6 +36,11 @@ public class VistaCalendarioMensual extends JPanel {
 	String mesElegido;
 	int month;
 	int anio;
+	/**
+	 * 
+	 * @param aux es el calendarioMensual(modelo)
+	 * @param agenda de tipo agenda
+	 */
 	public VistaCalendarioMensual(CalendarioMensual aux,Agenda agenda) {
 		   
 		   month = aux.getMes();
@@ -95,24 +104,39 @@ public class VistaCalendarioMensual extends JPanel {
 		    add(mes,BorderLayout.CENTER);
 	     
 
-		}
+	}
+	// cierre constructor
+	/**
+	 * 
+	 * @return el mes de la instrancia
+	 */
      public int getMonth() {
 		return month;
 	}
-
+    /**
+     * 
+     * @param month cambia el mes de la instancia
+     */
 	public void setMonth(int month) {
 		this.month = month;
 	}
-
+    /**
+     * 
+     * @return el año de la instancia
+     */
 	public int getAnio() {
 		return anio;
 	}
-
+    /**
+     * 
+     * @param anio se cambia el atributo anio de la instancia
+     */
 	public void setAnio(int anio) {
 		this.anio = anio;
 	}
-
-	//  este metodo de devuelve el nombre del mes depende al int que ingreses
+    /**
+	 *este metodo de devuelve el nombre del mes depende al int que ingreses
+	 **/
 	 public String nombrarMes (int month) {
 			String res = "";
 			
@@ -161,8 +185,13 @@ public class VistaCalendarioMensual extends JPanel {
 			return res;
 			
 		}
-
+      /**
+       * Es una clase interna de VistaCalendarioMensual, este metodo genera la lamaina del mes que se pide
+       * @author Karen Choquecallata Mancilla
+       *
+       */
 	private class LaminaMes extends JPanel{
+		
 		Agenda agenda ;
 		Integer[] arrayMes;
 	    Fecha fecha;
@@ -173,9 +202,15 @@ public class VistaCalendarioMensual extends JPanel {
 	    int contadorPrimerosDias;
 	    int maximo, diaprimero;
 	    LaminaObjeto a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,a1,a2,a3,a4,a5,a6,a7,a8,a9,a0,b1,b2,b3,b4,b5,b6;
-		
+		/**
+		 * 
+		 * @param calendario de tipo CalendarioMensual 
+		 * @param agenda de tipo agenda
+		 */
 		public LaminaMes(CalendarioMensual calendario,Agenda agenda) {
-	
+	       /**
+	        * Metodo Constructor
+	        */
 			this.agenda = agenda;
 			this.calendario = calendario;
 			agenda = new Agenda();
@@ -218,35 +253,18 @@ public class VistaCalendarioMensual extends JPanel {
 			inicializarDia(b5);inicializarDia(b6);
 		
 			}
-		//este metodo coloca cada dia en el lugar que corresponde
+		// Cierre de metodo
+		/**
+		 * Este metodo coloca cada dia en el lugar que corresponde
+		 * @param objeto de tipo LaminaObjeto
+		 */
        public void inicializarDia(LaminaObjeto objeto) {
 			if(arrayMes[contador] == 0) {
 				
 				objeto = new LaminaObjeto( "");
 				objeto.setBorder(null);
 				contador++;
-				/*if(contador < 10) {
-				   
-					if(diaprimero == -1) {
-						diaprimero = 6;
-					}
-					
-					System.out.println(contadormaximo);
-					objeto = new LaminaObjeto(contadormaximo + "");
-					
-					contadormaximo++;
-					contador++;
-					
-				}else {
-					if(contador>20) {
-						String numeroVacio = "";
-						objeto = new LaminaObjeto(contadorPrimerosDias + "");
-						contadorPrimerosDias++;
-						contador++;
-					}
-					
-				}*/
-				
+			
 			}else {
 			     objeto = new LaminaObjeto( arrayMes[contador]+"                        ");
 			     Fecha fecha = new Fecha(arrayMes[contador], month + 1, anio);
@@ -273,34 +291,49 @@ public class VistaCalendarioMensual extends JPanel {
 			add(objeto);
 		}
 		
+       
 		public void inicializarLaminaObjeto(LaminaObjeto objeto) {
 			add(objeto);
 		}
-
+        /**
+         * Este metodo pide el array del mes que deseemos al CalendarioMensual(modelo)
+         */
 		public void pedirArrayMes() {
 			arrayMes = calendario.generarMes();
 		}
+		/**
+		 * Este metodo devuelve la posicion de la cita de acuerdo a la hora actual del dia
+		 * @param lista
+		 * @return
+		 */
 	    public int  pregunarPosicion(ListaSE<Cita> lista) {
 	    	Cita cita;
 	    	int hora = calendar.get(Calendar.HOUR_OF_DAY);
 	    	int i = 0;
 	    	cita = lista.acceder(i);
-	    	while(cita.getHoraInicio().getHora() == hora) {
+	    	while(cita.getHoraInicio().getHora() >= hora) {
 	    		i++;
-	    		
+	    		break;
 	    	}
 	    	
 	    	return i;	
 	    }
 	}
-	
+	/**
+	 * Esta clase interna es la encargada de que cada dia tenga un objeto interfaz
+	 * @author KarenCh
+	 *
+	 */
 	private class LaminaObjeto extends JPanel{
 		
 		ObjetoDiaCitas objeto;
 		String numeroDia;
 		Cita pcita,scita;
 		JButton numero,cita1,cita2;
-		
+		/**
+		 * 
+		 * @param numeroDia de tipo String sera el titulo numero del dia
+		 */
 		public LaminaObjeto(String numeroDia) {
 			
 			this.numeroDia = numeroDia;
@@ -328,15 +361,7 @@ public class VistaCalendarioMensual extends JPanel {
 			add(box);
 			
 		}
-		public void cita1Bordenull() {
-			
-			if(cita1.getText().equals("")) {
-				Border border = LineBorder.createGrayLineBorder();
-				cita1.setBorder(border);
-				
-			}
-			
-		}
+		
         public void cita2Bordenull() {
 			
 			if(cita2.getText().equals("")) {
@@ -398,6 +423,10 @@ public class VistaCalendarioMensual extends JPanel {
 		public String getTextonumero() {
 			return  numero.getText();
 		}
+		/**
+		 * Este metodo es el encargado de ponerle una interfaz diferente al momento de inicializar para la cita 1
+		 * @param text de tipo String
+		 */
 		public void setTextoCita1(String text) {
 			cita1.setMinimumSize(new Dimension(30,10));
 			cita1.setMaximumSize(new Dimension(130,50));
@@ -408,6 +437,10 @@ public class VistaCalendarioMensual extends JPanel {
 			cita1.setText(text);
 			
 		}
+		/**
+		 * Este metodo es el encargado de ponerle una interfaz diferente al momento de inicializar para la cita 2
+		 * @param text de tipo String
+		 */
 		public void setTextoCita2(String text) {
 			cita2.setMinimumSize(new Dimension(30,10));
 			cita2.setMaximumSize(new Dimension(130,50));
@@ -417,12 +450,16 @@ public class VistaCalendarioMensual extends JPanel {
 			cita2.setBorder(border);
 			cita2.setText(text);
 		}
-		
+		/**
+		 * Esta clase interna  es la gestiona las accion de mouse
+		 * @author Karen Choquecallata Mancilla
+		 *
+		 */
         private class AccionesBoton extends MouseAdapter implements MouseListener {
         	
             @Override
 			public void mouseEntered(MouseEvent e) {
-			//numero.setBackground(new Color(133, 193, 233 ));
+			
 			
 				if(getTextonumero().equals("      ")) {
 					
@@ -434,7 +471,7 @@ public class VistaCalendarioMensual extends JPanel {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-		     //numero.setBackground(Color.WHITE);
+		    
 				LaminaObjeto a = (LaminaObjeto)e.getSource();
 				if(a.getTextonumero().equals("   " + "" + "   ")) {
 					setBorder(null);
@@ -447,7 +484,11 @@ public class VistaCalendarioMensual extends JPanel {
 
 			
         }
-		
+		/**
+		 * Esta clase gestiona las acciones de hacer click
+		 * @author Karen Choquecallata Mancilla
+		 *
+		 */
 		private class AccionCitas implements ActionListener{
 
 			@Override
@@ -473,5 +514,3 @@ public class VistaCalendarioMensual extends JPanel {
 	
 	
 }
-
-
