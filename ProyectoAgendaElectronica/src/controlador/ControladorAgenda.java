@@ -42,7 +42,7 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 	private Cita citaDeMomento = null;
 	private Memo memoDeMomento = null;
 	private ArrayList<Memo> listaMemoDeMomento = new ArrayList<>();
-
+	private Archivo contactos = new Archivo();
 	//////////////////////////////////////////
 	public ControladorAgenda(Agenda modelo, VistaAgenda vista) {
 		agendaControlada = modelo;
@@ -90,6 +90,7 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 						new Reloj(crearCita.obtenerHora(crearCita.horaFinC)), new Fecha(crearCita.obtenerFecha()),
 						crearCita.lugarC.getText());
 				paraAgregar.setListaRecordatorios(generarLista(listaMemoDeMomento));
+				paraAgregar.setContactosEnCita(crearCita.contactosC.getText());
 				if (crearCita.activarNotificaciones.isSelected()) {
 					System.out.println("notificacion marcada");
 					Reloj alarmaRescatada = traducirNotificacion(
@@ -117,6 +118,7 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 				citaDeMomento.setFecha(new Fecha(crearCita.obtenerFecha()));
 				citaDeMomento.setLugar(crearCita.lugarC.getText());
 				citaDeMomento.setListaRecordatorios(generarLista(listaMemoDeMomento));
+				citaDeMomento.setContactosEnCita(crearCita.contactosC.getText());
 				listaMemoDeMomento = new ArrayList<Memo>();
 				crearCita.limpiarEspacios();
 				llenarPanelCitas((ListaSE<Cita>) agendaControlada.getLista().inOrden());
@@ -139,14 +141,14 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 			crearCita.memo.visibilidadComponentesInferiores(false);
 			crearCita.memo.definirPanel(crearMemo);
 		} else if (evento.getSource() == crearCita.memo.eliminar) {
-			if (JOptionPane.showConfirmDialog(vistaControlada, "Esta seguro de eliminar la lista de Recordatorios", "Titulo", 2,
-					2) == 0) {
+			if (JOptionPane.showConfirmDialog(vistaControlada, "Esta seguro de eliminar la lista de Recordatorios",
+					"Titulo", 2, 2) == 0) {
 				listaMemoDeMomento = new ArrayList<Memo>();
 				llenarPanelMemo(listaMemoDeMomento, crearCita.memo.panelMemos);
 				crearCita.memo.definirPanel(crearCita.memo.panelMemos);
 			}
 
-		}  else if (evento.getSource() == crearMemo.aceptar) {
+		} else if (evento.getSource() == crearMemo.aceptar) {
 			crearCita.memo.visibilidadTextoSuperior(false, "");
 			crearCita.memo.visibilidadComponentesInferiores(true);
 
@@ -284,6 +286,16 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 				}
 
 			}
+		} else if (evento.getSource() == crearCita.panelDeContactos.buscar) {
+			ArrayList<String> lista = contactos.contactos(crearCita.panelDeContactos.textoBusqueda.getText());
+			llenarListaContactos(lista);
+			crearCita.panelDeContactos.actualizarPanel();
+		} else if (evento.getSource() == crearCita.panelDeContactos.cerrar) {
+			crearCita.panelDeContactos.setVisible(false);
+		} else if(evento.getSource() instanceof ElementoContacto) {
+			ElementoContacto contactoRecuperado = (ElementoContacto)evento.getSource();
+			String nombreRecuperado = contactoRecuperado.getTexto();
+			crearCita.contactosC.setText(crearCita.contactosC.getText()+nombreRecuperado+", ");
 		}
 		agendaControlada.guardarDatosAgenda();
 	}
@@ -350,16 +362,16 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 			aLlenar.add(new ElementoMemo(aux, this));
 		}
 	}
-	
+
 	// metodo para actualizar el panel de cita cuando se hace click en agenda
-		public void llenarPanelCitaRapido() {
-			vistaControlada.panelCitas.removeAll();
-			ListaSE<Cita> listaCitas = (ListaSE<Cita>) agendaControlada.getLista().inOrden();
-			for (int i = 0; i < listaCitas.longitud(); i++) {
-				Cita aux = listaCitas.acceder(i);
-				vistaControlada.panelCitas.add(new ElementoCita(aux, this));
-			}
+	public void llenarPanelCitaRapido() {
+		vistaControlada.panelCitas.removeAll();
+		ListaSE<Cita> listaCitas = (ListaSE<Cita>) agendaControlada.getLista().inOrden();
+		for (int i = 0; i < listaCitas.longitud(); i++) {
+			Cita aux = listaCitas.acceder(i);
+			vistaControlada.panelCitas.add(new ElementoCita(aux, this));
 		}
+	}
 
 	// metodo que agragega elementos
 	public void agregarMemo(Memo otro) {
@@ -454,6 +466,14 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 		}
 		return res;
 	}
+	
+	//llenar los contactos
+	private void llenarListaContactos(ArrayList<String> lista) {
+		crearCita.panelDeContactos.listaContactos.removeAll();
+		for(int i=0;i<lista.size();i++) {
+			crearCita.panelDeContactos.listaContactos.add(new ElementoContacto(lista.get(i),this));
+		}
+	}
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -466,6 +486,7 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 // TODO Auto-generated method stub
 		if (e.getSource() == crearCita.contactosC) {
 			System.out.println("ganaste el foco");
+			crearCita.panelDeContactos.restablecerValores();
 			crearCita.hacerVisiblePanelContactos(true);
 		} else if (e.getSource() == vistaControlada.seleccion) {
 			if (vistaControlada.seleccion.isSelected()) {
@@ -486,8 +507,11 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 	public void focusLost(FocusEvent e) {
 // TODO Auto-generated method stub
 		if (e.getSource() == crearCita.contactosC) {
-			System.out.println("perdiste el foco");
-			crearCita.hacerVisiblePanelContactos(false);
+			// System.out.println("perdiste el foco");
+			// crearCita.hacerVisiblePanelContactos(false);
+		} else if (e.getSource() == crearCita.panelDeContactos) {
+			crearCita.panelDeContactos.setVisible(false);
+			System.out.println("falta poco");
 		}
 	}
 
@@ -704,6 +728,32 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 
 		}
 
+	}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Clase ElementoMemo para mostrar un memo en un panel/////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+	class ElementoContacto extends JButton {
+		
+		private JLabel contacto;
+		private String contactoNombre;
+		public ElementoContacto(String nombre, ControladorAgenda control) {
+			addActionListener(control);
+			Border bordePanel = new TitledBorder(new EtchedBorder());
+			setBorder(bordePanel);
+			setLayout(new GridLayout(2, 0));
+			contactoNombre = nombre;
+			contacto = new JLabel(nombre);
+
+			add(contacto);
+		}
+		
+		public String getTexto() {
+			return contactoNombre;
+		}
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////

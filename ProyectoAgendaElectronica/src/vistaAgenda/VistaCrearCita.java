@@ -35,7 +35,7 @@ public class VistaCrearCita extends JPanel {
 	public VistaMemo memo;
 
 ////////////////////////////////////////////////////
-	public JPanel listaContactos;
+	public VistaCrearCitaContactos panelDeContactos;
 
 ///////////////////////////////////////////////////////
 	public VistaCrearCita() {
@@ -58,8 +58,8 @@ public class VistaCrearCita extends JPanel {
 		fechaC = new JTextField(" 00  /  00  /  2020");
 		lugarC = new JTextArea();
 		////////////////////////////////////////////////////
-		listaContactos = new JPanel();
-		listaContactos.setBackground(Color.blue);
+		panelDeContactos = new VistaCrearCitaContactos();
+		
 		///////////////////////////////////////////////////////
 		agregarComponentes();
 	}
@@ -118,8 +118,8 @@ public class VistaCrearCita extends JPanel {
 		memo.setBounds(20, 60, 365, 340);
 
 		////////////////////////////////////////////////////
-		listaContactos.setBounds(120, 435, 399, 75);
-		listaContactos.setVisible(false);
+		panelDeContactos.setBounds(120, 441, 399,100);
+		panelDeContactos.setVisible(false);
 		///////////////////////////////////////////////////////
 
 		add(asunto);
@@ -146,7 +146,7 @@ public class VistaCrearCita extends JPanel {
 		add(activarNotificaciones);
 
 		////////////////////////////////////////////////////
-		add(listaContactos);
+		add(panelDeContactos);
 		///////////////////////////////////////////////////////
 	}
 
@@ -155,6 +155,7 @@ public class VistaCrearCita extends JPanel {
 		cancelar.addActionListener(control);
 		contactosC.addFocusListener(control);
 		calendarioBoton.addActionListener(control);
+		panelDeContactos.setControlador(control);
 	}
 
 	public void editarTextoBoton(String texto) {
@@ -223,7 +224,7 @@ public class VistaCrearCita extends JPanel {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 	public void hacerVisiblePanelContactos(boolean estado) {
-		listaContactos.setVisible(estado);
+		panelDeContactos.setVisible(estado);
 	}
 ///////////////////////////////////////////////////////////////////////////////////////
 

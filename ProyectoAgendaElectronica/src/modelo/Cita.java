@@ -13,7 +13,7 @@ public class Cita implements Comparable<Cita>, Serializable{
 	private Fecha  fecha;
 	private String lugar;
 	private AlertaAlarma alarmaCita;
-	private ArrayList<Contacto> contactosEnCita;
+	private String contactosEnCita;
 	private ArrayList<Memo> listaRecordatorios;
 	
 	public Cita(String asunto, String descripcion, Reloj horaInicio, Reloj horaFin, Fecha fecha, String lugar) {
@@ -23,7 +23,7 @@ public class Cita implements Comparable<Cita>, Serializable{
 		this.horaFin = horaFin;
 		this.fecha = fecha;
 		this.lugar = lugar;
-		contactosEnCita = new ArrayList<Contacto>();
+		contactosEnCita = "";
 		listaRecordatorios = new ArrayList<Memo>();
 	}
 
@@ -120,11 +120,11 @@ public class Cita implements Comparable<Cita>, Serializable{
 		this.alarmaCita = alarmaCita;
 	}
 
-	public ArrayList<Contacto> getContactosEnCita() {
+	public String getContactosEnCita() {
 		return contactosEnCita;
 	}
 
-	public void setContactosEnCita(ArrayList<Contacto> contactosEnCita) {
+	public void setContactosEnCita(String contactosEnCita) {
 		this.contactosEnCita = contactosEnCita;
 	}
 
