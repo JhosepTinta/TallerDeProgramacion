@@ -1,18 +1,25 @@
 package controlador;
 
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JCheckBox;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListSelectionModel;
 
 import controlador.ControladorAgenda.ElementoCitaDos;
+import lineales.Lista;
 import lineales.ListaSE;
 import modelo.Agenda;
+import modelo.AlarmaL;
 import modelo.Cita;
 import modelo.Memo;
 import noLineales.ArbolBB;
@@ -24,12 +31,15 @@ public class ControladorTarea implements ActionListener {
 	private TareaVista vistatarea = new TareaVista ();
 	private Agenda agendacontrolada;
 	DefaultListModel DLM = new DefaultListModel();
+	DefaultListModel DLME = new DefaultListModel();
 	
 	//auxiliar metodos
+	
 	public ArrayList<Cita> b;
+	public ArrayList<Memo> mar;
 	public ArrayList<Cita> x=null;
 	public ListaSE<Cita> nuevo;
-	private ArrayList<Memo> listaMemoDeMomento = new ArrayList<>();
+	public ArrayList<Memo> memo= new ArrayList<>();
 	
 	public ControladorTarea(TareaVista  nuevo, Agenda modelo)
 	{
@@ -38,7 +48,7 @@ public class ControladorTarea implements ActionListener {
 	
 		
 	}
-int z =0;
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	
@@ -47,15 +57,15 @@ int z =0;
 		{
 			
 				
-				DLM.removeAllElements();
-			
+				
+			DLM.removeAllElements();
 			
 			
 		     nuevo = (ListaSE<Cita>) agendacontrolada.getLista().inOrden();
 		  	
 		  	 b = getConvertir(nuevo);
 		  
-			
+		  	
 		
 			   System.out.println(b);
 		
@@ -67,18 +77,11 @@ int z =0;
 	                vistatarea.list.setModel(DLM);
 			   }
 		    
-		       ArrayList<Cita> c= getConvertir(nuevo);
-		       x=c;
+		   
 		      
 		       JOptionPane.showMessageDialog(null, "ACTUALIZADO");
 		      
-			// }
-			// else {
-				 
-				// JOptionPane.showMessageDialog(null, "NO HAY NUEVAS TAREAS");
-				 
-				 
-			// }
+	
 			
 			
 //boton para marcar
@@ -91,10 +94,7 @@ int z =0;
 			System.out.println("se presiono el boton 3"+elitodo);
 			if (JOptionPane.showConfirmDialog(vistatarea ,"Esta seguro de eliminar la Cita", "Titulo", 2,
 					2) == 0) {
-				//agendacontrolada.eliminarCita(elitodo);
-				//llenarPanelCitas((ListaSE<Cita>) agendacontrolada.getLista().inOrden());
-				//definirPanel(vistatarea.list);
-				//agendacontrolada.setLista(new ArbolBB<Cita>());
+			
 				agendacontrolada.eliminarCita(elitodo);
 				int eliminaralarma =  vistatarea.list.getSelectedIndex();
 				DLM.remove(eliminaralarma);
@@ -115,35 +115,54 @@ int z =0;
 			if (JOptionPane.showConfirmDialog(vistatarea, "Seguro de eliminar todas las citas", "Titulo",
 					2, 2) == 0) {
 				
-					/*int i = 0;
-					//System.out.println("SSSSSSSSSSSSSSS"+vistatarea.list.getComponentCount());
-					while (i < vistatarea.list.getComponentCount()) {
-						ElementoCitaDos elemento = (ElementoCitaDos) vistatarea.list.getComponent(i);
-						if (elemento.elementoSeleccionado()) {
-							agendacontrolada.eliminarCita(elemento.getCita());
-							
-						}
-						i++;
-						System.out.println("SSSSSSSSSSSSSSS"+ elemento);
-					}
-					llenarPanelCitasDos((ListaSE<Cita>) agendacontrolada.getLista().inOrden(), false);
-					definirPanel(vistatarea.list);
-					*/
 					
 					agendacontrolada.setLista(new ArbolBB<Cita>());
 					DLM.removeAllElements();
 				}
 
 			agendacontrolada.guardarDatosAgenda();	
-			System.out.println("se presiono el boton 3");
-		}
 			
-		//agendacontrolada.guardarDatosAgenda();	
+			
+
+			
+// NUEVOS BOTONES 
+			
+		}else if(e.getSource()==vistatarea.marcar)
+		{
+			vistatarea.list1.setCellRenderer(new CheckboxListCellRenderer());
+			DLME.removeAllElements();
+			 int n =  vistatarea.list.getSelectedIndex();
+			 
+			mar = getMemo(nuevo,n);
+       		if(n==0 || n==1 || n==2 || n==3 || n==4 || n==5 || n==6 || n==7 || n==8 ||n==9 || n==10 || n==11 || n==12 || n==13 || n==14 || n==15|| n==16 || n==17 ||n==18 || n==19 || n==20)
+		    for(int i=0 ; i<mar.size(); i++)
+			   {
+         	   
+         	   DLME.addElement(mar.get(i));
+                vistatarea.list1.setModel(DLME);;
+			   }
+		}else if(e.getSource()==vistatarea.marcar1)
+		{
+			int l =  vistatarea.list.getSelectedIndex();
+			Cita m= nuevo.acceder(l);
+			int n =  vistatarea.list1.getSelectedIndex();
+			Memo c = (Memo) vistatarea.list1.getSelectedValue();
+			System.out.println("rata"+c+n);
+			DLME.remove(n);
+			
+			System.out.println("rata"+m);
+			m.getListaRecordatorios().remove(n);
+			//agendacontrolada.guardarDatosAgenda();
+		}
+
+		
 	
 	}	
 		
 	
 	
+
+
 	public ArrayList<Cita> getConvertir(ListaSE<Cita> nuevo)
 	{
 		 ArrayList<Cita> res = new ArrayList<>();
@@ -154,37 +173,60 @@ int z =0;
 		 return res;
 	}
 	
-	// metodo que permite actualizar las citas mostradas en el panel en pantalla
-	
-	private void llenarPanelCitas(ListaSE<Cita> lista) {
-		vistatarea.list.removeAll();
-		ListaSE<Cita> listaCitas = lista;
-		for (int i = 0; i < listaCitas.longitud(); i++) {
-			Cita aux = listaCitas.acceder(i);
-			//vistatarea.list.add(new ElementoCita(aux, this));
-		}
+	public void eleminar(int n)
+	{
+		ArrayList<Memo> res = new ArrayList<>();
+		  for(int j=0 ; j<res.size() ; j++)
+    	  {
+			  System.out.println("guardao" + res.get(j));
+			
+    	  }
+		
+		
+	}
+
+	public ArrayList<Memo> getMemo(ListaSE<Cita> nuevo2,int i)
+	{
+		 ArrayList<Memo> res = new ArrayList<>();
+	     // for(int i=0 ; i<nuevo.longitud(); i++)
+	     // {
+	    	  Cita buscar = nuevo.acceder(i);
+	    	  for(int j=0 ; j<buscar.getListaRecordatorios().size() ; j++)
+	    	  {
+	    		  res.add(buscar.getListaRecordatorios().get(j));
+	    		  
+	    	  }
+	    	  
+	    //  }
+	    
+		 return res;
 	}
 	
-	// metodo para cambiar de paneles
-	private void definirPanel(JList panel) {
-		vistatarea.scrollPane.setViewportView(panel);
+	
+	public class CheckboxListCellRenderer extends JCheckBox implements ListCellRenderer {
+
+	    public Component getListCellRendererComponent(JList list, Object value, int index, 
+	            boolean isSelected, boolean cellHasFocus) {
+
+	        setComponentOrientation(list.getComponentOrientation());
+	        setFont(list.getFont());
+	        setBackground(list.getBackground());
+	        setForeground(list.getForeground());
+	        setSelected(isSelected);
+	        setEnabled(list.isEnabled());
+
+	        setText(value == null ? "" : value.toString());  
+
+	        return this;
+	    }
 	}
 	
-	// segundo metodo que permite actualizar las citas mostradas en el panel en
-	// pantalla
-	private void llenarPanelCitasDos(ListaSE<Cita> lista, boolean estado) {
-		vistatarea.list.removeAll();
-		ListaSE<Cita> listaCitas = lista;
-		for (int i = 0; i < listaCitas.longitud(); i++) {
-			Cita aux = listaCitas.acceder(i);
-		//	vistatarea.list.add(new ElementoCitaDos(aux, this, estado));
-			// vistaControlada.panelCitas.add(new ElementoCitaDos(aux,
-			// this));////////////////////////////////// borrar
-		}
-	}
 	
-	
-	
+	   
+    public ArrayList<Memo> getAlarmaL(){
+    	   
+    	return memo;
+    }
 }
 
 

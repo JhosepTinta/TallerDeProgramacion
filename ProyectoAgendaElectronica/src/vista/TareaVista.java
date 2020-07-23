@@ -30,10 +30,17 @@ public class TareaVista extends JPanel {
 	public JScrollPane scrollPane;
 	public JButton actualizar;
 	public JLabel texto;
+	
 //	public JLabel tex;
 	public JButton realizada;
 	public JButton realizadatodos;
-
+	
+//NUEVOS BOTONES
+	public JList list1;
+	public JScrollPane scrollPane_1;
+	public JButton marcar;
+    public JButton marcar1;
+    public JLabel recordatorio;
 
 	
 	public TareaVista() {
@@ -69,18 +76,31 @@ public class TareaVista extends JPanel {
 		realizadatodos.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendintesTodas1.png")));
 		
 		texto.setFont(new Font("Agency FB", Font.BOLD, 35));
-		//texto1 = new JTextField();
-		//texto1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		//texto1.setColumns(10);
-	
+		
+		
+//NUEVOS BOTONES	
+		marcar = new JButton("SELECCIONE DE LA CITA");
+		marcar1 = new JButton("MARCAR");
+		recordatorio = new JLabel("LISTA DE RECORDATORIO DE LA CITA");
+
+		scrollPane_1 = new JScrollPane();
+		
+		list1 = new JList();
+		scrollPane_1.setViewportView(list1);
+		
+		list1.setSelectionBackground(Color.orange);
+//NUEVOS BOTONES
+		
 		scrollPane.setViewportView(list);
 		AgregarElementos();
+		
+		
 		
 	}
 	
 	private void AgregarElementos()
 	{
-		scrollPane.setBounds(70, 100, 480, 450);
+		scrollPane.setBounds(70, 100, 480, 350);
 		texto.setBounds(15, 15, 278, 66);
 	//	tex.setBounds(70, 90, 250, 35);
 		actualizar.setBounds(580, 117, 200, 50);
@@ -116,14 +136,25 @@ public class TareaVista extends JPanel {
 			}
 			
 		});
-	//	texto1.setBounds(70, 120, 300, 45);
+	//NUEVOS BOTONES 	
+		marcar.setBounds(580, 490, 200, 50);
+		marcar1.setBounds(580, 550, 200, 30);
+		recordatorio.setBounds(20, 440, 300, 50);
+		scrollPane_1.setBounds(70, 480, 480, 100);
+   //NUEVOS BOTONES
+		
 		add(scrollPane);
 		add(texto);
 		add(actualizar);
 		add(realizada);
 		add(realizadatodos);
-		//add(texto1);
-		//add(tex);
+	//NUEVOS BOTONES
+		add(marcar);
+		add(marcar1);
+		add(scrollPane_1);
+		add(recordatorio);
+    //NUEVOS BOTONES
+		
 	}
 	
 	public void setControlador(ControladorTarea entrar)
@@ -131,10 +162,9 @@ public class TareaVista extends JPanel {
 		actualizar.addActionListener(entrar);
 		realizada.addActionListener(entrar);
 		realizadatodos.addActionListener(entrar);
+		marcar.addActionListener(entrar);
+		marcar1.addActionListener(entrar);
 	}
 
 
 }
-
-
-
