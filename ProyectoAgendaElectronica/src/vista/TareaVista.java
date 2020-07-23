@@ -60,8 +60,6 @@ public class TareaVista extends JPanel {
 		actualizar.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendientesActualizar1.png")));
 		
 		texto = new JLabel("TAREAS PENDIENTES");
-	//	tex = new JLabel("Ingresar Tarea : ");
-	//	tex.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		realizada = new JButton();
 		realizada.setOpaque(false);
@@ -79,9 +77,20 @@ public class TareaVista extends JPanel {
 		
 		
 //NUEVOS BOTONES	
-		marcar = new JButton("SELECCIONE DE LA CITA");
-		marcar1 = new JButton("MARCAR");
+		marcar = new JButton();
+		marcar.setOpaque(false);
+		marcar.setContentAreaFilled(false);
+		marcar.setBorderPainted(false);
+		marcar.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendientesSeleccion1.png")));
+		
+		marcar1 = new JButton();
+		marcar1.setOpaque(false);
+		marcar1.setContentAreaFilled(false);
+		marcar1.setBorderPainted(false);
+		marcar1.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendientesMarcar1.png")));
+		
 		recordatorio = new JLabel("LISTA DE RECORDATORIO DE LA CITA");
+		recordatorio.setFont(new Font("tahoma", Font.BOLD, 16));
 
 		scrollPane_1 = new JScrollPane();
 		
@@ -100,10 +109,9 @@ public class TareaVista extends JPanel {
 	
 	private void AgregarElementos()
 	{
-		scrollPane.setBounds(70, 100, 480, 350);
+		scrollPane.setBounds(120, 100, 600, 250);
 		texto.setBounds(15, 15, 278, 66);
-	//	tex.setBounds(70, 90, 250, 35);
-		actualizar.setBounds(580, 117, 200, 50);
+		actualizar.setBounds(600, 25, 200, 50);
 		actualizar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
@@ -114,7 +122,7 @@ public class TareaVista extends JPanel {
 			}
 			
 		});
-		realizada.setBounds(580, 300, 200, 50);
+		realizada.setBounds(300, 357, 200, 50);
 		realizada.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
@@ -125,7 +133,7 @@ public class TareaVista extends JPanel {
 			}
 			
 		});
-		realizadatodos.setBounds(580, 400, 200, 50);
+		realizadatodos.setBounds(500, 357, 200, 50);
 		realizadatodos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
@@ -137,10 +145,30 @@ public class TareaVista extends JPanel {
 			
 		});
 	//NUEVOS BOTONES 	
-		marcar.setBounds(580, 490, 200, 50);
-		marcar1.setBounds(580, 550, 200, 30);
-		recordatorio.setBounds(20, 440, 300, 50);
-		scrollPane_1.setBounds(70, 480, 480, 100);
+		marcar.setBounds(580, 460, 180, 45);
+		marcar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				marcar.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendientesSeleccion2.png")));
+			}
+			public void mouseExited(MouseEvent arg0) {
+				marcar.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendientesSeleccion1.png")));//
+			}
+			
+		});
+		marcar1.setBounds(580, 515, 180, 45);
+		marcar1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				marcar1.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendientesMarcar2.png")));
+			}
+			public void mouseExited(MouseEvent arg0) {
+				marcar1.setIcon(new ImageIcon(TareaVista.class.getResource("/botones/PendientesMarcar1.png")));//
+			}
+			
+		});
+		recordatorio.setBounds(70, 407, 400, 50);
+		scrollPane_1.setBounds(70, 460, 480, 100);
    //NUEVOS BOTONES
 		
 		add(scrollPane);
@@ -168,3 +196,4 @@ public class TareaVista extends JPanel {
 
 
 }
+
