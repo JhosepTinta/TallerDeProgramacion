@@ -49,6 +49,7 @@ public class VistaPrincipal extends JFrame {
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaPrincipal.class.getResource("/imagenes/IconoP.png")));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setResizable(false);
 		setSize(1050,650);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
