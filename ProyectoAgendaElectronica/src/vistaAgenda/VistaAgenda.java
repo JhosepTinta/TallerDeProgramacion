@@ -64,6 +64,7 @@ public class VistaAgenda extends JPanel {
 		volver.addActionListener(control);
 		eliminar.addActionListener(control);
 		seleccion.addFocusListener(control);
+		buscar.addFocusListener(control);
 	}
 	
 	public void estadoTextoReferente(boolean estado) {

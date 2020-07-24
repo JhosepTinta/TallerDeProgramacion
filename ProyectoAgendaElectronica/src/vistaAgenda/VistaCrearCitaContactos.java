@@ -47,6 +47,7 @@ public class VistaCrearCitaContactos extends JPanel {
 	public void setControlador(ControladorAgenda control) {
 		buscar.addActionListener(control);
 		cerrar.addActionListener(control);
+		textoBusqueda.addFocusListener(control);
 	}
 	
 	public void actualizarPanel() {

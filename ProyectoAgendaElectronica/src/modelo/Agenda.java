@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import lineales.*;
 
@@ -148,8 +149,7 @@ public class Agenda implements Serializable {
 	public Agenda leerDatosGuardadosAgenda() {
 		Agenda datosRecogidos = null;
 		try {
-			ObjectInputStream leendo = new ObjectInputStream(
-					new FileInputStream("archivos dat\\datosAgenda.dat"));
+			ObjectInputStream leendo = new ObjectInputStream(new FileInputStream("archivos dat\\datosAgenda.dat"));
 			datosRecogidos = (Agenda) leendo.readObject();
 			leendo.close();
 		} catch (Exception e) {
@@ -160,6 +160,33 @@ public class Agenda implements Serializable {
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	//////////////////////////// Validador de Citas para evitar choques de
+	//////////////////////////// horarios///////////////////////////////
+	public ArrayList<Cita> validarCita(Cita nueva, Fecha fechaNueva, Cita exepcion) {
+		ArrayList<Cita> listaDeProblemas = new ArrayList<>();
+		ListaSE<Cita> citasParaComparar = buscarFecha(fechaNueva);
+		if (exepcion != null) {
+			for (int i = 0; i < citasParaComparar.longitud(); i++) {
+				Cita aux = citasParaComparar.acceder(i);
+				if (nueva.compareTo(aux) == 2) {
+					if (aux.compareTo(exepcion) != 0) {
+						listaDeProblemas.add(aux);
+					}
+				}
+			}
+		} else {
+			for (int i = 0; i < citasParaComparar.longitud(); i++) {
+				Cita aux = citasParaComparar.acceder(i);
+				if (nueva.compareTo(aux) == 2) {
+					listaDeProblemas.add(aux);
+				}
+			}
+		}
+
+		return listaDeProblemas;
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public String toString() {
 		return listaCita.inOrden().toString();
 	}

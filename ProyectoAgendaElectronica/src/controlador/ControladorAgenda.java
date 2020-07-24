@@ -43,6 +43,7 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 	private Memo memoDeMomento = null;
 	private ArrayList<Memo> listaMemoDeMomento = new ArrayList<>();
 	private Archivo contactos = new Archivo();
+
 	//////////////////////////////////////////
 	public ControladorAgenda(Agenda modelo, VistaAgenda vista) {
 		agendaControlada = modelo;
@@ -77,12 +78,12 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 			crearCita.memo.visibilidadComponentesInferiores(true);
 			crearCita.memo.definirPanel(crearCita.memo.panelMemos);
 			//////////////////////////////////////////////////////
-
+			vistaControlada.buscar.setText("buscar");
 			definirPanel(crearCita);// pone en pantalla el panel para creae citas
 
 		} else if (evento.getSource() == crearCita.aceptar) {
 			quitarTextoSuperioDelPanel(true);
-
+			ArrayList<Cita> problemasConHorarios;
 			if (!editandoCita) {
 				/// lo necesario para crear///
 				Cita paraAgregar = new Cita(crearCita.asuntoC.getText(), crearCita.descripcionC.getText(),
@@ -105,29 +106,62 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 							dia_noche);
 					paraAgregar.setAlarmaCita(alarma);
 				}
-				agregarCita(paraAgregar);
-				crearCita.limpiarEspacios();// limpia los recuadros despues de usarlos
-
+				problemasConHorarios = agendaControlada.validarCita(paraAgregar, paraAgregar.getFecha(), null);
+				if (!problemasConHorarios.isEmpty()) {
+					JOptionPane.showConfirmDialog(vistaControlada,
+							"Por favor revice la cita que esta creando" + "\n"
+									+ "tiene choque de horarios con las citas:" + "\n"
+									+ convertirProblemaEnTexto(problemasConHorarios),
+							"Titulo", -1, 0);
+				} else {
+					agregarCita(paraAgregar);
+					definirPanel(vistaControlada.panelCitas);
+					crearCita.limpiarEspacios();// limpia los recuadros despues de usarlos
+				}
 				/////////////////////////////
 			} else {
+				Cita paraEditar = new Cita(crearCita.asuntoC.getText(), crearCita.descripcionC.getText(),
+						new Reloj(crearCita.obtenerHora(crearCita.horaInicioC)),
+						new Reloj(crearCita.obtenerHora(crearCita.horaFinC)), new Fecha(crearCita.obtenerFecha()),
+						crearCita.lugarC.getText());
+				paraEditar.setListaRecordatorios(generarLista(listaMemoDeMomento));
+				paraEditar.setContactosEnCita(crearCita.contactosC.getText());
+				////////////////////////////
 
-				citaDeMomento.setAsunto(crearCita.asuntoC.getText());
-				citaDeMomento.setDescripcion(crearCita.descripcionC.getText());
-				citaDeMomento.setHoraInicio(new Reloj(crearCita.obtenerHora(crearCita.horaInicioC)));
-				citaDeMomento.setHoraFin(new Reloj(crearCita.obtenerHora(crearCita.horaFinC)));
-				citaDeMomento.setFecha(new Fecha(crearCita.obtenerFecha()));
-				citaDeMomento.setLugar(crearCita.lugarC.getText());
-				citaDeMomento.setListaRecordatorios(generarLista(listaMemoDeMomento));
-				citaDeMomento.setContactosEnCita(crearCita.contactosC.getText());
-				listaMemoDeMomento = new ArrayList<Memo>();
-				crearCita.limpiarEspacios();
-				llenarPanelCitas((ListaSE<Cita>) agendaControlada.getLista().inOrden());
-				citaDeMomento = null;
-				editandoCita = false;
+				problemasConHorarios = agendaControlada.validarCita(paraEditar, paraEditar.getFecha(), citaDeMomento);
+				if (!problemasConHorarios.isEmpty()) {
+					JOptionPane.showConfirmDialog(vistaControlada,
+							"Por favor revice la cita que esta editando" + "\n"
+									+ "tiene choque de horarios con las citas:" + "\n"
+									+ convertirProblemaEnTexto(problemasConHorarios),
+							"Titulo", -1, 0);
+				} else {
+					if (crearCita.activarNotificaciones.isSelected()) {
+						System.out.println("notificacion marcada");
+						Reloj alarmaRescatada = traducirNotificacion(
+								Integer.parseInt(crearCita.numeroSeleccionado.getValue().toString()),
+								(String) crearCita.tiempoSeleccionado.getSelectedItem(), paraEditar.getFecha(),
+								paraEditar.getHoraInicio());
+						System.out.println(alarmaRescatada);
+						String dia_noche = diaNocheCita(paraEditar.getHoraInicio());
+						AlertaAlarma alarma = new AlertaAlarma();
+						alarma.CrearAlarma(filtroNumero(alarmaRescatada.getHora()),
+								filtroNumero(alarmaRescatada.getMinutos()), filtroNumero(alarmaRescatada.getSegundos()),
+								dia_noche);
+						paraEditar.setAlarmaCita(alarma);
+					}
+					agendaControlada.eliminarCita(citaDeMomento);
+					agregarCita(paraEditar);
+					llenarPanelCitas((ListaSE<Cita>) agendaControlada.getLista().inOrden()); 
+					definirPanel(vistaControlada.panelCitas);
+					editandoCita = false;
+					citaDeMomento = null;
+					crearCita.limpiarEspacios();// limpia los recuadros despues de usarlos
+				}
 			}
 			crearCita.memo.panelMemos.removeAll();
 			listaMemoDeMomento.clear();
-			definirPanel(vistaControlada.panelCitas);
+			// definirPanel(vistaControlada.panelCitas);
 		} else if (evento.getSource() == crearCita.cancelar) {
 			quitarTextoSuperioDelPanel(true);
 			listaMemoDeMomento = new ArrayList<Memo>();
@@ -292,10 +326,10 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 			crearCita.panelDeContactos.actualizarPanel();
 		} else if (evento.getSource() == crearCita.panelDeContactos.cerrar) {
 			crearCita.panelDeContactos.setVisible(false);
-		} else if(evento.getSource() instanceof ElementoContacto) {
-			ElementoContacto contactoRecuperado = (ElementoContacto)evento.getSource();
+		} else if (evento.getSource() instanceof ElementoContacto) {
+			ElementoContacto contactoRecuperado = (ElementoContacto) evento.getSource();
 			String nombreRecuperado = contactoRecuperado.getTexto();
-			crearCita.contactosC.setText(crearCita.contactosC.getText()+nombreRecuperado+", ");
+			crearCita.contactosC.setText(crearCita.contactosC.getText() + nombreRecuperado + ", ");
 		}
 		agendaControlada.guardarDatosAgenda();
 	}
@@ -466,13 +500,38 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 		}
 		return res;
 	}
-	
-	//llenar los contactos
+
+	// llenar los contactos
 	private void llenarListaContactos(ArrayList<String> lista) {
 		crearCita.panelDeContactos.listaContactos.removeAll();
-		for(int i=0;i<lista.size();i++) {
-			crearCita.panelDeContactos.listaContactos.add(new ElementoContacto(lista.get(i),this));
+		for (int i = 0; i < lista.size(); i++) {
+			crearCita.panelDeContactos.listaContactos.add(new ElementoContacto(lista.get(i), this));
 		}
+	}
+
+	// metodo para convertir la lista de problemas en texto
+	public String convertirProblemaEnTexto(ArrayList<Cita> problema) {
+		String res = "";
+		if (!problema.isEmpty()) {
+			for (int i = 0; i < problema.size(); i++) {
+				Cita otra = problema.get(i);
+				if (i == problema.size() - 1) {
+					res += acortar(otra.getAsunto());
+				} else {
+					res = res + acortar(otra.getAsunto()) + ", ";
+				}
+			}
+		}
+		return res;
+	}
+
+	// acortador de mensajes
+	public String acortar(String mensaje) {
+		String res = mensaje;
+		if (mensaje.length() > 12) {
+			res = mensaje.substring(0, 11) + "...";
+		}
+		return res;
 	}
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -500,6 +559,10 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 			// agendaControlada.getLista().inOrden(),true);
 
 			definirPanel(vistaControlada.panelCitas);
+		} else if (e.getSource() == crearCita.panelDeContactos.textoBusqueda) {
+			crearCita.panelDeContactos.textoBusqueda.setText("");
+		} else if (e.getSource() == vistaControlada.buscar) {
+			vistaControlada.buscar.setText("");
 		}
 	}
 
@@ -737,9 +800,10 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 	class ElementoContacto extends JButton {
-		
+
 		private JLabel contacto;
 		private String contactoNombre;
+
 		public ElementoContacto(String nombre, ControladorAgenda control) {
 			addActionListener(control);
 			Border bordePanel = new TitledBorder(new EtchedBorder());
@@ -750,7 +814,7 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 
 			add(contacto);
 		}
-		
+
 		public String getTexto() {
 			return contactoNombre;
 		}
