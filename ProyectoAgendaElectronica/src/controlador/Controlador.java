@@ -40,7 +40,7 @@ public class Controlador implements ActionListener {
 			int fila=window.miPanelC.table.getSelectedRow();		 
 			if(fila>=0) {
 			if(a.existeC(window.miPanelC.model.getValueAt(fila,0),window.miPanelC.model.getValueAt(fila,1))){
-				 int v= JOptionPane.showConfirmDialog(window.miPanelC, "¿Estas seguro de eliminar a "+window.miPanelC.model.getValueAt(fila,0)+window.miPanelC.model.getValueAt(fila,1)+"?");
+				 int v= JOptionPane.showConfirmDialog(window.miPanelC, "Se eliminara a "+window.miPanelC.model.getValueAt(fila,0)+window.miPanelC.model.getValueAt(fila,1));
 				if(v==0) { 
 				a.eliminarC(window.miPanelC.model.getValueAt(fila,0), window.miPanelC.model.getValueAt(fila,1));
 				JOptionPane.showMessageDialog(window.miPanelC, "Contacto Eliminado");
@@ -132,7 +132,7 @@ public class Controlador implements ActionListener {
 		if(e.getSource()==window.miPanel1.btnEliminarC) {
 			Archivo a=new Archivo();
 			if(a.existeC(window.miPanel1.txtNB.getText(), window.miPanel1.txtAB.getText())) {
-			int v=JOptionPane.showConfirmDialog(window.miPanel1, "¿Seguro de eliminar a "+window.miPanel1.txtNB.getText()+" "+window.miPanel1.txtAB.getText()+"?");
+			int v=JOptionPane.showConfirmDialog(window.miPanel1, "Se eliminara a "+window.miPanel1.txtNB.getText()+" "+window.miPanel1.txtAB.getText());
 			if(v==0) {
 			a.eliminarC(window.miPanel1.txtNB.getText(), window.miPanel1.txtAB.getText());
 			window.miPanel1.txtMosN.setText(null);
