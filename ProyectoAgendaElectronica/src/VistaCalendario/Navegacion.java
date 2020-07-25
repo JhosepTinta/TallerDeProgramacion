@@ -26,7 +26,7 @@ import vista.VistaPrincipal;
 public class Navegacion extends JPanel {
        
 	   VistaCalendarioCompleto completo;
-       VistaSemanal vistasemanal;
+      
        public VistaDiariaCompleto diaria;
        JScrollPane contenedorDePaneles;
        JButton botonmensual,botondiario;

@@ -6,7 +6,7 @@ import modelo.*;
 public class ControladorCalendario {
       Agenda agenda;
       VistaCalendarioCompleto calendariocom;
-      VistaSemanal semanal;
+     
       VistaDiaria diaria;
       CalendarioMensual modelomes;
 	public ControladorCalendario(Agenda agenda,CalendarioMensual modelomes ) {
