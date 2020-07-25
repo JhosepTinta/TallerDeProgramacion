@@ -9,32 +9,38 @@ import vista.VistaPrincipal;
 
 public class Controlador implements ActionListener {
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////LA CLASE CONTROLA LOS PANELES DE LA LISTA DE CONTACTOS/////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	private VistaPrincipal window;
 	private Archivo a;	
 	
 	public Controlador (VistaPrincipal window,Archivo a) {
 		this.window=window;
 		this.a=a;
-		//Botones PanelC (lista)
+	///BOTONES DEL PanelC (LA LISTA CON CONTACTOS)///
 		window.miPanelC.btnBorrar.addActionListener(this);
 		window.miPanelC.btnBuscar.addActionListener(this);
 		window.miPanelC.btnCrear.addActionListener(this);
 		window.miPanelC.btnEdicion.addActionListener(this);
 		window.miPanelC.btnVer.addActionListener(this);
-		//Botones Panel1 (visualizar Contacto)
+	///BOTONES DEL Panel1 (VISUALIZACION AVANZADA DE UN CONTACTO)///
 		window.miPanel1.btnEliminarC.addActionListener(this);
 		window.miPanel1.btnIrEditar.addActionListener(this);
 		window.miPanel1.btnSalir.addActionListener(this);     //boton ir a Lista de Contactos		
-		//Botones Panel2 (editar contacto)
+	///BOTONES DEL Panel2 (EDICION DE UN CONTACTO)///
 		window.miPanel2.btnEditar.addActionListener(this);
 		window.miPanel2.btnVolver2.addActionListener(this);
-		//Botones Panel3 (crear contacto)
+	//BOTONES DEL Panel3 (CREAR CONTACTO)///
         window.miPanel3.btnGuardar.addActionListener(this);
 		window.miPanel3.btnVolver.addActionListener(this);	
 	}
 	public void actionPerformed (ActionEvent e) {
-	
-		//PanelC/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	   ///ACCIONES DE LOS BOTONES DEL PanelC (LISTA)////////////////////////////////////////////////////////////////////
+	   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+	   ///BOTON BORRAR, LLAMA AL METODO ELIMINAR CONTACTO Y SE ENCARGA DE LAS EXCEPCIONES POSIBLES////////////////////
 		if(e.getSource()==window.miPanelC.btnBorrar) {
 			 Archivo a =new Archivo();
 			int fila=window.miPanelC.table.getSelectedRow();		 
@@ -62,7 +68,8 @@ public class Controlador implements ActionListener {
 			 }
 		   }
 		}
-		//-----------------------------------------------------------------------------
+		
+	///BOTON BUSCAR QUE LLAMA AL METODO MATRIZ BUSQUEDA PARA MOSTRAR UNA LISTA MAS CORTA SOLO CON POSIBLES BUSQUEDAS///
 		if(e.getSource()==window.miPanelC.btnBuscar) {
 			Archivo a = new Archivo();
 			window.definirPanel(window.miPanelC);				
@@ -96,11 +103,11 @@ public class Controlador implements ActionListener {
 				}
 			}
 		}
-		//------------------------------------------------------------------------------
+		///ABRE EL Panel3 EN EL QUE SE PUEDE CREAR CONTACTOS///
 		if(e.getSource()==window.miPanelC.btnCrear) {
 			window.definirPanel(window.miPanel3);
 		}
-		//-------------------------------------------------------------------------------
+		///ABRE LA PANTALLA DE EDICION Y LE PASA LOS DATOS DEL CONTACTO SELECCIONADO
 		if(e.getSource()==window.miPanelC.btnEdicion) {
 			 Archivo a=new Archivo();
 			int fila=window.miPanelC.table.getSelectedRow();
@@ -115,7 +122,7 @@ public class Controlador implements ActionListener {
 			window.miPanel2.txtDE.setText((String) window.miPanelC.model.getValueAt(fila,4));
 			window.definirPanel(window.miPanel2);}}
 		}
-		//-------------------------------------------------------------------------------
+		///ABRE LA PANTALLA DE VISTA AVANZADA Y LE PASA LOS DATOS DEL CONTACTO SELECCIONADO
 		if(e.getSource()==window.miPanelC.btnVer) {
 			 Archivo a =new Archivo();
 				int fila=window.miPanelC.table.getSelectedRow();
@@ -128,7 +135,11 @@ public class Controlador implements ActionListener {
 				window.miPanel1.txtMosD.setText((String) window.miPanelC.model.getValueAt(fila,4));
 				window.definirPanel(window.miPanel1);}}
 		}
-		//Panel1////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///ACCIONES DE LOS BOTONES DEL Panel1 (VISTA AVANZADA)///////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+	  ///LLAMA AL METODO ELIMINAR Y SE ENCARGA DE LAS EXCEPCIONES POSIBLES///
 		if(e.getSource()==window.miPanel1.btnEliminarC) {
 			Archivo a=new Archivo();
 			if(a.existeC(window.miPanel1.txtNB.getText(), window.miPanel1.txtAB.getText())) {
@@ -151,8 +162,8 @@ public class Controlador implements ActionListener {
 			else JOptionPane.showMessageDialog(window.miPanelC, "Contacto mal ingresado");
 			
 		}
-		//---------------------------------------------------------------------------------
 		
+		///ABRE EL PANEL DE EDICION Y LE PASA LOS DATOS DEL CONTACTO////		
 		if(e.getSource()==window.miPanel1.btnIrEditar) {
 			window.miPanel2.txtNE.setText(window.miPanel1.txtNB.getText());
 			window.miPanel2.txtAE.setText(window.miPanel1.txtAB.getText());
@@ -163,7 +174,7 @@ public class Controlador implements ActionListener {
 			window.miPanel2.txtAP.setText(window.miPanel1.txtAB.getText());
 			window.definirPanel(window.miPanel2);
 	      }
-		//------------------------------------------------------------------------------------
+		///REGRESA AL PANEL DE LA LISTA DE CONTACTOS CON LOS CAMBIOS ACTUALIZADOS///
 		if(e.getSource()==window.miPanel1.btnSalir) {			
 			Archivo a = new Archivo();
 			window.definirPanel(window.miPanelC);				
@@ -175,8 +186,11 @@ public class Controlador implements ActionListener {
 			}
 		  }
 		
-		//Panel2//////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///ACCIONES DE LOS BOTONES DEL Panel2 (EDITAR)///////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
+		///REGRESA A LA LISTA DE CONTACTOS Y ACTUALIZA LA LISTA///
 		if(e.getSource()==window.miPanel2.btnVolver2) {
 			Archivo a = new Archivo();
 			window.definirPanel(window.miPanelC);				
@@ -187,7 +201,8 @@ public class Controlador implements ActionListener {
 				}
 			}		
 	    }
-		//-------------------------------------------------------------------------------------
+		///LLAMA LOS METODOS EXISTE PARA VERIFICAR SI SE PUEDE GUARDAR EL CONTACTO... ///
+		///...CON ESE NOMBRE Y SI ES POSIBLE LO ACTUALIZA                             ///
 		if(e.getSource()==window.miPanel2.btnEditar) {
             
 			Archivo a=new Archivo();
@@ -231,8 +246,11 @@ public class Controlador implements ActionListener {
 	     }
 
 		
-		//Panel3////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///ACCIONES DE LOS BOTONES DEL Panel3 (CREAR CONTACTO)///////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
+		///LLAMA AL METODO ESCRIBIR CONTACTO PARA CREARLO Y REALIZA LAS EXCEPCIONES POSIBLES///
 		if(e.getSource()==window.miPanel3.btnGuardar) {
                    
 			Archivo a=new Archivo();
@@ -276,7 +294,7 @@ public class Controlador implements ActionListener {
 			 }
 		   }
 	     }
-		//---------------------------------------------------------------------------------------------------
+		///VUELVE AL PANEL DE LA LISTA DE CONTACTOS Y LA ACTUALIZA///
 		if(e.getSource()==window.miPanel3.btnVolver) {
 			Archivo a = new Archivo();
 			window.definirPanel(window.miPanelC);				
@@ -286,11 +304,10 @@ public class Controlador implements ActionListener {
 			      window.miPanelC.table.setValueAt(matriz[i][j], i, j);
 				}
 			}
-		  }
-		
-		/////////////////////////////////////////////////////////////////////////////////////	    
+		  }    
   }
 }
+
 
 
 
