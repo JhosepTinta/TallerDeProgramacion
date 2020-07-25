@@ -2,6 +2,8 @@ package vistaMemo;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -10,6 +12,7 @@ import javax.swing.border.TitledBorder;
 
 import controlador.*;
 import vistaAgenda.VistaAgenda;
+import vistaAgenda.VistaCrearCita;
 
 public class VistaMemo extends JPanel {
 	
@@ -18,7 +21,7 @@ public class VistaMemo extends JPanel {
 	JLabel textoMemos = new JLabel("Lista de recordatorios:");
 	public JLabel textoSuperior = new JLabel();
 	public JButton agregar;
-	public JButton eliminar = new JButton("Vaciar Lista");
+	public JButton eliminar;
 	//private Color colorDeFondo = new Color(231, 245, 255);
 	private Color colorDeFondo = Color.white;
 	public VistaMemo() {
