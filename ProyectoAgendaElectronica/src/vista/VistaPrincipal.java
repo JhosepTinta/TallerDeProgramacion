@@ -4,6 +4,7 @@ package vista;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -44,16 +45,18 @@ public class VistaPrincipal extends JFrame {
 	//-----
 	public JButton btnC,btnA,btnCa,btnAg,btnP;
 	JScrollPane scrollPaneles;
-
+	public JLabel contactos = new JLabel("RANDOMSOFT -->Contactos: randomsoft50@gmail.com");
 	public VistaPrincipal() {
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaPrincipal.class.getResource("/imagenes/IconoP.png")));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Mi Agenda - RANDOMSOFT");
 		setResizable(false);
-		setSize(1050,650);
+		setSize(1037,650);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
+		contactos.setBounds(700, 600, 350, 20);
+		add(contactos);
 		iniciarComponentes();
 		}
 		
