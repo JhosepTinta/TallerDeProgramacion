@@ -10,7 +10,11 @@ import javax.swing.JOptionPane;
 
 public class Archivo {
 
-	//Almacena el contacto creado en un archivo
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////ESTA CLASE SE ENCARGA DE GESTIONAR LA LISTA DE CONTACTOS///////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	///GUARDA UN CONTACTO EN UN ARCHIVO LLAMADO <<Agenda.txt>> SEPARA CADA DATO POR EL SIGNO <<%>>///
 	public void escribirPersona(Contacto nuevo) {
 		try {
 			File file= new File("agenda.txt");
@@ -35,7 +39,7 @@ public class Archivo {
 		}
 	}
 
-	//Devuelve el numero del contacto
+	///RECORRE EL ARCHIVO Y DEVOLVERÁ EL NÚMERO DEL CONTACTO QUE SE BUSCA///
 	public String buscarN(String nombre,String apellido) {
 		try {
 			File file=new File("agenda.txt");
@@ -61,7 +65,7 @@ public class Archivo {
 		return ("No existe el Contacto");
 	  }
 	
-	//Devuelve el correo del contacto
+	///RECORRE EL ARCHIVO Y DEVOLVERÁ EL CORREO ELECTRÓNICO DEL CONTACTO QUE SE BUSCA///
 	public String buscarC(String nombre,String apellido) {
 		try {
 			File file=new File("agenda.txt");
@@ -87,7 +91,7 @@ public class Archivo {
 		return ("No existe el Contacto");
 	  }
 	
-	//Devuelve la direccion del contacto
+	///RECORRE EL ARCHIVO Y DEVOLVERÁ LA DIRECCIÓN FISICA DEL CONTACTO QUE SE BUSCA///
 	public String buscarD(String nombre,String apellido) {
 		try {
 			File file=new File("agenda.txt");
@@ -113,7 +117,8 @@ public class Archivo {
 		return ("No existe el Contacto");
 	  }
 	
-	//Elimina un contacto
+	///RECORRE EL ARCHIVO Y SI EL CONTACTO SE ENCUENTRA DENTRO LA LISTA,ESTA SE RESCRIBIRÁ PERO SIN... ///
+	///...EL CONTACTO QUE SE DESEA ELIMINAR                                                            ///
 	public void eliminarC(Object object,Object object2) {
 		try {
 			File file=new File("agenda.txt");
@@ -170,7 +175,7 @@ public class Archivo {
 			}
 	}
 	
-	//Devuelve si el contacto existe o no
+	///RECORRE EL ARCHIVO Y SI EL CONTACTO INGRESADO EXISTE ESTO SE RETORNARÁ///
 	public boolean existeC(Object object,Object object2) {
 		try {
 			File file=new File("agenda.txt");
@@ -195,7 +200,7 @@ public class Archivo {
 		return false;
 	  }
 	
-	//Devuelve el numero de Contactos existentes
+	///CUENTA LA CANTIDAD DE CONTACTOS QUE TIENE ALMACENADOS EL ARCHIVO///
 	public int numeroC() {
 		try {
 			File file=new File("agenda.txt");
@@ -219,8 +224,8 @@ public class Archivo {
 		return 0;
 	  }
 	
-	//Devuelve una matriz de contactos y datos. Necesita una matriz previa para llenarla
-		
+	///RETORNA UNA MATRIZ CON LOS CONTACTOS Y LOS DATOS DELOS CONTACTOS ADEMÁS DE TENER LOS CONTACTOS...///
+	///...ORDENADOS ALFABETICAMENTE///
 	public String[][] mC(){
 		String [][]m=enviarMatriz();
 		for(int i=0;i<m.length;i++) {
@@ -247,7 +252,7 @@ public class Archivo {
 		
 		return m;
 	}
-	
+	///RETORNA UNA MATRIZ CON CONTACTOS Y DATOS PERO SIN ORDEN ALFABETICO///
 	private String[][] enviarMatriz() {
 		try {
 			File file=new File("agenda.txt");
@@ -278,7 +283,7 @@ public class Archivo {
 		}
 		return null;
 	  }
-	
+	///RETORNA UNA MATRIZ MAS PEQUEÑA CON CONTACTOS Y DATOS YA QUE AÑADE SOLO A LAS BUSQUEDAS SEMEJANTES///
 	public String[][] MatrizBusqueda(String cadena) {
 		try {
 			File file=new File("agenda.txt");
@@ -334,6 +339,7 @@ public class Archivo {
 		return null;
 	}
 	
+	///RETORNA UN ArrayList CON LOS NOMBRES Y APELLIDOS DE LOS CONTACTOS///
 	public ArrayList<String> contactos(String busqueda){
 		ArrayList<String> lista;
 		lista=new ArrayList<String>();
@@ -387,7 +393,6 @@ public class Archivo {
 		}
 		return null;
 	}
-	
 	public boolean eCaracter(String caracter) {
 		try {
 			File file=new File("agenda.txt");
@@ -427,6 +432,7 @@ public class Archivo {
 	}
 	
 	}
+
 
 
 
