@@ -43,7 +43,7 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 	private Memo memoDeMomento = null;
 	private ArrayList<Memo> listaMemoDeMomento = new ArrayList<>();
 	private Archivo contactos = new Archivo();
-
+	private boolean marca = false;
 	//////////////////////////////////////////
 	public ControladorAgenda(Agenda modelo, VistaAgenda vista) {
 		agendaControlada = modelo;
@@ -78,11 +78,13 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 			crearCita.memo.visibilidadComponentesInferiores(true);
 			crearCita.memo.definirPanel(crearCita.memo.panelMemos);
 			//////////////////////////////////////////////////////
+			crearCita.activarNotificaciones.setSelected(false);
 			vistaControlada.buscar.setText("buscar");
+			vistaControlada.setBackground(new Color(174,214,241));
 			definirPanel(crearCita);// pone en pantalla el panel para creae citas
 
 		} else if (evento.getSource() == crearCita.aceptar) {
-			quitarTextoSuperioDelPanel(true);
+			
 			ArrayList<Cita> problemasConHorarios;
 			if (!editandoCita) {
 				/// lo necesario para crear///
@@ -92,32 +94,61 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 						crearCita.lugarC.getText());
 				paraAgregar.setListaRecordatorios(generarLista(listaMemoDeMomento));
 				paraAgregar.setContactosEnCita(crearCita.contactosC.getText());
-				if (crearCita.activarNotificaciones.isSelected()) {
-					System.out.println("notificacion marcada");
-					Reloj alarmaRescatada = traducirNotificacion(
-							Integer.parseInt(crearCita.numeroSeleccionado.getValue().toString()),
-							(String) crearCita.tiempoSeleccionado.getSelectedItem(), paraAgregar.getFecha(),
-							paraAgregar.getHoraInicio());
-					System.out.println(alarmaRescatada);
-					String dia_noche = diaNocheCita(paraAgregar.getHoraInicio());
-					AlertaAlarma alarma = new AlertaAlarma();
-					alarma.CrearAlarma(filtroNumero(alarmaRescatada.getHora()),
-							filtroNumero(alarmaRescatada.getMinutos()), filtroNumero(alarmaRescatada.getSegundos()),
-							dia_noche);
-					paraAgregar.setAlarmaCita(alarma);
-				}
+				
 				problemasConHorarios = agendaControlada.validarCita(paraAgregar, paraAgregar.getFecha(), null);
 				if (!problemasConHorarios.isEmpty()) {
+					crearCita.marcarHoras();
 					JOptionPane.showConfirmDialog(vistaControlada,
 							"Por favor revice la cita que esta creando" + "\n"
 									+ "tiene choque de horarios con las citas:" + "\n"
 									+ convertirProblemaEnTexto(problemasConHorarios),
-							"Titulo", -1, 0);
-				} else {
+									"Advertencia", -1, 0);
+				} else if(crearCita.tituloVacio()) {
+					crearCita.marcarTitulo();
+					JOptionPane.showConfirmDialog(vistaControlada,
+							"No pusiste el Asunto, porfavor coloca uno","Advertencia",-1, 0);
+				} else if(crearCita.fechaVacio()) {
+					crearCita.marcarFecha();
+					JOptionPane.showConfirmDialog(vistaControlada,
+							"No pusiste la Fecha, porfavor coloca una","Advertencia",-1, 0);
+				} else if(crearCita.horaVacio()) {
+					crearCita.marcarHoras();
+					JOptionPane.showConfirmDialog(vistaControlada,
+							"No puedes dejar los espacios de las horas vacios, porfavor arreglalo","Advertencia",-1, 0);
+				} else if(paraAgregar.getHoraInicio().compareTo(paraAgregar.getHoraFin())==1) {
+					crearCita.marcarHoras();
+					JOptionPane.showConfirmDialog(vistaControlada,
+							"La hora de fin no puede se mayor a la de inicio","Advertencia",-1, 0);
+				} else if(paraAgregar.getHoraInicio().compareTo(paraAgregar.getHoraFin())==0) {
+					crearCita.marcarHoras();
+					JOptionPane.showConfirmDialog(vistaControlada,
+							"La hora de inicio y fin no pueden ser iguales","Advertencia",-1, 0);
+				}else {
+					if (crearCita.activarNotificaciones.isSelected()) {
+						System.out.println("notificacion marcada");
+						Reloj alarmaRescatada = traducirNotificacion(
+								Integer.parseInt(crearCita.numeroSeleccionado.getValue().toString()),
+								(String) crearCita.tiempoSeleccionado.getSelectedItem(), paraAgregar.getFecha(),
+								paraAgregar.getHoraInicio());
+						System.out.println(alarmaRescatada);
+						String dia_noche = diaNocheCita(paraAgregar.getHoraInicio());
+						AlertaAlarma alarma = new AlertaAlarma();
+						alarma.CrearAlarma(filtroNumero(alarmaRescatada.getHora()),
+								filtroNumero(alarmaRescatada.getMinutos()), filtroNumero(alarmaRescatada.getSegundos()),
+								dia_noche);
+						paraAgregar.setAlarmaCita(alarma);
+					}
 					agregarCita(paraAgregar);
+					quitarTextoSuperioDelPanel(true);
+					ventanacalendariocita.setVisible(false);
+					vistaControlada.setBackground(Color.white);
 					definirPanel(vistaControlada.panelCitas);
 					crearCita.limpiarEspacios();// limpia los recuadros despues de usarlos
+					crearCita.memo.panelMemos.removeAll();
+					listaMemoDeMomento.clear();
+					crearCita.colorInicialBorde();
 				}
+				
 				/////////////////////////////
 			} else {
 				Cita paraEditar = new Cita(crearCita.asuntoC.getText(), crearCita.descripcionC.getText(),
@@ -130,11 +161,32 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 
 				problemasConHorarios = agendaControlada.validarCita(paraEditar, paraEditar.getFecha(), citaDeMomento);
 				if (!problemasConHorarios.isEmpty()) {
+					crearCita.marcarHoras();
 					JOptionPane.showConfirmDialog(vistaControlada,
 							"Por favor revice la cita que esta editando" + "\n"
 									+ "tiene choque de horarios con las citas:" + "\n"
 									+ convertirProblemaEnTexto(problemasConHorarios),
 							"Titulo", -1, 0);
+				}else if(crearCita.tituloVacio()) {
+					crearCita.marcarTitulo();
+					JOptionPane.showConfirmDialog(vistaControlada,
+							"No pusiste el Asunto, porfavor coloca uno","Advertencia",-1, 0);
+				} else if(crearCita.fechaVacio()) {
+					crearCita.marcarFecha();
+					JOptionPane.showConfirmDialog(vistaControlada,
+							"No pusiste la Fecha, porfavor coloca una","Advertencia",-1, 0);
+				} else if(crearCita.horaVacio()) {
+					crearCita.marcarHoras();
+					JOptionPane.showConfirmDialog(vistaControlada,
+							"No puedes dejar los espacios de las horas vacios, porfavor arreglalo","Advertencia",-1, 0);
+				} else if(paraEditar.getHoraInicio().compareTo(paraEditar.getHoraFin())==1) {
+					crearCita.marcarHoras();
+					JOptionPane.showConfirmDialog(vistaControlada,
+							"La hora de fin no puede se mayor a la de inicio","Advertencia",-1, 0);
+				} else if(paraEditar.getHoraInicio().compareTo(paraEditar.getHoraFin())==0) {
+					crearCita.marcarHoras();
+					JOptionPane.showConfirmDialog(vistaControlada,
+							"La hora de inicio y fin no pueden ser iguales","Advertencia",-1, 0);
 				} else {
 					if (crearCita.activarNotificaciones.isSelected()) {
 						System.out.println("notificacion marcada");
@@ -152,15 +204,21 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 					}
 					agendaControlada.eliminarCita(citaDeMomento);
 					agregarCita(paraEditar);
-					llenarPanelCitas((ListaSE<Cita>) agendaControlada.getLista().inOrden()); 
+					llenarPanelCitas((ListaSE<Cita>) agendaControlada.getLista().inOrden());
 					definirPanel(vistaControlada.panelCitas);
 					editandoCita = false;
 					citaDeMomento = null;
+					quitarTextoSuperioDelPanel(true);
+					ventanacalendariocita.setVisible(false);
+					vistaControlada.setBackground(Color.white);
 					crearCita.limpiarEspacios();// limpia los recuadros despues de usarlos
+					crearCita.memo.panelMemos.removeAll();
+					listaMemoDeMomento.clear();
 				}
 			}
-			crearCita.memo.panelMemos.removeAll();
-			listaMemoDeMomento.clear();
+			
+			
+			
 			// definirPanel(vistaControlada.panelCitas);
 		} else if (evento.getSource() == crearCita.cancelar) {
 			quitarTextoSuperioDelPanel(true);
@@ -169,17 +227,29 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 			crearMemo.limpiarEspacios();
 			citaDeMomento = null;
 			editandoCita = false;
+			vistaControlada.setBackground(Color.white);
 			definirPanel(vistaControlada.panelCitas);
+			crearCita.colorInicialBorde();
+			
+			if(marca) {
+				ventanacalendariocita.setVisible(false);//dara error
+				marca = false;
+			}
 		} else if (evento.getSource() == crearCita.memo.agregar) {
 			crearCita.memo.visibilidadTextoSuperior(true, "Usted esta creando un Memo ...");
 			crearCita.memo.visibilidadComponentesInferiores(false);
 			crearCita.memo.definirPanel(crearMemo);
 		} else if (evento.getSource() == crearCita.memo.eliminar) {
-			if (JOptionPane.showConfirmDialog(vistaControlada, "Esta seguro de eliminar la lista de Recordatorios",
-					"Titulo", 2, 2) == 0) {
-				listaMemoDeMomento = new ArrayList<Memo>();
-				llenarPanelMemo(listaMemoDeMomento, crearCita.memo.panelMemos);
-				crearCita.memo.definirPanel(crearCita.memo.panelMemos);
+
+			if (!listaMemoDeMomento.isEmpty()) {
+				if (JOptionPane.showConfirmDialog(vistaControlada, "Esta seguro de eliminar la lista de Recordatorios",
+						"Titulo", 2, 2) == 0) {
+					listaMemoDeMomento = new ArrayList<Memo>();
+					llenarPanelMemo(listaMemoDeMomento, crearCita.memo.panelMemos);
+					crearCita.memo.definirPanel(crearCita.memo.panelMemos);
+				}
+			} else {
+				JOptionPane.showConfirmDialog(vistaControlada, "No hay memos para eliminar", "Titulo", -1, 1);
 			}
 
 		} else if (evento.getSource() == crearMemo.aceptar) {
@@ -217,7 +287,7 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 			citaDeMomento = b;
 
 		} else if (evento.getSource() == detalleCita.editar) {
-
+			crearCita.activarNotificaciones.setSelected(false);
 			crearCita.darValores(citaDeMomento.getAsunto(), citaDeMomento.getDescripcion(),
 					citaDeMomento.getHoraInicio().toString(), citaDeMomento.getHoraFin().toString(),
 					citaDeMomento.getFecha().toString(), citaDeMomento.getContactosEnCita().toString(),
@@ -287,7 +357,7 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 			definirPanel(vistaControlada.panelCitas);
 		} else if (evento.getSource() == crearCita.calendarioBoton) {
 			ventanacalendariocita = new VentanaCalendarioCita(crearCita);
-			// crearCita.fechaC.setText(ventanacalendariocita.calen.getFechaMarcada());
+			marca = true;
 		} else if (evento.getSource() instanceof JMenuItem) {
 			JMenuItem item = (JMenuItem) evento.getSource();
 			if (item.getText().equals("Eliminar Varios")) {
@@ -533,6 +603,19 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 		}
 		return res;
 	}
+	
+	//controla que el mensaje no termine en coma
+	private String controlarComa(String mensaje) {
+		String res = mensaje;
+		if (mensaje.length()>1) {
+			int i =mensaje.length()-1;
+			char a = mensaje.charAt(i);
+			if(a==',') {
+				res = mensaje.substring(0,i-1);
+			}
+		}
+		return res;
+	}
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -608,7 +691,15 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 			setComponentPopupMenu(emergente);
 			opcion1.addActionListener(this);
 			opcion2.addActionListener(control);
-
+			addMouseListener(new MouseAdapter() {
+				public void mouseEntered(MouseEvent e) {
+					setBackground(new Color(233, 244, 251));
+				}
+				
+				public void mouseExited(MouseEvent e) {
+				    setBackground(Color.white);
+				}
+			});
 			agregarLabels();
 //detalleCita.setControlador(this);
 		}
@@ -680,7 +771,15 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 			emergente.add(opcion1);
 			setComponentPopupMenu(emergente);
 			opcion1.addActionListener(this);
-
+			addMouseListener(new MouseAdapter() {
+				public void mouseEntered(MouseEvent e) {
+					setBackground(new Color(244, 247, 252));
+				}
+				
+				public void mouseExited(MouseEvent e) {
+				    setBackground(Color.white);
+				}
+			});
 			add(tituloMemo);
 			add(resumenMemo);
 		}
@@ -767,7 +866,7 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 // setBackground(new Color(153,255,204));
 // setBackground(new Color(102,178,255));
 // setBackground(new Color(153,204,255));
-				setBackground(new Color(204, 229, 255));
+				setBackground(new Color(174,214,241));
 				setLayout(new GridLayout(2, 3, 250, 15));
 				asuntoCita = new JLabel(" " + cita.getAsunto());
 				horaInicioCita = new JLabel("  " + cita.getHoraInicio().toString());

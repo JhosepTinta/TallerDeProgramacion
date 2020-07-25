@@ -1,5 +1,10 @@
 package vistaMemo;
 
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,10 +19,25 @@ public class VistaDetalleMemo extends JPanel{
 	JLabel tituloC;
 	JLabel textoC;
 	public JButton editar = new JButton("Editar");
-	public JButton cancelar = new JButton("Cancelar");
+	public JButton cancelar;
 	public VistaDetalleMemo() {
+		setBackground(new Color(244, 247, 252));
+		cancelar = new JButton(new ImageIcon(VistaDetalleMemo.class.getResource("/botones/MemoCancelar1.png")));
+		cancelar.setBackground(new Color(244, 247, 252));
+		titulo.setForeground(new Color(78,165,224));
+		texto.setForeground(new Color(78,165,224));
+		cancelar.setBorder(null);
 		tituloC = new JLabel();
 		textoC = new JLabel();
+		cancelar.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				cancelar.setIcon(new ImageIcon(VistaDetalleMemo.class.getResource("/botones/MemoCancelar2.png")));
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				cancelar.setIcon(new ImageIcon(VistaDetalleMemo.class.getResource("/botones/MemoCancelar1.png")));
+			}
+		});
 		agregarElementos();
 	}
 	
@@ -28,7 +48,7 @@ public class VistaDetalleMemo extends JPanel{
 		texto.setBounds(5, 80, 150, 20);
 		textoC.setBounds(5, 110, 237, 110);
 		editar.setBounds(5, 245, 90, 20);
-		cancelar.setBounds(150, 245, 90, 20);
+		cancelar.setBounds(150, 240, 100, 30);
 		add(titulo);
 		add(tituloC);
 		add(texto);

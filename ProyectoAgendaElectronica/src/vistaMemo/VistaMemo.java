@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 import controlador.*;
 import vistaAgenda.VistaAgenda;
@@ -16,8 +19,8 @@ public class VistaMemo extends JPanel {
 	public JLabel textoSuperior = new JLabel();
 	public JButton agregar;
 	public JButton eliminar = new JButton("Vaciar Lista");
-	private Color colorDeFondo = new Color(167, 255, 186);
-	
+	//private Color colorDeFondo = new Color(231, 245, 255);
+	private Color colorDeFondo = Color.white;
 	public VistaMemo() {
 		setBackground(colorDeFondo);
 		agregar = new JButton(new ImageIcon(VistaMemo.class.getResource("/botones/MemoAgregar.png")));
@@ -34,12 +37,12 @@ public class VistaMemo extends JPanel {
 	
 	private void agregarElementos() {
 		setLayout(null);
-		panelMemos.setBackground(new Color(225,255,247));
-		textoMemos.setBounds(0, 0, 250, 20);
-		textoSuperior.setBounds(0, 0, 190, 20);
-		listaMemos.setBounds(0, 25, 250, 275);
-		agregar.setBounds(3, 305, 120, 40);
-		eliminar.setBounds(128, 305, 120, 40);
+		panelMemos.setBackground(new Color(233, 244, 251));
+		textoMemos.setBounds(7, 0, 250, 20);
+		textoSuperior.setBounds(3, 0, 190, 20);
+		listaMemos.setBounds(3, 25, 250, 275);
+		agregar.setBounds(6, 300, 120, 40);
+		eliminar.setBounds(131, 300, 120, 40);
 		textoSuperior.setVisible(false);
 		add(listaMemos);
 		add(agregar);

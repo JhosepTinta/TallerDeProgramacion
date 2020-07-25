@@ -1,6 +1,9 @@
 package vistaAgenda;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.*;
 import controlador.*;
 import vista.VistaPrincipal;
@@ -30,8 +33,27 @@ public class VistaAgenda extends JPanel {
 		agregar.setBorder(null);
 		seleccion.setBackground(Color.white);
 		panelCitas = new JPanel();
+		panelCitas.setBackground(new Color(242,239,255));
 		listaCitas = new JScrollPane(panelCitas);
 		panelCitas.setLayout(new GridLayout(20,0));
+		agregar.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				agregar.setIcon(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaAnadir2.png")));
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				agregar.setIcon(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaAnadir1.png")));
+			}
+		});
+		buscarBoton.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				buscarBoton.setIcon(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaLupa2.png")));
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				buscarBoton.setIcon(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaLupa1.png")));
+			}
+		});
 		agregarElementos();
 	}
 	

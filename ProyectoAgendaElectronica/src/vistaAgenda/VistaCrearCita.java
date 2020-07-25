@@ -15,7 +15,8 @@ public class VistaCrearCita extends JPanel {
 
 	public JButton aceptar;
 	public JButton cancelar;
-	private Color colorDeFondo = new Color(167, 255, 186);
+	private Color colorDeFondo = new Color(244, 247, 252);
+	//Color colorDeFondo = Color.white;
 	JLabel asunto = new JLabel("Asunto: ");
 	JLabel descripcion = new JLabel("Descripción: ");
 	JLabel horaInicio = new JLabel("Hora de Inicio: ");
@@ -36,8 +37,17 @@ public class VistaCrearCita extends JPanel {
 
 ////////////////////////////////////////////////////
 	public VistaCrearCitaContactos panelDeContactos;
-
 ///////////////////////////////////////////////////////
+	//paneles de decoracion
+	public JPanel bordeMemo = new JPanel();
+	public JPanel bordeTitulo = new JPanel();
+	public JPanel bordeFecha = new JPanel();
+	public JPanel bordeHoraInicio = new JPanel();
+	public JPanel bordeHoraFin = new JPanel();
+	public JPanel bordeDescripcion= new JPanel();
+	public JPanel bordeLugar = new JPanel();
+	public JPanel bordeContactos = new JPanel();
+	/////////////////////////////////////////////////
 	public VistaCrearCita() {
 		calendarioBoton.setBackground(colorDeFondo);
 		calendarioBoton.setBorder(null);
@@ -55,12 +65,39 @@ public class VistaCrearCita extends JPanel {
 		descripcionC = new JTextArea();
 		horaInicioC = new JTextField("   00  :  00  :  00");
 		horaFinC = new JTextField("   00  :  00  :  00");
-		fechaC = new JTextField(" 00  /  00  /  2020");
+		fechaC = new JTextField("  00  /  00  /  2020");
 		lugarC = new JTextArea();
 		////////////////////////////////////////////////////
 		panelDeContactos = new VistaCrearCitaContactos();
-		
+		///////////////////////////////////////////////////777
+		bordeMemo.setBackground(new Color(174,214,241));
+		bordeTitulo.setBackground(new Color(174,214,241));
+		bordeContactos.setBackground(new Color(174,214,241));
+		bordeFecha.setBackground(new Color(174,214,241));
+		bordeHoraInicio.setBackground(new Color(174,214,241));
+		bordeHoraFin.setBackground(new Color(174,214,241));
+		bordeLugar.setBackground(new Color(174,214,241));
+		bordeDescripcion.setBackground(new Color(174,214,241));
 		///////////////////////////////////////////////////////
+		cancelar.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				cancelar.setIcon(new ImageIcon(VistaCrearCita.class.getResource("/botones/AgendaCancelar2.png")));
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				cancelar.setIcon(new ImageIcon(VistaCrearCita.class.getResource("/botones/AgendaCancelar1.png")));
+			}
+		});
+		
+		aceptar.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				aceptar.setIcon(new ImageIcon(VistaCrearCita.class.getResource("/botones/AgendaAceptar2.png")));
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				aceptar.setIcon(new ImageIcon(VistaCrearCita.class.getResource("/botones/AgendaAceptar1.png")));
+			}
+		});
 		agregarComponentes();
 	}
 
@@ -78,10 +115,21 @@ public class VistaCrearCita extends JPanel {
 
 	private void agregarComponentes() {
 		setLayout(null);
-		
-		Border bordePanel = new TitledBorder(new EtchedBorder());
-		descripcionC.setBorder(bordePanel);
-		lugarC.setBorder(bordePanel);
+		//////////////////////////////////
+		bordeMemo.setBounds(20, 58, 259, 344);
+		bordeTitulo.setBounds(183, 20, 504, 24);
+		asuntoC.setBorder(null);
+		bordeFecha.setBounds(368, 260, 104, 24);
+		fechaC.setBorder(null);
+		bordeHoraInicio.setBounds(678, 260, 104, 24);
+		horaInicioC.setBorder(null);
+		bordeHoraFin.setBounds(678, 315, 104, 24);
+		horaFinC.setBorder(null);
+		bordeDescripcion.setBounds(348, 113, 394, 134);
+		bordeLugar.setBounds(368, 300, 154, 74);
+		bordeContactos.setBounds(118, 420,404, 24);
+		contactosC.setBorder(null);
+		//////////////////////////////////
 		
 		String lista[] = { "minutos", "horas", "dias", "semanas" };
 		tiempoSeleccionado = new JComboBox<String>(lista);
@@ -110,12 +158,12 @@ public class VistaCrearCita extends JPanel {
 		descripcion.setBounds(350, 85, 100, 15);
 		descripcionC.setBounds(350, 115, 390, 130);
 
-		contactos.setBounds(20, 425, 100, 10);
+		contactos.setBounds(30, 425, 100, 10);
 		contactosC.setBounds(120, 422, 400, 20);
 		cancelar.setBounds(705, 490, 120, 40);
 		aceptar.setBounds(575, 490, 120, 40);
 
-		memo.setBounds(20, 60, 365, 340);
+		memo.setBounds(22, 60, 255, 340);
 
 		////////////////////////////////////////////////////
 		panelDeContactos.setBounds(120, 441, 399,100);
@@ -147,6 +195,14 @@ public class VistaCrearCita extends JPanel {
 
 		////////////////////////////////////////////////////
 		add(panelDeContactos);
+		add(bordeMemo);
+		add(bordeTitulo);
+		add(bordeFecha);
+		add(bordeHoraInicio);
+		add(bordeHoraFin);
+		add(bordeDescripcion);
+		add(bordeLugar);
+		add(bordeContactos);
 		///////////////////////////////////////////////////////
 	}
 
@@ -174,6 +230,43 @@ public class VistaCrearCita extends JPanel {
 		}
 		return res;
 	}
+	
+	public String obtenerMes() {
+		String res = "";
+		String fecha = obtenerFecha();
+		int n = fecha.length();
+		boolean marca = false;
+		int i=0;
+		while (i < n) {
+			char aux = fecha.charAt(i);
+			if (aux == '/') {
+				marca = !marca;
+			}else if(marca) {
+				res += aux;
+			}
+			i++;
+		}
+		return res;
+	}
+	
+	public String obtenerDia() {
+		String res = "";
+		String fecha = obtenerFecha();
+		int n = fecha.length();
+		boolean marca = true;
+		int i=0;
+		while (i < n && marca) {
+			char aux = fecha.charAt(i);
+			if (aux == '/') {
+				marca = false;
+			}else if(marca) {
+				res += aux;
+			}
+			i++;
+		}
+		return res;
+	}
+	
 
 	public String obtenerHora(JTextField hora) {
 		String res = "";
@@ -228,5 +321,58 @@ public class VistaCrearCita extends JPanel {
 	}
 ///////////////////////////////////////////////////////////////////////////////////////
 
+	public boolean tituloVacio() {
+		return asuntoC.getText().equals("")?true:false;
+	}
+	
+	public boolean fechaVacio() {
+		String fecha = obtenerFecha();
+		String mes = obtenerMes();
+		String dia = obtenerDia();
+		boolean mesB = (mes.equals("0")||mes.equals("00"))?true:false;
+		boolean diaB = (dia.equals("0")||dia.equals("00"))?true:false;
+		return (fechaC.getText().equals(" 00  /  00  /  2020")||fecha.equals("00/00/2020")||fecha.equals(" 00/00/2020")
+				||fecha.equals(" 00/00/0") ||mesB||diaB)?true:false;
+	}
+	
+	public boolean horaVacio() {
+		String inicio = obtenerHora(horaInicioC);
+		String fin = obtenerHora(horaFinC);
+		boolean casoEspecial = (fin.equals("00:00:00")&&inicio.equals("00:00:00"))?true:false;
+		boolean casoEspecial2 = (fin.equals("0:0:0")&&inicio.equals("0:0:0"))?true:false;
+		return  (horaFinC.equals("   00  :  00  :  00")|| horaInicioC.equals("   00  :  00  :  00")
+				||casoEspecial||casoEspecial2||horaFinC.equals("")|| horaInicioC.equals(""))?true:false;
+	}
+	
+	public void colorInicialBorde() {
+		bordeTitulo.setBackground(new Color(174,214,241));
+		asuntoC.setText(asuntoC.getText());
+		bordeFecha.setBackground(new Color(174,214,241));
+		fechaC.setText(fechaC.getText());
+		bordeHoraInicio.setBackground(new Color(174,214,241));
+		horaInicioC.setText(horaInicioC.getText());
+		bordeHoraFin.setBackground(new Color(174,214,241));
+		horaFinC.setText(horaFinC.getText());
+	}
+	
+	public void marcarTitulo() {
+		colorInicialBorde();
+		bordeTitulo.setBackground(Color.red);
+		asuntoC.setText(" ");
+	}
+	
+	public void marcarFecha() {
+		colorInicialBorde();
+		bordeFecha.setBackground(Color.red);
+		fechaC.setText("  00  /  00  /  2020");
+	}
+	
+	public void marcarHoras() {
+		colorInicialBorde();
+		bordeHoraInicio.setBackground(Color.red);
+		horaInicioC.setText("   00  :  00  :  00");
+		bordeHoraFin.setBackground(Color.red);
+		horaFinC.setText("   00  :  00  :  00");
+	}
 }
 
