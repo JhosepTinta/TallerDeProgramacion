@@ -135,4 +135,5 @@ public class VistaDetalleCitaPanel extends JPanel {
 		editar.addActionListener(elementoCita);
 		cancelar.addActionListener(elementoCita);
 	}
+	
 }

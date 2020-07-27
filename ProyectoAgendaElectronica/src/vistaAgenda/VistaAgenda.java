@@ -24,7 +24,12 @@ public class VistaAgenda extends JPanel {
 	public VistaAgenda() {
 		setLayout(null);
 		setBackground(Color.white);
-		//next.setIcon(new ImageIcon(VistaPrincipal.class.getResource("/botones/AgendaAnadir1.png")));
+		volver = new JButton(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaVolver1.png")));
+		volver.setBackground(Color.white);
+		volver.setBorder(null);
+		eliminar = new JButton(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaEliminar1.png")));
+		eliminar.setBackground(Color.white);
+		eliminar.setBorder(null);
 		buscarBoton = new JButton(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaLupa1.png")));
 		buscarBoton.setBackground(Color.white);
 		buscarBoton.setBorder(null);
@@ -54,13 +59,31 @@ public class VistaAgenda extends JPanel {
 				buscarBoton.setIcon(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaLupa1.png")));
 			}
 		});
+		eliminar.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				eliminar.setIcon(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaEliminar2.png")));
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				eliminar.setIcon(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaEliminar1.png")));
+			}
+		});
+		volver.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				volver.setIcon(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaVolver2.png")));
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				volver.setIcon(new ImageIcon(VistaAgenda.class.getResource("/botones/AgendaVolver1.png")));
+			}
+		});
 		agregarElementos();
 	}
 	
 	private void agregarElementos() {
 		seleccion.setBounds(5, 10, 180, 20);
-		eliminar.setBounds(540, 10, 95, 20);
-		volver.setBounds(650, 10, 190, 20);
+		eliminar.setBounds(650, 10, 95, 20);
+		volver.setBounds(750, 10, 90, 20);
 		buscarBoton.setBounds(510, 3, 37, 37);
 		buscar.setBounds(5, 10, 500, 25);
 		agregar.setBounds(730, 3, 110, 34);

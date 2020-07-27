@@ -10,6 +10,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import controlador.ControladorAgenda;
+import vistaMemo.VistaMemo;
 
 public class VistaCrearCitaContactos extends JPanel {
 	
@@ -22,9 +23,11 @@ public class VistaCrearCitaContactos extends JPanel {
 	public VistaCrearCitaContactos() {
 		Border bordePanel = new TitledBorder(new EtchedBorder());
 		setBorder(bordePanel);
-		setBackground(Color.white);
+		setBackground(new Color(174,214,241));
 		textoBusqueda = new JTextField("Busca algun contacto");
-		buscar = new JButton("Buscar");
+		buscar = new JButton(new ImageIcon(VistaCrearCitaContactos.class.getResource("/botones/AgendaLupaContactos.png")));
+		buscar.setBackground(new Color(174,214,241));
+		buscar.setBorder(null);
 		cerrar = new JButton("x");
 		cerrar.setBackground(Color.white);
 		cerrar.setBorder(bordePanel);
@@ -47,7 +50,7 @@ public class VistaCrearCitaContactos extends JPanel {
 	private void agregarElementos() {
 		setLayout(null); //listaContactos.setBounds(120, 435, 399, 75);
 		textoBusqueda.setBounds(2, 2, 260, 20);
-		buscar.setBounds(270, 2, 80, 20);
+		buscar.setBounds(265, 3, 20, 20);
 		cerrar.setBounds(357, 2, 44, 20);
 		contenedor.setBounds(2,23,399,75);
 		add(textoBusqueda);
