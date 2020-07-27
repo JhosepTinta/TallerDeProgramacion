@@ -573,10 +573,11 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 
 	// llenar los contactos
 	private void llenarListaContactos(ArrayList<String> lista) {
+		if(lista != null) {
 		crearCita.panelDeContactos.listaContactos.removeAll();
 		for (int i = 0; i < lista.size(); i++) {
 			crearCita.panelDeContactos.listaContactos.add(new ElementoContacto(lista.get(i), this));
-		}
+		}}
 	}
 
 	// metodo para convertir la lista de problemas en texto
@@ -627,7 +628,6 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 	public void focusGained(FocusEvent e) {
 // TODO Auto-generated method stub
 		if (e.getSource() == crearCita.contactosC) {
-			System.out.println("ganaste el foco");
 			crearCita.panelDeContactos.restablecerValores();
 			crearCita.hacerVisiblePanelContactos(true);
 		} else if (e.getSource() == vistaControlada.seleccion) {
@@ -638,9 +638,6 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 				llenarPanelCitasDos((ListaSE<Cita>) agendaControlada.getLista().inOrden(), true);
 				System.out.println("2");
 			}
-			// llenarPanelCitasDos((ListaSE<Cita>)
-			// agendaControlada.getLista().inOrden(),true);
-
 			definirPanel(vistaControlada.panelCitas);
 		} else if (e.getSource() == crearCita.panelDeContactos.textoBusqueda) {
 			crearCita.panelDeContactos.textoBusqueda.setText("");
@@ -823,7 +820,6 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 		public ElementoCitaDos(Cita cita, ControladorAgenda control, boolean estado) {
 			this.cita = cita;
 			this.addActionListener(control);
-//seleccionElemento.setBorder(bordePanel);
 			seleccionElemento = new JRadioButton("", estado);
 			panelSeleccion.setBackground(Color.white);
 			panelSeleccion.setBorder(bordePanel);
@@ -859,13 +855,6 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 		class PanelDescripcion extends JPanel {
 
 			public PanelDescripcion() {
-// Border bordePanel = new TitledBorder(new EtchedBorder());
-// setBorder(bordePanel);
-// setBackground(new Color(204,255,229));
-// setBackground(new Color(102,255,178));
-// setBackground(new Color(153,255,204));
-// setBackground(new Color(102,178,255));
-// setBackground(new Color(153,204,255));
 				setBackground(new Color(174,214,241));
 				setLayout(new GridLayout(2, 3, 250, 15));
 				asuntoCita = new JLabel(" " + cita.getAsunto());
@@ -895,7 +884,7 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Clase ElementoMemo para mostrar un memo en un panel/////////////////////////////
+/////////////// Clase ElementoContacto para mostrar un contacto en el panel Contactos/////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 	class ElementoContacto extends JButton {
@@ -905,13 +894,13 @@ public class ControladorAgenda implements ActionListener, FocusListener {
 
 		public ElementoContacto(String nombre, ControladorAgenda control) {
 			addActionListener(control);
+			setBackground(new Color(174,214,241));
 			Border bordePanel = new TitledBorder(new EtchedBorder());
 			setBorder(bordePanel);
-			setLayout(new GridLayout(2, 0));
+			setLayout(new BorderLayout());
 			contactoNombre = nombre;
 			contacto = new JLabel(nombre);
-
-			add(contacto);
+			add(contacto,BorderLayout.WEST);
 		}
 
 		public String getTexto() {

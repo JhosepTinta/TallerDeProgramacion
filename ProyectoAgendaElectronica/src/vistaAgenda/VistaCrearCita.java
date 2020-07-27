@@ -16,7 +16,6 @@ public class VistaCrearCita extends JPanel {
 	public JButton aceptar;
 	public JButton cancelar;
 	private Color colorDeFondo = new Color(244, 247, 252);
-	//Color colorDeFondo = Color.white;
 	JLabel asunto = new JLabel("Asunto: ");
 	JLabel descripcion = new JLabel("Descripción: ");
 	JLabel horaInicio = new JLabel("Hora de Inicio: ");
@@ -166,7 +165,7 @@ public class VistaCrearCita extends JPanel {
 		memo.setBounds(22, 60, 255, 340);
 
 		////////////////////////////////////////////////////
-		panelDeContactos.setBounds(120, 441, 399,100);
+		panelDeContactos.setBounds(119, 441, 403,100);
 		panelDeContactos.setVisible(false);
 		///////////////////////////////////////////////////////
 

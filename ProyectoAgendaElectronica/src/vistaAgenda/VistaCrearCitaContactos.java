@@ -1,6 +1,8 @@
 package vistaAgenda;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -24,11 +26,21 @@ public class VistaCrearCitaContactos extends JPanel {
 		textoBusqueda = new JTextField("Busca algun contacto");
 		buscar = new JButton("Buscar");
 		cerrar = new JButton("x");
-		cerrar.setBackground(Color.red);
-		cerrar.setBorder(null);
+		cerrar.setBackground(Color.white);
+		cerrar.setBorder(bordePanel);
 		listaContactos = new JPanel();
 		contenedor = new JScrollPane(listaContactos);
 		listaContactos.setLayout(new  GridLayout(30,0));
+		listaContactos.setBackground(new Color(233, 244, 251));
+		cerrar.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				cerrar.setBackground(Color.red);
+			}
+			
+			public void mouseExited(MouseEvent e) {
+			    cerrar.setBackground(Color.white);
+			}
+		});
 		agregarElementos();
 	}
 	
@@ -36,8 +48,8 @@ public class VistaCrearCitaContactos extends JPanel {
 		setLayout(null); //listaContactos.setBounds(120, 435, 399, 75);
 		textoBusqueda.setBounds(2, 2, 260, 20);
 		buscar.setBounds(270, 2, 80, 20);
-		cerrar.setBounds(353, 2, 44, 20);
-		contenedor.setBounds(2,23,394,75);
+		cerrar.setBounds(357, 2, 44, 20);
+		contenedor.setBounds(2,23,399,75);
 		add(textoBusqueda);
 		add(buscar);
 		add(cerrar);
