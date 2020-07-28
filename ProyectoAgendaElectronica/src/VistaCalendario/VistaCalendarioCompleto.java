@@ -46,12 +46,13 @@ public class VistaCalendarioCompleto extends JPanel implements ActionListener{
 		
 	    JPanel botones = new JPanel();
 	    botones.setBackground(Color.WHITE);
+	    
 	    JPanel cabecera = new JPanel();
 	    cabecera.setBackground(Color.WHITE);
 	    cabecera.setLayout(new BorderLayout());
 	    cabecera.add(botones, BorderLayout.EAST);
 	    
-	    
+	    //-------------------------------
 		next = new JButton();
 		next.setBackground(Color.WHITE);
 		next.setBorder(null);
@@ -66,7 +67,7 @@ public class VistaCalendarioCompleto extends JPanel implements ActionListener{
 			}
 			
 		});
-		
+		//------------------------------
 		back = new JButton() ;
 		back.setBackground(Color.WHITE);
 		back.setBorder(null);
@@ -162,15 +163,9 @@ public class VistaCalendarioCompleto extends JPanel implements ActionListener{
 			 			
 			 			
 			 		}
-			
-			
 		}
 		
-	}
-   
-    	
-    	
-    
+	} 
 }
 // Cierre de la clase
 

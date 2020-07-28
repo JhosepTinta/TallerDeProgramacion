@@ -3,7 +3,8 @@ package modelo;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 /**
- * Esta clase es la mas importante por que genera la estructura del mes en el calendario
+ * Esta clase es la mas importante por que genera la estructura del mes en el calendario, esta clase 
+ * genera automaticamente cualquier mes encuadrandolo en un array de 42
  * @author Karen Choquecallata Mancilla
  * @version 22/07/2020
  * @see < a href = "https://github.com/JhosepTinta/TallerDeProgramacion">Enlace repositorio</a>
@@ -19,9 +20,9 @@ public class CalendarioMensual {
 	 * @param anio anio del mes que se generara
 	 */
     public CalendarioMensual(int mes , int anio) {
-	    this.mes = mes ;
+	    this.mes  = mes ;
 	    this.anio = anio;
-		calendar = new GregorianCalendar(anio,mes,1);
+		calendar  = new GregorianCalendar(anio,mes,1);
 	}
     //cierre del constructor
     
@@ -60,33 +61,19 @@ public class CalendarioMensual {
     	
     }
 	// cierre metodo
-	/**
-	 * 
-	 * @return mes
-	 */
+	
 	public int getMes() {
 		return mes;
 	}
 	
-	/**
-	 * 
-	 * @param mes numero del mes set
-	 */
 	public void setMes(int mes) {
 		this.mes = mes;
 	}
-	/**
-	 * 
-	 * @return el año con el que ha sido creado la instancia
-	 */
+	
 	public int getAnio() {
 		return anio;
 	}
 	
-	/**
-	 * 
-	 * @param anio que se desea cambiar 
-	 */
 	public void setAnio(int anio) {
 		this.anio = anio;
 	}

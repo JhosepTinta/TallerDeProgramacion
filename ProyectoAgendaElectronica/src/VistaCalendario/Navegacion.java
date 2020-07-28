@@ -22,7 +22,12 @@ import javax.swing.JScrollPane;
 import lineales.ListaSE;
 import modelo.*;
 import vista.VistaPrincipal;
-
+/**
+ * Explicacion: esta clase es como un controlador de los componenetes calendario y lista hora por que 
+ * relaciona a ambos y  gestiona las acciones principales
+ * @author Karen Choquecallata Mancilla
+ *
+ */
 public class Navegacion extends JPanel {
        
 	   VistaCalendarioCompleto completo;
@@ -37,22 +42,22 @@ public class Navegacion extends JPanel {
 	   CalendarioMensual calen;
 	   JPanel estado;
        
-       
-	   public Navegacion(Agenda agenda, CalendarioMensual calen) {
+       public Navegacion(Agenda agenda, CalendarioMensual calen) {
+		
 		this.agenda = agenda;
-		this.calen = calen;
-		estado = completo;
+		this.calen  = calen;
+		estado      = completo;
 		setLayout(new BorderLayout());
 		
-		calendar = new GregorianCalendar();
-		day = calendar.get(Calendar.DAY_OF_MONTH);
-		mes = calendar.get(Calendar.MONTH);
-		year = calendar.get(Calendar.YEAR);
-		contenedorDePaneles= new JScrollPane();
+		calendar    = new GregorianCalendar();
+		day         = calendar.get(Calendar.DAY_OF_MONTH);
+		mes         = calendar.get(Calendar.MONTH);
+		year        = calendar.get(Calendar.YEAR);
+		contenedorDePaneles = new JScrollPane();
 		contenedorDePaneles.setBorder(null);
-		completo = new VistaCalendarioCompleto(calen,agenda);
-		diaria = new VistaDiariaCompleto(agenda,day-1,mes,year);
-		Box box = Box.createHorizontalBox();
+		completo    = new VistaCalendarioCompleto(calen,agenda);
+		diaria      = new VistaDiariaCompleto(agenda,day-1,mes,year);
+		Box box     = Box.createHorizontalBox();
 		// --------
 	    botonmensual = new JButton();
 	    botonmensual.setBorder(null);
@@ -98,20 +103,30 @@ public class Navegacion extends JPanel {
 		
 	
 
-	}
+	} 
+       
 	public void setEstado() {
 		estado = completo;
-	}   
+	} 
+	
 	public void arrancarDia(Agenda modelo) {
-		estado = completo;
+		estado      = completo;
 		this.diaria = new VistaDiariaCompleto(modelo, day, mes, year);
 	}   
-    
-   
+    /**
+     * Este metodo define el panel acutal, asi gestionando la interaccion de los paneles 
+     * con los botones
+     * @param panel
+     */
 	public void definirPanel(JPanel panel) {
 		contenedorDePaneles.setViewportView(panel);
 	}
-	 private class AccionBoton implements ActionListener {
+	/**
+	 * Esta clase es la encargada de dar accion a los botones (mensual) y (diaria)
+	 * @author KarenChoquecallataMancilla
+	 *
+	 */
+	private class AccionBoton implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -127,12 +142,8 @@ public class Navegacion extends JPanel {
 				   }
 				   estado = diaria;
 				   definirPanel(nuevo);	
-				}
-				
+				}	
 			}
-			
-		}
-		 
-		 
+		} 
 	 }		
 }

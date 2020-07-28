@@ -28,14 +28,20 @@ import modelo.Cita;
 import modelo.Fecha;
 import modelo.Reloj;
 import vistaAgenda.VistaDetalleCitaVentana;
-
+/**
+ * Explicacion:
+ * Esta clase solo genera el panel de con todas las horas y las citas que contien cada horario
+ * @author KarenCh
+ *
+ */
 public class VistaDiaria extends JPanel {
      
-	ListaCitas listacitas;
+	 ListaCitas listacitas;
      int dia,mes, anio;
      JButton botonmes,botonanio,botondia;
 	 Calendar calendar;
-     public VistaDiaria(ListaSE<Cita> lista,int dia, int mes, int anio) {
+     
+	 public VistaDiaria(ListaSE<Cita> lista,int dia, int mes, int anio) {
  		this.dia = dia;
  		this.mes = mes;
  		this.anio = anio;
@@ -57,7 +63,7 @@ public class VistaDiaria extends JPanel {
  		add(cabecera,BorderLayout.NORTH);
  		
  	}
- 	 
+ 	 // Este metodo nombra al mes que deseemos
       public String nombrarMes (int month) {
  			String res = "";
  			
@@ -154,6 +160,7 @@ public class VistaDiaria extends JPanel {
     Box box;
     int dia,mes;
 	int horaminutos;
+	
     public ListaCitas(ListaSE<Cita> lista,int dia, int mes) {
 		this.citas = lista;
 		this.dia = dia;
@@ -194,29 +201,30 @@ public class VistaDiaria extends JPanel {
 	}
     
 	public void addCitas(Objeto objeto) {
-		if(contador2 <= 24) {
-			
 		
+	   if(contador2 <= 24) {
+			
 		   if(contadorpos < tamaniolista) {
 		  
 		    Cita citaahora = citas.acceder(contadorpos);
 		    int horaini = citaahora.getHoraInicio().getHora();
 		    int horafi = citaahora.getHoraFin().getHora();
+		    
 		    if(horaini == contador2) {
 			         objeto = new Objeto(citaahora);
 			         contadorpos++;
 			         contador2 = horafi;
 			         horaminutos = citaahora.getHoraFin().getMinutos();
-		    }else {
+		   }else {
 		  	  if(contador2 < 10) {
 					objeto = new Objeto("0"+contador2+"  :  00  :  00");
 			        contador2++;
-				 }else {
+			  }else{
 				    objeto = new Objeto(contador2+"  : 00  :  00");
 		            contador2++;
-		       }
+		      }
 			  
-		     }
+		    }
 		  
 		  
 		  }else {
@@ -234,15 +242,21 @@ public class VistaDiaria extends JPanel {
 		
 		
 	}
-	
+	/**
+	 * Explicacion:
+	 * esta clase interna contien lo necesario de una fila de la lista de horas
+	 * @author KarenChoquecallataMancilla
+	 *
+	 */
 	 private class Objeto extends JPanel {
 		 
 		 JButton hora;
 		 JButton tituloCita;
 		 JButton horafin;
 		 Cita cita;
-		 
+		 // primer constructor
 		 public Objeto(Cita cita) {
+			 
 			 setLayout(new BorderLayout());
 			 hora = new JButton("          "+ cita.getHoraInicio()+"");
              this.cita = cita;
@@ -265,7 +279,7 @@ public class VistaDiaria extends JPanel {
 			 
 	
 		 }
-		 
+		 // segundo constructor
 		 public Objeto(String horario) {
 			 setLayout(new BorderLayout());
 			 hora = new JButton("          "+horario);
@@ -279,6 +293,7 @@ public class VistaDiaria extends JPanel {
 			 add(hora,BorderLayout.WEST);
 	
 		 }
+		 
 		 public void vistaBotonHora(JButton boton) {
 			 boton.setBackground(Color.WHITE);
 			 boton.setForeground(new Color(52, 152, 219));
@@ -286,7 +301,11 @@ public class VistaDiaria extends JPanel {
 		 	 boton.setFont(fuente);
 			 boton.setBorder(new BevelBorder(3,Color.BLACK, Color.BLUE));
 		 }
-        
+        /**
+         * Es la encargada de gestionar las acciones de solo sapasar por encima con el mause
+         * @author KarenChoquecallataMancilla
+         *
+         */
 		private class AccionObjeto extends MouseAdapter implements MouseListener{
 
 			@Override

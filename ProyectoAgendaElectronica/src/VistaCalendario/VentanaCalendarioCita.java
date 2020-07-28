@@ -33,20 +33,24 @@ import com.sun.javafx.scene.paint.GradientUtils.Point;
 import modelo.CalendarioMensual;
 import vista.VistaPrincipal;
 import vistaAgenda.VistaCrearCita;
-
+/**
+ * Explicacion: esta clase es el minicalendario del panel crar cita,para ayudar con 
+ * la interfaz y de este modo sea mas comoda para el usuario
+ * @author KarenChoquecallataMancilla
+ *
+ */
 public class VentanaCalendarioCita extends JFrame {
      Calendar calendar;
-     int mes ;
-     int anio;
+     int mes,anio;
      public VistaCalendarioCompletoCita calen;
      
 	public VentanaCalendarioCita(VistaCrearCita crearcita) {
 		setUndecorated(true);
 		calendar = new GregorianCalendar();
-		mes = calendar.get(Calendar.MONTH);
-		anio = calendar.get(Calendar.YEAR);
+		mes      = calendar.get(Calendar.MONTH);
+		anio     = calendar.get(Calendar.YEAR);
 		
-	    calen = new VistaCalendarioCompletoCita(new CalendarioMensual(mes,anio),crearcita);
+	    calen    = new VistaCalendarioCompletoCita(new CalendarioMensual(mes,anio),crearcita);
 	    
 	    Image icon = new ImageIcon(getClass().getResource("/botones/iconcalendario.png")).getImage();
 	    setIconImage(icon);
@@ -59,15 +63,20 @@ public class VentanaCalendarioCita extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		add(calen);
 	}
-	
+	/**
+	 * Explicacion:
+	 * esta clase interna ayuda a tener una estructura en cascada al minicalendario
+	 * @author KarenChoquecallataMancilla
+	 *
+	 */
 	protected class VistaCalendarioCompletoCita extends JPanel implements ActionListener{
 		 
-		
 		VistaCalendarioCita anterior,actual,siguiente;
 		CalendarioMensual calendario;
 		JButton back,next;
 		int mes, anio;
 		VistaCrearCita crearcita;
+		
 	    public VistaCalendarioCompletoCita(CalendarioMensual calendario, VistaCrearCita vistacrear) {
 	       
 	    	this.crearcita = vistacrear;
@@ -84,7 +93,7 @@ public class VentanaCalendarioCita extends JFrame {
 		    cabecera.setLayout(new BorderLayout());
 		    cabecera.add(botones, BorderLayout.EAST);
 		    
-		    
+		    //-----------------------
 			next = new JButton();
 			next.setBackground(Color.WHITE);
 			next.setBorder(null);
@@ -99,7 +108,7 @@ public class VentanaCalendarioCita extends JFrame {
 				}
 				
 			});
-			
+			//-----------------------
 			back = new JButton() ;
 			back.setBackground(Color.WHITE);
 			back.setBorder(null);
@@ -125,13 +134,15 @@ public class VentanaCalendarioCita extends JFrame {
 			add(cabecera,BorderLayout.NORTH);
 		
 		}
+	    
 	    public VistaCalendarioCita getActual() {
 	    	return actual;
 	    }
+	    
 	    public void addMesSiguiente() {
 			if(mes == 11) {
 				anio = anio + 1;
-				mes = 0;
+				mes  = 0;
 				
 				CalendarioMensual nuevo = new CalendarioMensual(mes,anio);
 				siguiente = new VistaCalendarioCita(nuevo,crearcita);
@@ -140,7 +151,7 @@ public class VentanaCalendarioCita extends JFrame {
 				 mes++;
 			    CalendarioMensual nuevo = new CalendarioMensual(mes,anio);
 				siguiente = new VistaCalendarioCita(nuevo,crearcita);
-		      }
+		    }
 			
 			add(siguiente,BorderLayout.CENTER);
 		
@@ -165,12 +176,14 @@ public class VentanaCalendarioCita extends JFrame {
 			}
 			add(anterior,BorderLayout.CENTER);
 		}
+	    
 	    public String getFechaMarcada() {
 	    	String res;
 	    	res = actual.diaapretado;
 	    	return res;
 	    	
 	    }
+	    
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object a = e.getSource();
@@ -189,12 +202,16 @@ public class VentanaCalendarioCita extends JFrame {
 				 			
 				 			
 				 		}
-				
-				
 			}
 			
 		}
-	   
+	   /**
+	    * Explicacion:
+	    * Esta clase  genera solo el mes, de una version abreviada del calendario 
+	    * @author KarenChoquecallataMancilla
+	    *
+	    */
+		
 		public class VistaCalendarioCita extends JPanel {
 		    
 			 CalendarioMensual aux;
@@ -204,6 +221,7 @@ public class VentanaCalendarioCita extends JFrame {
 			 public String diaapretado;
 		     public LaminaMes mes;
 		     public VistaCrearCita vistaagen;
+		     
 			public VistaCalendarioCita(CalendarioMensual aux,VistaCrearCita vista) {
 			   vistaagen = vista;
 			   month = aux.getMes();
@@ -211,7 +229,7 @@ public class VentanaCalendarioCita extends JFrame {
 			   this.aux = aux;		
 		       setLayout(new BorderLayout());
 		       setBackground(Color.WHITE);
-		        mes = new LaminaMes(this.aux);
+		       mes = new LaminaMes(this.aux);
 		      
 		      //Encabezado para el mes
 		       mesElegido = nombrarMes(month);
@@ -235,9 +253,11 @@ public class VentanaCalendarioCita extends JFrame {
 			    tituloanio.setFont(fuente);
 			    tituloanio.setForeground(new Color(52, 152, 219 ));
 			    todo.setLayout(nuevo);
+			    
 			    JPanel contenedorAM = new JPanel();
 			    contenedorAM.setBackground(Color.WHITE);
 			    contenedorAM.setLayout(new BorderLayout());
+			    
 			    JPanel contenedorwest = new JPanel();
 			    contenedorwest.setBackground(Color.WHITE);
 			    contenedorwest.add(tituloanio);
@@ -279,7 +299,8 @@ public class VentanaCalendarioCita extends JFrame {
 
 			//  este metodo de devuelve el nombre del mes depende al int que ingreses
 			 public String nombrarMes (int month) {
-					String res = "";
+					
+				 String res = "";
 					
 				    switch (month) {
 					case 0:
@@ -326,7 +347,12 @@ public class VentanaCalendarioCita extends JFrame {
 					return res;
 					
 				}
-
+/**
+ * Explicacion:
+ * Es una clase aun mas interna que solo genera el mes sin nombre y sin anio
+ * @author KarenCh
+ *
+ */
 			private class LaminaMes extends JPanel implements MouseListener{
 				
 				Integer[] arrayMes;
@@ -339,14 +365,12 @@ public class VentanaCalendarioCita extends JFrame {
 			    int maximo, diaprimero;
 			    public JButton a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,a1,a2,a3,a4,a5,a6,a7,a8,a9,a0,b1,b2,b3,b4,b5,b6;
 				String fecha;
+				
 				public LaminaMes(CalendarioMensual calendario) {
-			
-					
-					this.calendario = calendario;
+			        this.calendario = calendario;
 					
 					anio = calendario.getAnio();
 					month = calendario.getMes();
-					
 					calendar = new GregorianCalendar(anio,month,1);
 					
 					setBackground(Color.WHITE);
@@ -383,6 +407,7 @@ public class VentanaCalendarioCita extends JFrame {
 					inicializarDia(b5);inicializarDia(b6);
 				
 					}
+				
 				//este metodo coloca cada dia en el lugar que corresponde
 		       public void inicializarDia(JButton objeto) {
 					if(arrayMes[contador] == 0) {
@@ -409,13 +434,19 @@ public class VentanaCalendarioCita extends JFrame {
 					arrayMes = calendario.generarMes();
 				}
 			   
-			  
+			  /**
+			   * Explicacion:
+			   * Es la clase encargada de la accion de cerrado al apretar una fecha en el 
+			   * minicalendario
+			   * @author KarenCh
+			   *
+			   */
 				private class Accion implements ActionListener{
 		            
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						String evento = e.getActionCommand();
-						diaapretado = "  "+evento + " / "+ (month+1) +" / "+anio;
+						diaapretado = "  "+evento + " / "+ (month + 1) +" / "+anio;
 						vistaagen.fechaC.setText(diaapretado);
 					    dispose();
 						
@@ -459,18 +490,8 @@ public class VentanaCalendarioCita extends JFrame {
 					// TODO Auto-generated method stub
 					
 				}
-				
-			}
-
-
-
-			
-			
-		}
-
-
-		
-	    
+			}	
+		}  
 	}
 
 

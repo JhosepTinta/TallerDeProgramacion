@@ -18,7 +18,13 @@ import modelo.Agenda;
 import modelo.CalendarioMensual;
 import modelo.Fecha;
 import vista.VistaPrincipal;
-
+/**
+ * Explicacion:
+ *  esta clase tiene la funcionalidad de generar el mes siguiente y anterio con variables
+ *  recursivas, esta clase fue generada completamente desde cero
+ * @author KarenChoquecallataMancilla
+ *
+ */
 public class VistaDiariaCompleto extends JPanel implements ActionListener{
        
 	   VistaDiaria vistadiaria,anterior, siguiente;
@@ -26,11 +32,9 @@ public class VistaDiariaCompleto extends JPanel implements ActionListener{
        Agenda agenda;
        ListaSE listacitashoy;
        Calendar cal;
-       int dia;
+       int dia, mes, anio;
        int diapos;
        int diapos2;
-       int mes;
-       int anio;
        Integer[] diasmes;
        int diaMaximo;
        
@@ -39,8 +43,7 @@ public class VistaDiariaCompleto extends JPanel implements ActionListener{
 		mes = month;
         anio = year;
 		cal = new GregorianCalendar(anio,mes,day);
-		
-        dia = cal.get(Calendar.DAY_OF_MONTH);
+		dia = cal.get(Calendar.DAY_OF_MONTH);
         
      	setLayout(new BorderLayout());
 		
@@ -50,7 +53,7 @@ public class VistaDiariaCompleto extends JPanel implements ActionListener{
 		
 		JPanel contenedorbotones = new JPanel();
 		contenedorbotones.setBackground(Color.WHITE);
-		
+		//------------------------------------
 		next = new JButton();
 		next.setBackground(Color.WHITE);
 		next.setBorder(null);
@@ -65,7 +68,7 @@ public class VistaDiariaCompleto extends JPanel implements ActionListener{
 			}
 			
 		});
-		
+		//-----------------------------------------
 		back = new JButton();
 		back.setBackground(Color.WHITE);
 		back.setBorder(null);
@@ -93,6 +96,7 @@ public class VistaDiariaCompleto extends JPanel implements ActionListener{
 		add(cabecera,BorderLayout.NORTH);
 		
 	}
+	// calcula el dia maximo del mes actual
 	public int calcularDiaMax(int mesahora) {
 		int res ;
 		Calendar a = new GregorianCalendar(anio, mesahora, 1);
@@ -101,12 +105,11 @@ public class VistaDiariaCompleto extends JPanel implements ActionListener{
 	}
 	
 	public void definirHoy() {
-		
 		listacitashoy = agenda.buscarCitasHoy();
 		vistadiaria = new VistaDiaria(listacitashoy,dia,mes,anio);
 		add(vistadiaria,BorderLayout.CENTER);
 	}
-	
+	// este metodo recursivo genera el mes siguiente del mes actual
     public void definirSiguiente() {
     	diaMaximo = calcularDiaMax(mes);
     	if(mes == 11 && dia == diaMaximo) {
@@ -130,7 +133,7 @@ public class VistaDiariaCompleto extends JPanel implements ActionListener{
       	add(siguiente,BorderLayout.CENTER);
     	
 	}
-    
+    // este metodo recursivo genera el mes anterior del mes actual
     public void definirAnterior() {
     	diaMaximo = calcularDiaMax(mes-1);
     	if(mes == 0 && dia == 1) {

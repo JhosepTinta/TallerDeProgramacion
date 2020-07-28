@@ -31,11 +31,10 @@ import vistaAgenda.VistaDetalleCitaVentana;
 public class VistaCalendarioMensual extends JPanel {
     
 	CalendarioMensual aux;
-	JButton back;
-	JButton next;
+	JButton back, next;
 	String mesElegido;
-	int month;
-	int anio;
+	int month, anio;
+	
 	/**
 	 * 
 	 * @param aux es el calendarioMensual(modelo)
@@ -106,31 +105,19 @@ public class VistaCalendarioMensual extends JPanel {
 
 	}
 	// cierre constructor
-	/**
-	 * 
-	 * @return el mes de la instrancia
-	 */
+	
      public int getMonth() {
 		return month;
 	}
-    /**
-     * 
-     * @param month cambia el mes de la instancia
-     */
+    
 	public void setMonth(int month) {
 		this.month = month;
 	}
-    /**
-     * 
-     * @return el año de la instancia
-     */
+   
 	public int getAnio() {
 		return anio;
 	}
-    /**
-     * 
-     * @param anio se cambia el atributo anio de la instancia
-     */
+    
 	public void setAnio(int anio) {
 		this.anio = anio;
 	}
@@ -460,7 +447,6 @@ public class VistaCalendarioMensual extends JPanel {
             @Override
 			public void mouseEntered(MouseEvent e) {
 			
-			
 				if(getTextonumero().equals("      ")) {
 					
 				}else {
@@ -503,14 +489,6 @@ public class VistaCalendarioMensual extends JPanel {
 					
 				}
 			}
-			
-			
 		}
-		
-		
 	}
-
-
-	
-	
 }
