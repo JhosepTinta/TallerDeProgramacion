@@ -20,9 +20,9 @@ import noLineales.ArbolBB;
 
 import vistaAgenda.*;
 import vistaMemo.*;
-
-// lll revisar la forma
-//en la que esta borrando
+////////////////////////////////////////////////
+//@autor Jhosep Jesus Orlando Tinta Mancilla  //
+////////////////////////////////////////////////
 public class ControladorAgenda implements ActionListener, FocusListener {
 
 	private Agenda agendaControlada;
